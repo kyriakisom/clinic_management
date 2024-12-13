@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Medilife</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            padding: 25px;
+            background-color: white;
+            color: rgb(11, 6, 43);
+            font-size: 25px;
+        }
+
+        .dark-mode {
+            background-color: rgb(11, 6, 43);
+            color: white;
+        }
+
+        .language-selector {
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .footer-white-text {
+            color: white;
+        }
+
+        .contact-section h5 {
+            color: #ff0000;
+        }
+
+        .address-section h5 {
+            color: #00ff00;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ***** Language Selector ***** -->
+    <div>
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                            <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="index.html">Αρχική</a>
+                                            <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                            <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                            <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                            <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                            <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                            <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Hero Area Start ***** -->
+    <section class="hero-area">
+        <div class="hero-slides owl-carousel">
+            <div class="single-hero-slide bg-img bg-overlay-white" style="background-image: url(img/bg-img/hero1.jpg);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                                <h2 data-animation="fadeInUp" data-delay="100ms" class="el">Ιατρικές Υπηρεσίες <br>που εμπιστεύεστε</h2>
+                                <h2 data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Medical Services <br>you can trust</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Hero Area End ***** -->
+
+    <!-- ***** About Us Area Start ***** -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <h3 class="el">Ποιοί είμαστε:</h3>
+                        <h3 class="en" style="display:none;">Who we are:</h3>
+                        <p class="el">Το ιατρείο μας βρίσκεται στην πανέμορφη Σάμο...</p>
+                        <p class="en" style="display:none;">Our clinic is located in beautiful Samos...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** About Us Area End ***** -->
+
+    <!-- ***** Footer Area Start ***** -->
+    <footer class="footer-area section-padding-100">
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo mb-3">
+                                <img src="img/core-img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                            <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com</p>
+                            <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                            <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                            <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ***** Footer Area End ***** -->
+
+    <!-- jQuery -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script>
+        // Language switcher
+        function changeLanguage(language) {
+            // Save the selected language to local storage
+            localStorage.setItem('selectedLanguage', language);
+
+            // Set the language for all elements
+            setLanguage(language);
+        }
+
+        function setLanguage(language) {
+            // Show the selected language content and hide the others
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+        }
+
+        // On page load, check if a language is stored in local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'el';  // Default to Greek
+            setLanguage(savedLanguage);
+        });
+    </script>
+
+</body>
+
+</html>

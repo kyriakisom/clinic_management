@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta and title tags as before -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Medilife - Healthcare Services">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Κλείστε ραντεβού</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            min-width: 160px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        #dropdownUserName {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    color: blue; 
+}
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            min-width: 160px;
+            z-index: 1000;
+            right: 0;
+        }
+
+        .dropdown-content button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #f44336; /* Red */
+            color: white;
+            cursor: pointer;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #e53935;
+        }
+        .appointment-form-content {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .appointment-form-content form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .form-group {
+            flex: 1 1 100%;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            color: black;
+        }
+
+        .form-group select option {
+            color: black;
+        }
+
+        .medilife-btn {
+    padding: 10px;
+    border: none;
+    background-color: #0000ff; /* Πράσινο χρώμα */
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.medilife-btn:hover {
+    background-color: #0101ea; /* Σκούρο πράσινο όταν κάνεις hover */
+}
+
+
+        .nav-item {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .nav-item a {
+            padding: 10px;
+            display: block;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .message.success {
+            color: green;
+        }
+
+        .message.error {
+            color: red;
+        }
+
+        #availabilityTable {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        #availabilityTable th, #availabilityTable td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        #availabilityTable th {
+            background-color: #f2f2f2;
+        }
+
+    #availabilityTable th {
+    background-color: #f91570; /* Κόκκινο χρώμα */
+    color: white; /* Λευκό κείμενο */
+}
+.form-control option {
+            color: black; /* Ensure all options have black text */
+        }
+
+        .form-control:invalid {
+            color: black; /* Ensures the default selected placeholder is black */
+        }
+/* CSS για το dropdown list */
+.form-control {
+    color: black; /* Χρώμα κειμένου */
+}
+
+.form-control option {
+    color: black; /* Χρώμα κειμένου για επιλογές */
+}
+.appointment-banner {
+    background: linear-gradient(45deg, #61b5ff, #3f1bde); /* Gradient φόντο */
+    color: white; /* Λευκό κείμενο */
+    text-align: center; /* Κεντράρισμα του κειμένου */
+    padding: 20px; /* Εσωτερικά κενά */
+    border-radius: 8px; /* Καμπυλότητα γωνιών */
+    font-weight: bold; /* Έντονο κείμενο */
+    margin-bottom: 30px; /* Κενό κάτω από το banner */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Σκιά για βάθος */
+    position: relative; /* Σχετική θέση για το animation */
+    overflow: hidden; /* Κρύβει ό,τι βγαίνει εκτός πλαισίου */
+    animation: fadeIn 1.5s ease-in-out; /* Εμφάνιση με animation */
+}
+
+.appointment-banner i {
+    font-size: 40px; /* Μέγεθος του εικονιδίου */
+    margin-right: 10px; /* Κενό δίπλα στο εικονίδιο */
+    vertical-align: middle; /* Κεντράρισμα με το κείμενο */
+}
+
+.appointment-banner p {
+    display: inline-block; /* Εμφάνιση του κειμένου δίπλα στο εικονίδιο */
+    font-size: 24px; /* Μεγαλύτερο μέγεθος γραμματοσειράς */
+    margin: 0; /* Αφαίρεση των περιθωρίων */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.language-selector {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+   
+    <div>
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="patient.html">Αρχική <span class="sr-only">(τρέχουσα)</span></a>
+                                            <a class="nav-link en" href="patient.html">Home page <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="doctors_patients.html">Δείτε τους ιατρούς</a>
+                                            <a class="nav-link en" href="doctors_patients.html">Doctors</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="appointments_patients.html">Κλείστε ραντεβού</a>
+                                            <a class="nav-link en" href="appointments_patients.html">Book an appointment</a>
+
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="med_history.html">Δείτε το ιστορικό σας</a>
+                                            <a class="nav-link en" href="med_history.html">My medical history</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="view_appointments_patient.html">Δείτε τα ραντεβού σας</a>
+                                            <a class="nav-link en" href="view_appointments_patient.html">My appointments</a>
+
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <div class="dropdown">
+                                                <span id="dropdownUserName">Φόρτωση...</span>
+                                                <div class="dropdown-content">
+                                                    <button id="logoutButton">Αποσύνδεση</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<section class="medica-about-us-area section-padding-100-20">
+    <p class="message">
+        <br></br>
+        <span class="el">Δείτε τις διαθεσιμότητες των ιατρών μας</span>
+        <span class="en" style="display:none;">Check our doctors' availabilities</span>
+        <a href="/redirect_availabilities.html" id="availabilityLink">
+            <span class="el">Εδώ</span>
+            <span class="en" style="display:none;">Here</span>
+        </a>
+    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="appointment-banner">
+                    <h2>
+                        <i class="fas fa-calendar-check"></i>
+                        <span class="el">Διαθέσιμα Ραντεβού ανά Μισή Ώρα!</span>
+                        <span class="en" style="display:none;">Available Appointments Every Half Hour!</span>
+                    </h2>
+                    <p>
+                        <span class="el">Κλείστε το ραντεβού σας εύκολα και γρήγορα.</span>
+                        <span class="en" style="display:none;">Book your appointment easily and quickly.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="medica-about-content">
+                    <p></p>
+                    <h3>
+                        <span class="el">Πραγματοποιήστε ραντεβού</span>
+                        <span class="en" style="display:none;">Make an Appointment</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- ***** About Us Area End ***** -->
+<!-- ***** Banner Area Start ***** -->
+    <!-- ***** Appointment Form Area Start ***** -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="appointment-form-content">
+                    <form id="appointmentForm" action="#" method="post">
+                        <div class="form-group">
+                            <label for="doctorName">
+                                <span class="el">Επιλέξτε έναν από τους ιατρούς μας:</span>
+                                <span class="en" style="display:none;">Choose one of our doctors:</span>
+                            </label>
+                            <select class="form-control" id="doctorName" name="doctorName">
+                            <option selected disabled></option>
+                                <option>Δημήτριος Παπαδόπουλος</option>
+                                <option>Μαγδαληνή Τριανταφύλλου</option>
+                                <option>Παύλος Αποστόλου</option>
+                                <option>Γεώργιος Ιωάννου</option>
+                                <option>Αθανασία Καλογεροπούλου</option>
+                                <option>Δήμητρα Παπαγεωργίου</option>
+                                <option>Εμμανουήλ Θεοδωρίδης</option>
+                                <option>Πέτρος Βασιλείου</option>
+                                <option>Μαρία Αργυροπούλου</option>
+                                <option>Ελένη Μάνου</option>
+                                <option>Γρηγόριος Νικολάου</option>
+                                <option>Γεωργία Οικονόμου</option>
+                                <option>Αθανάσιος Χατζηαναγνώστου</option>
+                                <option>Μάρκος Παπαβασιλείου</option>
+                                <option>Ζωή Χατζηγεωργίου</option>
+                                <option>Ιωάννα Δημητρίου</option>
+                            </select>
+                            
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="appointmentDate">
+                                <span class="el">Ημερομηνία:</span>
+                                <span class="en" style="display:none;">Date:</span>
+                            </label>
+                            <input type="date" class="form-control" name="appointmentDate" id="appointmentDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="appointmentTime">
+                                <span class="el">Ώρα:</span>
+                                <span class="en" style="display:none;">Time:</span>
+                            </label>
+                            <input type="time" class="form-control" name="appointmentTime" id="appointmentTime">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName">
+                                <span class="el">Όνομα:</span>
+                                <span class="en" style="display:none;">First Name:</span>
+                            </label>
+                            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Εισάγετε το όνομά του ασθενούς">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">
+                                <span class="el">Επίθετο:</span>
+                                <span class="en" style="display:none;">Last Name:</span>
+                            </label>
+                            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Εισάγετε το επιθετό του ασθενούς">
+                        </div>
+                        <div class="form-group">
+                            <label for="socialSecurityNumber">
+                                <span class="el">Αριθμός Μητρώου Κοινωνικής Ασφάλισης:</span>
+                                <span class="en" style="display:none;">Social Security Number:</span>
+                            </label>
+                            <input type="text" class="form-control" name="socialSecurityNumber" id="socialSecurityNumber" placeholder="Εισάγετε τον ΑΜΚΑ του ασθενούς">
+                        </div>
+                        <div class="form-group">
+                            <label for="reason">
+                                <span class="el">Λόγος επίσκεψης:</span>
+                                <span class="en" style="display:none;">Reason for Visit:</span>
+                            </label>
+                            <input type="text" class="form-control" name="reason" id="reason" placeholder="Αιτία ραντεβού">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="medilife-btn el">Υποβολή ραντεβού</button>
+                            <button type="submit" class="medilife-btn en">Submit</button>
+                        </div>
+                        
+                    </form>
+                    <div id="message" class="message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ***** Appointment Form Area End ***** -->
+    <br></br>
+    <br></br>
+       <!-- ***** Cool Facts Area End ***** -->
+       <footer class="footer-area section-padding-100">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Operating Hours -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo mb-3">
+                                <img src="img/core-img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                      
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                            <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                            <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                            <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                            <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                        </div>
+                    </div>
+    
+        
+                </div>
+            </div>
+        </div>
+    
+
+    
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area py-3 black text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 text-md-left text-center">
+                        <p>&copy; 2024 Medilife. All rights reserved.</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-right text-center">
+                        <br></br>
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle language setting based on saved preference or browser language
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+    
+            // Handle the current date and time inputs
+            const appointmentDateInput = document.getElementById('appointmentDate');
+            const today = new Date().toISOString().split('T')[0];
+            appointmentDateInput.setAttribute('min', today);
+    
+            const appointmentTimeInput = document.getElementById('appointmentTime');
+            appointmentDateInput.addEventListener('input', function () {
+                const selectedDate = new Date(this.value);
+                const day = selectedDate.getUTCDay();
+                const messages = {
+                    'el': 'Οι Κυριακές δεν είναι διαθέσιμες για ραντεβού.',
+                    'en': 'Sundays are not available for appointments.'
+                };
+                this.setCustomValidity(day === 0 ? messages[savedLanguage] : '');
+            });
+    
+            appointmentTimeInput.addEventListener('input', function () {
+                const selectedTime = this.value.split(':')[0];
+                const messages = {
+                    'el': 'Η ώρα πρέπει να είναι μεταξύ 08:00 π.μ. και 21:00 μ.μ.',
+                    'en': 'The time must be between 08:00 AM and 09:00 PM.'
+                };
+                this.setCustomValidity(selectedTime < 8 || selectedTime >= 21 ? messages[savedLanguage] : '');
+            });
+    
+            // Fetch and display the user's name
+            fetch('http://localhost:5000/users/getUserInfo', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include'
+            })
+            .then(response => {
+                if (response.status === 401) throw new Error('Unauthorized: Please log in.');
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('dropdownUserName').textContent = `${data.firstname} ${data.lastname}`;
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+                const messages = {
+                    'el': 'Σφάλμα φόρτωσης πληροφοριών χρήστη',
+                    'en': 'Error loading user info'
+                };
+                document.getElementById('dropdownUserName').textContent = messages[savedLanguage];
+            });
+    
+            // Event listeners for dropdown and logout
+            document.getElementById('dropdownUserName').addEventListener('click', (event) => {
+                event.stopPropagation();
+                const dropdownContent = document.querySelector('.dropdown-content');
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+            });
+    
+            document.addEventListener('click', (event) => {
+                const dropdown = document.querySelector('.dropdown');
+                const dropdownContent = document.querySelector('.dropdown-content');
+                if (!dropdown.contains(event.target) && dropdownContent.style.display === 'block') {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+    
+            document.getElementById('logoutButton').addEventListener('click', async function () {
+                try {
+                    const response = await fetch('/users/logout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include'
+                    });
+                    if (response.ok) {
+                        setTimeout(() => window.location.href = 'index.html', 2000);
+                    }
+                } catch (error) {
+                    const messages = {
+                        'el': 'Σφάλμα: Αδυναμία αποσύνδεσης',
+                        'en': 'Error: Unable to logout'
+                    };
+                    alert(messages[savedLanguage]);
+                }
+            });
+    
+            // Handle form submission
+            document.getElementById('appointmentForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                const data = {
+                    socialSecurityNumber: formData.get('socialSecurityNumber'),
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    appointmentDate: formData.get('appointmentDate'),
+                    appointmentTime: formData.get('appointmentTime'),
+                    reason: formData.get('reason'),
+                    doctorName: formData.get('doctorName')
+                };
+    
+                try {
+                    const response = await fetch('/appointments', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+    
+                    const result = await response.json();
+                    const messageElement = document.getElementById('message');
+                    const successMessages = {
+                        'el': 'Το ραντεβού καταχωρήθηκε επιτυχώς!',
+                        'en': 'Appointment booked successfully!'
+                    };
+                    const errorMessages = {
+                        'el': 'Η καταχώρηση του ραντεβού απέτυχε: ',
+                        'en': 'Appointment booking failed: '
+                    };
+                    const unknownErrorMessages = {
+                        'el': 'Άγνωστο σφάλμα',
+                        'en': 'Unknown error'
+                    };
+    
+                    if (response.ok) {
+                        messageElement.textContent = successMessages[savedLanguage];
+                        messageElement.className = 'message success';
+                        document.getElementById('appointmentForm').reset();
+                    } else {
+                        const errors = Array.isArray(result.errors) ? result.errors : [result.error] || [unknownErrorMessages[savedLanguage]];
+                        messageElement.textContent = errorMessages[savedLanguage] + errors.join(' ');
+                        messageElement.className = 'message error';
+                        clearInvalidFields(result.errors);
+                    }
+                } catch (error) {
+                    const messageElement = document.getElementById('message');
+                    const messages = {
+                        'el': 'Σφάλμα: Αδυναμία καταχώρησης ραντεβού',
+                        'en': 'Error: Unable to book appointment'
+                    };
+                    messageElement.textContent = messages[savedLanguage];
+                    messageElement.className = 'message error';
+                }
+            });
+    
+            // Clear invalid form fields
+            function clearInvalidFields(errors) {
+                if (errors.includes('Invalid SSN.')) document.getElementById('socialSecurityNumber').value = '';
+                if (errors.includes('Invalid First name.')) document.getElementById('firstName').value = '';
+                if (errors.includes('Invalid Last name.')) document.getElementById('lastName').value = '';
+            }
+        });
+    
+        // Function to handle language change
+        function changeLanguage(language) {
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Toggle visible text
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Toggle placeholders
+            document.getElementById('firstName').placeholder = language === 'el' ? 'Εισάγετε το όνομά του ασθενούς' : "Enter the patient's first name";
+            document.getElementById('lastName').placeholder = language === 'el' ? 'Εισάγετε το επιθετό του ασθενούς' : "Enter the patient's last name";
+            document.getElementById('socialSecurityNumber').placeholder = language === 'el' ? 'Εισάγετε τον ΑΜΚΑ του ασθενούς' : "Enter the patient's SSN";
+            document.getElementById('reason').placeholder = language === 'el' ? 'Αιτία ραντεβού' : "Reason for appointment";
+    
+            // Toggle select placeholder
+            const doctorNameSelect = document.getElementById('doctorName');
+            doctorNameSelect.options[0].text = language === 'el' ? 'Επιλέξτε γιατρό' : 'Select Doctor';
+    
+            // Update page title based on language
+            const titles = {
+                'el': 'Κλείστε ραντεβού',
+                'en': 'Book an appointment'
+            };
+            updateTitle(titles[language]);
+        }
+    
+        // Function to update the page title
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Update the browser tab title
+        }
+        logoutButton.innerHTML = `<span class="el">Αποσύνδεση</span><span class="en">Logout</span>`;
+
+    </script>
+</body>
+</html>

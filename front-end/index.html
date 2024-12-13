@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+          content="width=device-width, 
+                   initial-scale=1.0" />
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Medilife</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            padding: 25px;
+            background-color: white;
+            color: rgb(11, 6, 43);
+            font-size: 25px;
+        }
+
+        .dark-mode {
+            background-color: rgb(11, 6, 43);
+            color: white;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .footer-white-text {
+    color: white;
+}
+
+    </style>
+</head>
+
+<body>
+  
+    <!-- ***** Header Area Start ***** -->
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                            <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                            <div>
+                                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="index.html">Αρχική</a>
+                                            <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                            <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                            <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                            <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                            <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                            <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Hero Area Start ***** -->
+    <section class="hero-area">
+        <div class="hero-slides owl-carousel">
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide bg-img bg-overlay-white" style="background-image: url(img/bg-img/hero1.jpg);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                                <div class="hero-slides-content">
+                                    <h2 data-animation="fadeInUp" data-delay="100ms" class="el">Ιατρικές Υπηρεσίες <br>που εμπιστεύεστε</h2>
+                                    <h2 data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Medical Services <br>you can trust</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide bg-img bg-overlay-white"
+                style="background-image: url(img/bg-img/breadcumb3.jpg);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                                <div class="hero-slides-content">
+                                    <h2 data-animation="fadeInUp" data-delay="100ms" class="el">Οι ασθενείς αποτελούν <br>πάντα προτεραιότητά μας</h2>
+                                    <h2 data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Patients are <br>always our priority</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide bg-img bg-overlay-white"
+                style="background-image: url(img/bg-img/breadcumb1.jpg);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                                <div class="hero-slides-content">
+                                    <h2 data-animation="fadeInUp" data-delay="100ms" class="el">Κοντά σας σε οτιδήποτε <br>μας χρειαστείτε!</h2>
+                                    <h2 data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Close to you in whatever <br> you need!</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- ***** Hero Area End ***** -->
+
+    <!-- ***** Book An Appoinment Area Start ***** -->
+    <div class="medilife-book-an-appoinment-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="appointment-form-content">
+                        <div class="row no-gutters align-items-center">
+                    
+                            <div class="col-12 col-lg-12">
+                                <div class="medilife-contact-info">
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info mb-30">
+                                        <img src="img/icons/alarm-clock.png" alt="">
+                                        <p data-animation="fadeInUp" data-delay="100ms" class="el">Δευτέρα με Σάββατο 08:00 - 21:00 <br>Κυριακή Κλειστά</p>
+                                    <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday to Saturday 08:00 - 21:00 <br>Sunday Closed</p>
+                                    </div>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info mb-30">
+                                        <img src="img/icons/envelope.png" alt="">
+                                        <p>22730-14859<br>medilife@gmail.com<br>fax : 254 478 2458</p>
+                                    </div>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info">
+                                        <img src="img/icons/map-pin.png" alt="">
+                                        <p data-animation="fadeInUp" data-delay="100ms" class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                                    <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Asklipiou 8<br>83200 Karlovassi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Book An Appoinment Area End ***** -->
+
+    <style>
+        .medica-about-us-area .medica-about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+        .medica-about-us-area .row {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    
+    <style>
+        .medica-about-us-area .medica-about-content p {
+            text-align: justify;
+        }
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+    </style>
+    
+    <!-- ***** About Us Area Start ***** -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <h3 data-animation="fadeInUp" data-delay="100ms" class="el">Ποιοί είμαστε:</h3>
+                        <h3 data-animation="fadeInUp" data-delay="100ms" class="en">Who we are:</h3>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Το ιατρείο μας, που βρίσκεται στην πανέμορφη Σάμο, και λειτουργεί από το 2010, προσφέρει μια ολοκληρωμένη παρουσίαση των πολλών και εξειδικευμένων υπηρεσιών υγείας που παρέχουμε. Με μια πληθώρα ειδικοτήτων ιατρών, καλύπτουμε κάθε ανάγκη σας, από τη μαιευτική και τη γυναικολογία έως την καρδιολογία και την ορθοπεδική. Το ιατρείο μας είναι εξοπλισμένο με σύγχρονο ελικοδρόμιο για επείγουσες αεροδιακομιδές, εξασφαλίζοντας άμεση πρόσβαση σε εξειδικευμένη ιατρική φροντίδα. Το πλήρως εξοπλισμένο εργαστήριο αιματολογικών εξετάσεων μας προσφέρει αξιόπιστα και γρήγορα αποτελέσματα για την καλύτερη διάγνωση και παρακολούθηση της υγείας σας. Η ιστοσελίδα μας περιλαμβάνει επίσης λεπτομερείς πληροφορίες για όλες τις διαθέσιμες υπηρεσίες, τους ιατρούς μας και τις ώρες λειτουργίας, διευκολύνοντας την επικοινωνία και την πρόσβαση σε υψηλής ποιότητας ιατρική φροντίδα. Με στόχο την υγεία και την ευεξία σας, είμαστε εδώ για να σας προσφέρουμε το καλύτερο δυνατό.</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Our clinic, located in the beautiful island of Samos, and operating since 2010, offers a comprehensive presentation of the many specialized health services we provide. With a multitude of medical specialties, we cover your every need, from obstetrics and gynecology to cardiology and orthopedics. Our clinic is equipped with a modern helipad for emergency air ambulances, ensuring immediate access to specialist medical care. Our fully equipped blood testing laboratory offers reliable and rapid results for better diagnosis and monitoring of your health. Our website also includes detailed information on all available services, our doctors and opening hours, making it easy to communicate and access high-quality medical care. With your health and wellness in mind, we are here to provide you with the best possible care.</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <!-- ***** Cool Facts Area Start ***** -->
+    <section class="medilife-cool-facts-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <!-- Single Cool Fact-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact-area text-center mb-100">
+                        <i class="icon-blood-transfusion-2"></i>
+                        <h2><span class="counter">500</span></h2>
+                        <h6 data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Αιμοδοσίες ετησίως</h6>
+                        <h6 data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Blood donations per year</h6>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Διοργανώνουμε τακτικές αιμοδοσίες καθ' όλη τη διάρκεια του έτους, προσφέροντας μια σημαντική υπηρεσία στην κοινότητα. Με στόχο την ενίσχυση των αποθεμάτων αίματος και την υποστήριξη των ασθενών που το χρειάζονται, οι αιμοδοσίες μας πραγματοποιούνται σε τακτά χρονικά διαστήματα και είναι ανοιχτές για όλους τους κατοίκους και επισκέπτες του νησιού. Σας προσκαλούμε να συμμετάσχετε σε αυτή την πράξη ανθρωπιάς, βοηθώντας να σωθούν ζωές και να ενισχυθεί το αίσθημα της αλληλεγγύης.</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">We hold regular blood drives throughout the year, providing an important service to the community. Aiming to boost blood stocks and support patients in need, our blood donations are held regularly and are open to all residents and visitors to the island. We invite you to participate in this act of humanity, helping to save lives and strengthen the sense of solidarity.</p>
+                    </div>
+                </div>
+                <!-- Single Cool Fact-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact-area text-center mb-100">
+                        <i class="icon-atoms"></i>
+                        <h2><span class="counter">1</span>k</h2>
+                
+                        <h6 data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Ασθενείς</h6>
+                        <h6 data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Patients</h6>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Οι ασθενείς μας βρίσκονται πάντα στο επίκεντρο της φροντίδας μας. Στο ιατρείο μας, προσφέρουμε εξειδικευμένες υπηρεσίες υγείας με αφοσίωση και επαγγελματισμό. Κάθε ασθενής αντιμετωπίζεται με σεβασμό και κατανόηση, εξασφαλίζοντας ότι λαμβάνει την καλύτερη δυνατή ιατρική φροντίδα. Είμαστε εδώ για να σας υποστηρίξουμε σε κάθε βήμα της υγειονομικής σας περίθαλψης, παρέχοντας ένα φιλόξενο και ασφαλές περιβάλλον για την αντιμετώπιση κάθε ιατρικής ανάγκης.</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Our patients are always at the centre of our care. At our practice, we offer specialized health care services with dedication and professionalism. Each patient is treated with respect and understanding, ensuring that they receive the best possible medical care. We are here to support you every step of the way in your healthcare journey, providing a welcoming and safe environment to address any medical need.</p>
+
+                    </div>
+                </div>
+                <!-- Single Cool Fact-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact-area text-center mb-100">
+                        <i class="icon-microscope"></i>
+                        <h2><span class="counter">16</span></h2>
+                        <h6 data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Ειδικότητες</h6>
+                        <h6 data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Specialties</h6>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Στο ιατρείο μας, προσφέρουμε ένα ευρύ φάσμα ιατρικών ειδικοτήτων για να καλύψουμε κάθε ανάγκη των ασθενών μας. Από τη γενική ιατρική και την καρδιολογία, μέχρι τη μαιευτική-γυναικολογία, την παιδιατρική και την ορθοπεδική, οι εξειδικευμένοι ιατροί μας είναι εδώ για να παρέχουν υψηλής ποιότητας φροντίδα. Οι υπηρεσίες μας επεκτείνονται και σε άλλους τομείς όπως η ενδοκρινολογία, η δερματολογία και η νευρολογία, εξασφαλίζοντας ολοκληρωμένη ιατρική κάλυψη για κάθε περίπτωση. Με αφοσίωση και επαγγελματισμό, είμαστε έτοιμοι να σας προσφέρουμε την καλύτερη δυνατή ιατρική φροντίδα.</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">In our practice, we offer a wide range of medical specialties to meet every need of our patients. From general medicine and cardiology, to obstetrics-gynecology, pediatrics and orthopedics, our skilled physicians are here to provide high-quality care. Our services extend to other areas such as endocrinology, dermatology and neurology, ensuring comprehensive medical coverage for every case. With dedication and professionalism, we are ready to provide you with the best possible medical care.</p>
+                   
+                    </div>
+                </div>
+                <!-- Single Cool Fact-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact-area text-center mb-100">
+                        <i class="icon-doctor-1"></i>
+                        <h2><span class="counter">16</span></h2>
+                        <h6 data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Ιατροί</h6>
+                        <h6 data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Doctors</h6>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Οι γιατροί μας, είναι εξειδικευμένοι επαγγελματίες που καλύπτουν ένα ευρύ φάσμα ιατρικών τομέων. Με πλούσια εμπειρία και συνεχή εκπαίδευση, είναι αφοσιωμένοι στην παροχή υψηλής ποιότητας φροντίδας στους ασθενείς μας. Από καρδιολόγους και παιδίατρους, μέχρι γυναικολόγους και ορθοπεδικούς, η ομάδα μας είναι έτοιμη να αντιμετωπίσει κάθε ιατρική πρόκληση με γνώση και επαγγελματισμό. Η πολυπλοκότητα και η ποικιλία των ειδικοτήτων μας εξασφαλίζουν ότι μπορούμε να προσφέρουμε ολοκληρωμένη και εξειδικευμένη ιατρική φροντίδα για κάθε ανάγκη σας.</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Our doctors are qualified professionals covering a wide range of medical fields. With a wealth of experience and continuing education, they are dedicated to providing high quality care to our patients. From cardiologists and pediatricians, to gynecologists and orthopedists, our team is ready to tackle any medical challenge with knowledge and professionalism. The complexity and variety of our specialties ensure that we can provide comprehensive and specialized medical care for your every need.</p>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Cool Facts Area End ***** -->
+    <footer class="footer-area section-padding-100">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Operating Hours -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo mb-3">
+                                <img src="img/core-img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                      
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                            <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                            <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                            <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                            <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                        </div>
+                    </div>
+    
+        
+                </div>
+            </div>
+        </div>
+    
+
+    
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area py-3 black text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 text-md-left text-center">
+                        <p>&copy; 2024 Medilife. All rights reserved.</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-right text-center">
+                        <br></br>
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    
+    
+                <!-- ***** Footer Area End ***** -->
+
+                <!-- jQuery (Necessary for All JavaScript Plugins) -->
+                <script src="js/jquery/jquery-2.2.4.min.js"></script>
+                <!-- Popper js -->
+                <script src="js/popper.min.js"></script>
+                <!-- Bootstrap js -->
+                <script src="js/bootstrap.min.js"></script>
+                <!-- Plugins js -->
+                <script src="js/plugins.js"></script>
+                <!-- Active js -->
+                <script src="js/active.js"></script>
+ <!-- jQuery -->
+ <script src="js/jquery/jquery-2.2.4.min.js"></script>
+ <script>
+     // Language switcher
+     function changeLanguage(language) {
+         // Save the selected language to local storage
+         localStorage.setItem('selectedLanguage', language);
+
+         // Set the language for all elements
+         setLanguage(language);
+     }
+
+     function setLanguage(language) {
+         // Show the selected language content and hide the others
+         document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+         document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+     }
+
+     // On page load, check if a language is stored in local storage
+     document.addEventListener('DOMContentLoaded', () => {
+         const savedLanguage = localStorage.getItem('selectedLanguage') || 'el';  // Default to Greek
+         setLanguage(savedLanguage);
+     });
+     
+ </script>
+
+</body>
+
+
+</html>

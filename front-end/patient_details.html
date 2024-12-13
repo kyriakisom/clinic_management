@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Πληροφορίες Ασθενούς</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <style>
+          .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .home-link .arrow-icon {
+            width: 50px;
+            height: 50px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 15px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2868a7;
+            text-align: left;
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        .patient-details, .medical-history {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+        }
+        .patient-details p, .medical-history p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #555;
+        }
+        .label {
+            font-weight: 600;
+            color: #222;
+        }
+        .medical-history div {
+            margin-bottom: 25px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #eaeaea;
+            margin: 15px 0;
+        }
+        .loading {
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+        .alert {
+            color: #b71c1c;
+            font-weight: bold;
+            text-align: center;
+        }
+        .language-selector {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span class="language-selector" id="el" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" id="en" onclick="changeLanguage('en')">English</span>
+    </div>
+    <a href="view_patients.html" class="home-link">
+        <div class="arrow-icon"></div>
+    </a>
+    <div class="container">
+        <h1 class="el">Πληροφορίες Ασθενούς</h1>
+        <h1 class="en">Patient Information</h1>
+        <div id="patientInfo" class="patient-details">
+            <p><span class="label el">Όνομα:</span> <span class="label en">First Name:</span> <span id="firstName" class="loading"></span></p>
+            <p><span class="label el">Επώνυμο:</span> <span class="label en">Last Name:</span> <span id="lastName" class="loading"></span></p>
+            <p><span class="label el">Αριθμός Ταυτότητας:</span> <span class="label en">ID Number:</span> <span id="idNumber" class="loading"></span></p>
+            <p><span class="label el">Email:</span> <span class="label en">Email:</span> <span id="email" class="loading"></span></p>
+            <p><span class="label el">ΑΜΚΑ:</span> <span class="label en">SSN:</span> <span id="ssn" class="loading"></span></p>
+        </div>
+
+        <h2  class="el">Ιατρικό ιστορικό</h2>
+        <h2  class="en">Medical history</h2>
+
+
+        <div id="medicalHistory" class="medical-history">
+            <p class="loading " class="el">Φόρτωση ιστορικού...</p>
+            <p class="loading " class="en">History loading...</p>
+
+        </div>
+    </div>
+
+    <script>
+        // Object to hold translated labels for both languages
+        const translations = {
+            el: {
+                firstName: "Όνομα:",
+                lastName: "Επώνυμο:",
+                idNumber: "Αριθμός Ταυτότητας:",
+                email: "Ηλεκτρονικό Ταχυδρομείο:",
+                ssn: "ΑΜΚΑ:",
+                date: "Ημερομηνία:",
+                healthProblems: "Προβλήματα Υγείας:",
+                treatment: "Θεραπεία:",
+                noMedicalHistory: "Δεν βρέθηκε ιατρικό ιστορικό.",
+                noPatientInfo: "Δεν βρέθηκαν πληροφορίες για τον ασθενή.",
+                errorFetchingData: "Σφάλμα κατά την λήψη δεδομένων. Παρακαλώ προσπαθήστε ξανά αργότερα.",
+                patientInfoTitle: "Πληροφορίες ασθενούς"
+            },
+            en: {
+                firstName: "First Name:",
+                lastName: "Last Name:",
+                idNumber: "ID Number:",
+                email: "Email:",
+                ssn: "SSN:",
+                date: "Date:",
+                healthProblems: "Health Problems:",
+                treatment: "Treatment:",
+                noMedicalHistory: "No medical history found.",
+                noPatientInfo: "No patient information found.",
+                errorFetchingData: "Error fetching data. Please try again later.",
+                patientInfoTitle: "Patient Information"
+            }
+        };
+    
+        let selectedLanguage = 'el'; // Default language
+    
+        // Fetch patient details and dynamically update the content based on the selected language
+        async function fetchPatientDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ssn = urlParams.get('ssn');
+    
+            if (!ssn) {
+                document.getElementById('patientInfo').innerHTML = `<p class="alert">${translations[selectedLanguage].noPatientInfo}</p>`;
+                return;
+            }
+    
+            try {
+                const patientResponse = await fetch('/users/get?ssn=' + encodeURIComponent(ssn));
+                if (patientResponse.ok) {
+                    const patientData = await patientResponse.json();
+    
+                    // Update patient info with translated labels
+                    document.getElementById('firstName').textContent = `${translations[selectedLanguage].firstName} ${patientData.firstname}`;
+                    document.getElementById('lastName').textContent = `${translations[selectedLanguage].lastName} ${patientData.lastname}`;
+                    document.getElementById('idNumber').textContent = `${translations[selectedLanguage].idNumber} ${patientData.idNumber}`;
+                    document.getElementById('email').textContent = `${translations[selectedLanguage].email} ${patientData.email}`;
+                    document.getElementById('ssn').textContent = `${translations[selectedLanguage].ssn} ${patientData.ssn}`;
+    
+                    // Fetch the medical history after patient details are loaded
+                    fetchMedicalHistory(ssn);
+                } else {
+                    document.getElementById('patientInfo').innerHTML = `<p class="alert">${translations[selectedLanguage].noPatientInfo}</p>`;
+                }
+            } catch (error) {
+                console.error('Error fetching patient data:', error);
+                document.getElementById('patientInfo').innerHTML = `<p class="alert">${translations[selectedLanguage].errorFetchingData}</p>`;
+            }
+        }
+    
+        async function fetchMedicalHistory(socialSecurityNumber) {
+            try {
+                const historyResponse = await fetch('/med_histories/ssn?socialSecurityNumber=' + encodeURIComponent(socialSecurityNumber));
+                if (historyResponse.ok) {
+                    const histories = await historyResponse.json();
+    
+                    if (histories.length > 0) {
+                        const historyContainer = document.getElementById('medicalHistory');
+                        historyContainer.innerHTML = '';
+    
+                        histories.forEach(history => {
+                            const historyElement = document.createElement('div');
+                            historyElement.innerHTML = `
+                                <p><span class="label">${translations[selectedLanguage].date}</span> ${new Date(history.createdAt).toLocaleDateString()}</p>
+                                <p><span class="label">${translations[selectedLanguage].healthProblems}</span> ${history.detectedHealthProblems}</p>
+                                <p><span class="label">${translations[selectedLanguage].treatment}</span> ${history.treatment}</p>
+                                <hr>
+                            `;
+                            historyContainer.appendChild(historyElement);
+                        });
+                    } else {
+                        document.getElementById('medicalHistory').innerHTML = `<p>${translations[selectedLanguage].noMedicalHistory}</p>`;
+                    }
+                } else {
+                    document.getElementById('medicalHistory').innerHTML = `<p>${translations[selectedLanguage].noMedicalHistory}</p>`;
+                }
+            } catch (error) {
+                console.error('Error fetching medical history:', error);
+                document.getElementById('medicalHistory').innerHTML = `<p class="alert">${translations[selectedLanguage].errorFetchingData}</p>`;
+            }
+        }
+    
+        // Change language and update content
+        function changeLanguage(language) {
+            selectedLanguage = language; // Update the selected language
+            localStorage.setItem('selectedLanguage', language); // Store selected language in localStorage
+    
+            // Update static content
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Update dynamic content labels
+            fetchPatientDetails(); // Re-fetch patient details and apply the translations
+    
+            // Update title according to language
+            updateTitle(translations[selectedLanguage].patientInfoTitle);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for saved language in localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Update browser tab title
+        }
+    </script>
+    
+    
+</body>
+</html>

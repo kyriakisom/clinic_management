@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title id="page-title">Η μαιευτική μονάδα μας</title> <!-- Add id="page-title" here -->
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+         .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+  
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                            <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                            <div>
+                                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="index.html">Αρχική</a>
+                                            <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                            <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                            <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                            <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                            <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                            <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Breadcumb Area Start ***** -->
+    <section class="breadcumb-area bg-img gradient-background-overlay"
+        style="background-image: url(img/bg-img/tab.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class=" el" data-animation="fadeInUp" data-delay="100ms">Λίγα λόγια για την μαιευτική μας μονάδα</h3>
+                        <h3 class="en" data-animation="fadeInUp" data-delay="100ms">A few words about our obstetric unit</h3>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Services Area Start ***** -->
+  
+
+    <style>
+        .medica-about-us-area .medica-about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+        .medica-about-us-area .row {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    
+    <style>
+        .medica-about-us-area .medica-about-content p {
+            text-align: justify;
+        }
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+    </style>
+    
+    <!-- ***** About Us Area Start ***** -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <p class="el">Η μαιευτική μονάδα του ιατρείου μας στη Σάμο είναι ένας χώρος εξειδικευμένος στη φροντίδα των εγκύων γυναικών, παρέχοντας υποστήριξη από τη σύλληψη μέχρι τη γέννηση και τη μεταγεννητική φροντίδα. Η μονάδα μας είναι εξοπλισμένη με σύγχρονα ιατρικά εργαλεία και τεχνολογίες για να διασφαλίσει ότι κάθε γέννα είναι ασφαλής και άνετη για τη μητέρα και το νεογνό.</p>
+                        <p class="en">Our obstetrics unit in Samos is a specialized facility for the care of pregnant women, offering support from conception to childbirth and postnatal care. Our unit is equipped with modern medical tools and technologies to ensure that every birth is safe and comfortable for both mother and newborn.</p>
+                    
+                        <p class="el">Στην μαιευτική μας μονάδα, οι γυναικολόγοι-μαιευτήρες είναι εξαιρετικά καταρτισμένοι και έμπειροι, έτοιμοι να παρέχουν την καλύτερη δυνατή φροντίδα σε κάθε στάδιο της εγκυμοσύνης. Από τις πρώτες εξετάσεις και τους υπερήχους μέχρι την προγεννητική παρακολούθηση και τις συμβουλευτικές συνεδρίες, οι γιατροί μας εξασφαλίζουν ότι κάθε έγκυος γυναίκα λαμβάνει την απαραίτητη υποστήριξη και πληροφορίες για μια υγιή εγκυμοσύνη.</p>
+                        <p class="en">In our obstetrics unit, our gynecologists-obstetricians are highly qualified and experienced, ready to provide the best possible care at every stage of pregnancy. From initial tests and ultrasounds to prenatal monitoring and counseling sessions, our doctors ensure that every pregnant woman receives the necessary support and information for a healthy pregnancy.</p>
+                    
+                        <p class="el">Η μονάδα μας διαθέτει άνετους και σύγχρονους τοκετούς χώρους, σχεδιασμένους για να παρέχουν μια ήρεμη και ασφαλή εμπειρία γέννας. Επιπλέον, υπάρχει διαθέσιμος εξειδικευμένος εξοπλισμός για την παρακολούθηση της υγείας της μητέρας και του νεογνού κατά τη διάρκεια του τοκετού.</p>
+                        <p class="en">Our unit features comfortable and modern labor rooms, designed to provide a calm and safe birthing experience. Additionally, specialized equipment is available to monitor the health of both mother and newborn during childbirth.</p>
+                    
+                        <p class="el">Μετά τον τοκετό, η μαιευτική μονάδα μας συνεχίζει να προσφέρει υποστήριξη με μεταγεννητική φροντίδα, συμπεριλαμβανομένων συμβουλών για το θηλασμό, την αποκατάσταση της μητέρας και την φροντίδα του νεογέννητου. Οι μαίες μας είναι πάντα διαθέσιμες για να προσφέρουν την απαραίτητη βοήθεια και καθοδήγηση στις νέες μητέρες.</p>
+                        <p class="en">After childbirth, our obstetrics unit continues to offer support with postnatal care, including breastfeeding advice, mother’s recovery, and newborn care. Our midwives are always available to provide the necessary assistance and guidance to new mothers.</p>
+                    
+                        <p class="el">Η μαιευτική μονάδα μας είναι αφιερωμένη στο να προσφέρει μια ολοκληρωμένη και υψηλής ποιότητας φροντίδα, εξασφαλίζοντας ότι κάθε μητέρα και κάθε μωρό λαμβάνουν την καλύτερη δυνατή υποστήριξη και φροντίδα σε κάθε βήμα αυτού του σημαντικού ταξιδιού.</p>
+                        <p class="en">Our obstetrics unit is dedicated to providing comprehensive and high-quality care, ensuring that every mother and baby receive the best possible support and care at every step of this important journey.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+       <!-- ***** Cool Facts Area End ***** -->
+       <footer class="footer-area section-padding-100">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Operating Hours -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo mb-3">
+                                <img src="img/core-img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                      
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                            <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                            <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                            <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                            <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                        </div>
+                    </div>
+    
+        
+                </div>
+            </div>
+        </div>
+    
+
+    
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area py-3 black text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 text-md-left text-center">
+                        <p>&copy; 2024 Medilife. All rights reserved.</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-right text-center">
+                        <br></br>
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <script>
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Μαιευτήριο',
+                'en': 'Obstetric unit'
+            };
+            updateTitle(titles[language]);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+    
+
+</body>
+</html>

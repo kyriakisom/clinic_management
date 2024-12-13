@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Κοινοτικό Γεγονός: Υγειονομική Ενημέρωση</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .article-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .article-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .article-image {
+    display: flex; /* Χρησιμοποίησε flexbox για καλύτερο κεντράρισμα */
+    justify-content: center; /* Κεντράρει την εικόνα οριζόντια */
+    margin-bottom: 20px;
+}
+
+.article-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+        .article-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .article-content p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #555;
+            text-align: justify;
+        }
+        .el { /* Greek Language */
+            display: block;
+        }
+        .en { /* English Language */
+            display: none;
+        }
+        [lang="en"] .el { /* Hide Greek for English pages */
+            display: none;
+        }
+        [lang="en"] .en { /* Show English on English pages */
+            display: block;
+        }
+        .language-selector {
+  margin: 5px; /* Adjusted margin for smaller spacing */
+  padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+  cursor: pointer;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 14px; /* Smaller font size */
+}
+    </style>
+</head>
+<body>
+    <header class="header-area">
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                            <div>
+                                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                            
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+
+    <div class="article-container">
+        <div class="article-header">
+            <h1 data-animation="fadeInUp" data-delay="100ms" class="el">Κοινοτικό Γεγονός: Υγειονομική Ενημέρωση</h1>
+            <h1 data-animation="fadeInUp" data-delay="100ms" class="en">Community Event: Health Awareness</h1>
+        </div>
+        <div class="article-image">
+            <img src="img/news/community-event.jpg" alt="Κοινοτικό Γεγονός" class="el">
+            <img src="img/news/community-event.jpg" alt="Community Event" class="en">
+        </div>
+        <div class="article-content">
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Στο πλαίσιο της κοινωνικής μας ευθύνης, η κλινική μας διοργανώνει μια μεγάλη εκδήλωση υγειονομικής ενημέρωσης ανοιχτή για όλη την κοινότητα.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">As part of our social responsibility, our clinic is organizing a major health awareness event open to the entire community.</p>
+
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Η εκδήλωση αυτή θα πραγματοποιηθεί στο πάρκο της περιοχής και θα περιλαμβάνει ομιλίες από κορυφαίους ειδικούς ιατρούς, που θα αναλύσουν σημαντικά θέματα όπως η πρόληψη χρόνιων ασθενειών, η σημασία των τακτικών εξετάσεων και οι τελευταίες εξελίξεις στη θεραπεία διαφόρων παθήσεων.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">The event will take place at the local park and will include talks from leading medical experts, addressing important topics such as chronic disease prevention, the importance of regular check-ups, and the latest advancements in the treatment of various conditions.</p>
+
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Παράλληλα, οι συμμετέχοντες θα έχουν τη δυνατότητα να κάνουν δωρεάν εξετάσεις, όπως μέτρηση σακχάρου, αρτηριακής πίεσης και δερματολογικού ελέγχου.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">Participants will also have the opportunity to undergo free tests, such as blood sugar measurement, blood pressure checks, and dermatological screenings.</p>
+
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Θα υπάρχουν επίσης περίπτερα όπου οι επισκέπτες θα μπορούν να λάβουν συμβουλές για τη διατροφή, την άσκηση και άλλες πτυχές της καθημερινής φροντίδας της υγείας τους.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">There will also be booths where visitors can get advice on nutrition, exercise, and other aspects of daily health care.</p>
+
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Αυτή η εκδήλωση προσφέρει μια μοναδική ευκαιρία να μάθετε πώς να βελτιώσετε την υγεία σας και να λάβετε αξιόπιστες πληροφορίες απευθείας από τους ειδικούς.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">This event provides a unique opportunity to learn how to improve your health and receive reliable information directly from experts.</p>
+        </div>
+    </div>
+    
+<p></p>
+<footer class="footer-area section-padding-100">
+    <!-- Main Footer Area -->
+    <div class="main-footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- Logo and Operating Hours -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <div class="footer-logo mb-3">
+                            <img src="img/core-img/logo.png" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                  
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                        <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                        <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                        <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                        <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                    </div>
+                </div>
+
+    
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bottom Footer Area -->
+    <div class="bottom-footer-area py-3 black text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 text-md-left text-center">
+                    <p>&copy; 2024 Medilife. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6 text-md-right text-center">
+                    <br></br>
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (Necessary for All JavaScript Plugins) -->
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="js/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Plugins js -->
+<script src="js/plugins.js"></script>
+<!-- Active js -->
+<script src="js/active.js"></script>
+<script>
+    // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+    function updateTitle(title) {
+        const titleElement = document.getElementById('page-title');
+        if (titleElement) {
+            titleElement.textContent = title;
+        }
+        document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+    }
+
+    function changeLanguage(language) {
+        // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+        localStorage.setItem('selectedLanguage', language);
+
+        // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+        document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+        document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+
+        // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+        const titles = {
+            'el': 'Κοινοτικό γεγονός',
+            'en': 'New event'
+        };
+        updateTitle(titles[language]);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+        const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+        changeLanguage(savedLanguage);
+    });
+</script>
+
+</body>
+</html>

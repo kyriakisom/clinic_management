@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Πολιτική Απορρήτου - Medilife</title> <!-- Add id="page-title" here -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+    background-color: #3f2de5;
+    color: #ffffff;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+header .logo {
+    flex: 1; /* Allows the logo to take up space on the left */
+}
+
+header .logo img {
+    height: 50px;
+}
+
+header .language-selector-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes the language selector to the right */
+}
+
+header .language-selector {
+    margin: 0 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+.hidden {
+    display: none;
+}
+.el {
+    display: inline-block; /* Default for Greek */
+}
+
+.en {
+    display: none; /* Hidden by default */
+}
+
+        main {
+            padding: 40px 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #c3c9e9;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #3f2de5;
+            margin-top: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3f2de5;
+            padding-bottom: 10px;
+        }
+        p {
+            margin: 0 0 1.5em;
+        }
+        footer {
+            background-color: #3f2de5;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        footer .footer-links {
+            margin: 10px 0;
+        }
+        footer .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+        footer .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            background-color: #3f2de5;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #2d1aab;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- ***** Header Area Start ***** -->
+    <header>
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+            </div>
+            <!-- Language Selector -->
+            <div class="language-selector-container">
+                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span>
+                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+            </div>
+        </div>
+    </header>
+    
+    
+    <section>
+        <div class="container">
+            <!-- Greek Content -->
+
+                <h1 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Πολιτική Απορρήτου</h1>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Η Medilife δεσμεύεται για την προστασία της ιδιωτικότητάς σας. Αυτή η Πολιτική Απορρήτου εξηγεί πώς συλλέγουμε, χρησιμοποιούμε και προστατεύουμε τα προσωπικά σας δεδομένα.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Συλλογή Δεδομένων</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Συλλέγουμε προσωπικά δεδομένα όπως το όνομα, τη διεύθυνση email και τον αριθμό τηλεφώνου όταν υποβάλλετε φόρμες επικοινωνίας. Επίσης, συλλέγουμε δεδομένα μέσω cookies για να βελτιώσουμε την εμπειρία σας στον ιστότοπό μας.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Χρήση Δεδομένων</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Τα προσωπικά σας δεδομένα χρησιμοποιούνται για να επικοινωνήσουμε μαζί σας σχετικά με τις υπηρεσίες μας, να σας παρέχουμε εξατομικευμένες προσφορές και να βελτιώσουμε τις υπηρεσίες μας. Μπορεί να χρησιμοποιήσουμε επίσης τα δεδομένα για να σας στείλουμε ενημερωτικά δελτία και άλλες σχετικές πληροφορίες.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Κοινοποίηση Δεδομένων</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Δεν κοινοποιούμε τα προσωπικά σας δεδομένα σε τρίτους εκτός αν είναι απαραίτητο για την παροχή των υπηρεσιών μας ή αν απαιτείται από το νόμο. Σε περιπτώσεις που είναι απαραίτητη η κοινοποίηση των δεδομένων σας, διασφαλίζουμε ότι οι τρίτοι παρέχουν επαρκή επίπεδα προστασίας.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Ασφάλεια Δεδομένων</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Λαμβάνουμε όλα τα απαραίτητα μέτρα ασφαλείας για την προστασία των προσωπικών σας δεδομένων από μη εξουσιοδοτημένη πρόσβαση, αλλοίωση ή καταστροφή. Χρησιμοποιούμε σύγχρονη τεχνολογία και πρακτικές ασφάλειας για να εξασφαλίσουμε την προστασία των δεδομένων σας.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Δικαιώματα Χρηστών</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Έχετε το δικαίωμα να ζητήσετε πρόσβαση, διόρθωση ή διαγραφή των προσωπικών σας δεδομένων που διατηρούμε. Επίσης, μπορείτε να αντιταχθείτε στη χρήση των δεδομένων σας για συγκεκριμένους σκοπούς, όπως η αποστολή διαφημιστικών μηνυμάτων.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Πολιτική Cookies</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία σας στον ιστότοπό μας. Τα cookies είναι μικρά αρχεία κειμένου που αποθηκεύονται στον υπολογιστή σας και βοηθούν στην ανάλυση της χρήσης του ιστότοπου. Μπορείτε να διαχειριστείτε ή να απενεργοποιήσετε τα cookies μέσω των ρυθμίσεων του προγράμματος περιήγησής σας.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Επικοινωνία</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Για οποιεσδήποτε ερωτήσεις σχετικά με την Πολιτική Απορρήτου ή αν θέλετε να ασκήσετε τα δικαιώματά σας, παρακαλώ επικοινωνήστε μαζί μας στο medilife@gmail.com  ή μέσω της φόρμας επικοινωνίας στον ιστότοπό μας.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Αλλαγές στην Πολιτική Απορρήτου</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Ενδέχεται να ενημερώνουμε την Πολιτική Απορρήτου μας κατά καιρούς. Οι αλλαγές θα αναρτώνται σε αυτή τη σελίδα με την ημερομηνία ισχύος των αλλαγών. Σας προτείνουμε να ελέγχετε περιοδικά αυτή τη σελίδα για τυχόν ενημερώσεις.</p>
+            
+            <!-- English Content -->
+                <h1 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Privacy Policy</h1>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Medilife is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your personal data.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Data Collection</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">We collect personal data such as name, email address, and phone number when you submit contact forms. We also collect data through cookies to enhance your experience on our website.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Data Usage</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Your personal data is used to communicate with you regarding our services, provide personalized offers, and improve our services. We may also use the data to send you newsletters and other relevant information.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Data Sharing</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">We do not share your personal data with third parties unless necessary for providing our services or required by law. If sharing is necessary, we ensure that third parties provide adequate levels of protection.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Data Security</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">We take all necessary security measures to protect your personal data from unauthorized access, alteration, or destruction. We use modern technology and security practices to ensure the protection of your data.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">User Rights</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">You have the right to request access to, correction, or deletion of your personal data we hold. You can also object to the use of your data for specific purposes, such as sending marketing messages.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Cookies Policy</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">We use cookies to improve your experience on our website. Cookies are small text files stored on your computer that help analyze website usage. You can manage or disable cookies through your browser settings.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Contact</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">If you have any questions regarding the Privacy Policy or wish to exercise your rights, please contact us at medilife@gmail.com  or via the contact form on our website.</p>
+                
+                <h4 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Changes to the Privacy Policy</h4>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">We may update our Privacy Policy from time to time. Changes will be posted on this page with the effective date of the changes. We recommend checking this page periodically for any updates.</p>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Medilife. All rights reserved.</p>
+            <div class="footer-links">
+                <!-- Greek Links -->
+                <div id="el-footer-links" class="el">
+                    <a href="privacy-policy.html">Πολιτική Απορρήτου</a> |
+                    <a href="terms-of-service.html">Όροι Χρήσης</a> |
+                    <a href="contact.html">Επικοινωνία</a>
+                </div>
+                <!-- English Links -->
+                <div id="en-footer-links" class="en">
+                    <a href="privacy-policy.html">Privacy Policy</a> |
+                    <a href="terms-of-service.html">Terms of Service</a> |
+                    <a href="contact.html">Contact Us</a>
+                </div>
+            </div>
+            <!-- Greek Button -->
+            <a href="index.html" id="el-btn" class="btn el">Επιστροφή στην Αρχική Σελίδα</a>
+            <!-- English Button -->
+            <a href="index.html" id="en-btn" class="btn en">Return to Home Page</a>
+        </div>
+    </footer>
+    
+    
+    
+     <!-- jQuery (Necessary for All JavaScript Plugins) -->
+     <script src="js/jquery/jquery-2.2.4.min.js"></script>
+     <!-- Popper js -->
+     <script src="js/popper.min.js"></script>
+     <!-- Bootstrap js -->
+     <script src="js/bootstrap.min.js"></script>
+     <!-- Plugins js -->
+     <script src="js/plugins.js"></script>
+     <!-- Active js -->
+     <script src="js/active.js"></script>
+     <script>
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Πολιτική Απορρήτου - Medilife',
+                'en': 'Privacy Policy - Medilife'
+            };
+            updateTitle(titles[language]);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title id="page-title">Νέα & Ανακοινώσεις</title> <!-- Add id="page-title" here -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+    padding: 25px;
+    background-color: white;
+    color: rgb(11, 6, 43);
+    font-size: 25px;
+}
+
+.dark-mode {
+    background-color: rgb(11, 6, 43);
+    color: white;
+}
+
+.news-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Κεντράρισμα των ανακοινώσεων */
+}
+
+.news-item {
+    width: 80%; /* Μείωση του πλάτους των ανακοινώσεων */
+    max-width: 600px; /* Ορισμός ενός μέγιστου πλάτους για τις ανακοινώσεις */
+    margin-bottom: 15px; /* Μείωση του περιθωρίου κάτω από κάθε κάρτα */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Μείωση του shadow για πιο διακριτικό αποτέλεσμα */
+    transition: transform 0.3s ease;
+}
+
+.news-item:hover {
+    transform: scale(1.02);
+}
+
+.news-item img {
+    width: 100%; /* Τοποθέτηση της εικόνας να καταλαμβάνει όλο το πλάτος του κουτιού */
+    height: auto;
+    display: block;
+}
+
+.news-item-content {
+    padding: 10px; /* Μείωση του padding */
+}
+
+.news-item a {
+    text-decoration: none;
+    color: #3f2de5;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px; /* Μείωση του περιθωρίου κάτω από τον τίτλο */
+    font-size: 16px; /* Μείωση του μεγέθους γραμματοσειράς */
+}
+
+.news-item a:hover {
+    text-decoration: underline;
+}
+
+.news-item p {
+    margin: 0;
+    font-size: 14px; /* Μείωση του μεγέθους γραμματοσειράς στην περιγραφή */
+    color: #333;
+}
+.carousel-inner {
+            display: flex;
+            justify-content: center;
+        }
+
+        .carousel-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+       
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid #3f2de5;
+    border-radius: 5px;
+    color: #000000;
+    background-color: #3f2de5;
+}
+
+.pagination .page-link:hover {
+    background-color: #3f2de5;
+    color: white;
+}
+.language-selector {
+  margin: 5px; /* Adjusted margin for smaller spacing */
+  padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+  cursor: pointer;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 14px; /* Smaller font size */
+}
+    </style>
+</head>
+
+<body>
+   
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area">
+    <div class="top-header-area">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-12 h-100">
+                    <div class="h-100 d-md-flex justify-content-between align-items-center">
+                        <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                        <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                        <div>
+                            <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                            <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-header-area" id="stickyHeader">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 h-100">
+                    <div class="main-menu h-100">
+                        <nav class="navbar h-100 navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                            <div class="collapse navbar-collapse" id="medilifeMenu">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item ">
+                                        <a class="nav-link el" href="index.html">Αρχική</a>
+                                        <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                        <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                        <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                        <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                        <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                        <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Ανακοινώσεις ***** -->
+<section class="news-area">
+    <div class="container">
+        <br></br>
+        <br></br>
+        <h1 data-animation="fadeInUp" data-delay="100ms" class="el">Νέα & Ανακοινώσεις</h1>
+        <h1 data-animation="fadeInUp" data-delay="100ms" class="en">News & Announcements</h1>
+        <ul class="news-list">
+            <!-- Νέα 1 -->
+            <li class="news-item">
+                <a href="news-new-doctor.html">
+                    <img src="img/news/new-doctor.jpg" alt="Νέος Καρδιολόγος" class="el">
+                    <img src="img/news/new-doctor.jpg" alt="New Cardiologist" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-new-doctor.html" class="el">Νέος Καρδιολόγος στο Προσωπικό μας!</a>
+                    <a href="news-new-doctor.html" class="en">New Cardiologist Joins Our Staff!</a>
+                    <p class="el">Ο Δρ. Δημήτριος Παπαδόπουλος εντάχθηκε στην ομάδα μας. Διαβάστε περισσότερα...</p>
+                    <p class="en">Dr. Dimitrios Papadopoulos has joined our team. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 2 -->
+            <li class="news-item">
+                <a href="news-seminar.html">
+                    <img src="img/news/seminar.jpg" alt="Σεμινάριο Πρώτων Βοηθειών" class="el">
+                    <img src="img/news/seminar.jpg" alt="First Aid Seminar" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-seminar.html" class="el">Σεμινάριο Πρώτων Βοηθειών - 12 Σεπτεμβρίου 2024</a>
+                    <a href="news-seminar.html" class="en">First Aid Seminar - September 12, 2024</a>
+                    <p class="el">Εγγραφείτε τώρα για το επερχόμενο σεμινάριο πρώτων βοηθειών. Διαβάστε περισσότερα...</p>
+                    <p class="en">Sign up now for the upcoming first aid seminar. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 3 -->
+            <li class="news-item">
+                <a href="news-award.html">
+                    <img src="img/news/award.jpg" alt="Βράβευση Κλινικής" class="el">
+                    <img src="img/news/award.jpg" alt="Clinic Award" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-award.html" class="el">Η Κλινική μας Βραβεύθηκε ως η Καλύτερη στo Βόρειo Αιγαίο!</a>
+                    <a href="news-award.html" class="en">Our Clinic Awarded as the Best in Northern Aegean!</a>
+                    <p class="el">Μια σημαντική διάκριση για την ποιότητα των υπηρεσιών μας. Διαβάστε περισσότερα...</p>
+                    <p class="en">A significant award for the quality of our services. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 4 -->
+            <li class="news-item">
+                <a href="news-new-treatment.html">
+                    <img src="img/news/new-treatment.jpg" alt="Νέα Θεραπεία για τον Διαβήτη" class="el">
+                    <img src="img/news/new-treatment.jpg" alt="New Diabetes Treatment" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-new-treatment.html" class="el">Νέα Θεραπεία για τον Διαβήτη Διαθέσιμη</a>
+                    <a href="news-new-treatment.html" class="en">New Diabetes Treatment Available</a>
+                    <p class="el">Μάθετε για τη νέα θεραπεία που προσφέρουμε στους ασθενείς μας. Διαβάστε περισσότερα...</p>
+                    <p class="en">Learn about the new treatment we offer to our patients. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 5 -->
+            <li class="news-item">
+                <a href="news-extended-hours.html">
+                    <img src="img/news/extended-hours.jpg" alt="Επέκταση Ωραρίων" class="el">
+                    <img src="img/news/extended-hours.jpg" alt="Extended Hours" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-extended-hours.html" class="el">Επέκταση Ωραρίων Λειτουργίας για την Εορταστική Περίοδο</a>
+                    <a href="news-extended-hours.html" class="en">Extended Operating Hours for the Holiday Season</a>
+                    <p class="el">Η κλινική μας θα παραμείνει ανοιχτή για περισσότερες ώρες κατά τη διάρκεια των εορτών. Διαβάστε περισσότερα...</p>
+                    <p class="en">Our clinic will remain open for extended hours during the holidays. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 6 -->
+            <li class="news-item">
+                <a href="news-health-tips.html">
+                    <img src="img/news/health-tips.jpg" alt="Συμβουλές Υγείας" class="el">
+                    <img src="img/news/health-tips.jpg" alt="Health Tips" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-health-tips.html" class="el">Συμβουλές Υγείας για τον Χειμώνα</a>
+                    <a href="news-health-tips.html" class="en">Winter Health Tips</a>
+                    <p class="el">Ανακαλύψτε χρήσιμες συμβουλές για τη διατήρηση της υγείας σας κατά τους χειμερινούς μήνες. Διαβάστε περισσότερα...</p>
+                    <p class="en">Discover useful tips for maintaining your health during the winter months. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 7 -->
+            <li class="news-item">
+                <a href="news-new-equipment.html">
+                    <img src="img/news/new-equipment.jpg" alt="Νέος Εξοπλισμός" class="el">
+                    <img src="img/news/new-equipment.jpg" alt="New Equipment" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-new-equipment.html" class="el">Ενσωμάτωση Νέου Ιατρικού Εξοπλισμού</a>
+                    <a href="news-new-equipment.html" class="en">Integration of New Medical Equipment</a>
+                    <p class="el">Η κλινική μας προχώρησε στην αναβάθμιση του ιατρικού της εξοπλισμού για καλύτερη εξυπηρέτηση. Διαβάστε περισσότερα...</p>
+                    <p class="en">Our clinic has upgraded its medical equipment for better service. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 8 -->
+            <li class="news-item">
+                <a href="news-community-event.html">
+                    <img src="img/news/community-event.jpg" alt="Κοινοτικό Γεγονός" class="el">
+                    <img src="img/news/community-event.jpg" alt="Community Event" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-community-event.html" class="el">Κοινοτικό Γεγονός: Υγειονομική Ενημέρωση</a>
+                    <a href="news-community-event.html" class="en">Community Event: Health Awareness</a>
+                    <p class="el">Συμμετέχετε στην εκδήλωση της κοινότητας για την υγειονομική ενημέρωση και ευαισθητοποίηση. Διαβάστε περισσότερα...</p>
+                    <p class="en">Join the community event for health awareness and education. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 9 -->
+            <li class="news-item">
+                <a href="news-new-services.html">
+                    <img src="img/news/new-services.jpg" alt="Νέες Υπηρεσίες" class="el">
+                    <img src="img/news/new-services.jpg" alt="New Services" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-new-services.html" class="el">Νέες Υπηρεσίες Υγειονομικής Φροντίδας</a>
+                    <a href="news-new-services.html" class="en">New Healthcare Services</a>
+                    <p class="el">Η κλινική μας επεκτείνει τις υπηρεσίες της με νέες ειδικότητες και θεραπείες. Διαβάστε περισσότερα...</p>
+                    <p class="en">Our clinic is expanding its services with new specialties and treatments. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 10 -->
+            <li class="news-item">
+                <a href="news-upcoming-workshop.html">
+                    <img src="img/news/upcoming-workshop.jpg" alt="Επερχόμενο Εργαστήριο" class="el">
+                    <img src="img/news/upcoming-workshop.jpg" alt="Upcoming Workshop" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-upcoming-workshop.html" class="el">Εργαστήριο Υγείας και Ευεξίας - 30 Αυγούστου 2024</a>
+                    <a href="news-upcoming-workshop.html" class="en">Health and Wellness Workshop - August 30, 2024</a>
+                    <p class="el">Μην χάσετε το επερχόμενο εργαστήριο για την υγεία και ευεξία. Διαβάστε περισσότερα...</p>
+                    <p class="en">Don't miss the upcoming workshop on health and wellness. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 11 -->
+            <li class="news-item">
+                <a href="news-charity-event.html">
+                    <img src="img/news/charity-event.jpg" alt="Φιλανθρωπική Εκδήλωση" class="el">
+                    <img src="img/news/charity-event.jpg" alt="Charity Event" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-charity-event.html" class="el">Φιλανθρωπική Εκδήλωση Υποστήριξης Ασθενών</a>
+                    <a href="news-charity-event.html" class="en">Charity Event for Patient Support</a>
+                    <p class="el">Συμμετέχετε στην ετήσια φιλανθρωπική εκδήλωση της κλινικής μας. Διαβάστε περισσότερα...</p>
+                    <p class="en">Join our annual charity event for patient support. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 12 -->
+            <li class="news-item">
+                <a href="news-improvement-project.html">
+                    <img src="img/news/improvement-project.jpg" alt="Σχέδιο Βελτίωσης Υποδομών" class="el">
+                    <img src="img/news/improvement-project.jpg" alt="Infrastructure Improvement Project" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-improvement-project.html" class="el">Σχέδιο Βελτίωσης Υποδομών Κλινικής</a>
+                    <a href="news-improvement-project.html" class="en">Clinic Infrastructure Improvement Project</a>
+                    <p class="el">Ανακοινώνουμε το νέο σχέδιο βελτίωσης των υποδομών μας για καλύτερη εξυπηρέτηση. Διαβάστε περισσότερα...</p>
+                    <p class="en">We announce a new infrastructure improvement project for better service. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 13 -->
+            <li class="news-item">
+                <a href="news-new-medication.html">
+                    <img src="img/news/new-medication.jpg" alt="Νέο Φάρμακο" class="el">
+                    <img src="img/news/new-medication.jpg" alt="New Medication" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-new-medication.html" class="el">Νέο Φάρμακο για τη Θεραπεία Χρόνιων Παθήσεων</a>
+                    <a href="news-new-medication.html" class="en">New Medication for Chronic Conditions</a>
+                    <p class="el">Εισαγωγή νέου φαρμάκου που υποστηρίζει την αποτελεσματική διαχείριση χρόνιων παθήσεων. Διαβάστε περισσότερα...</p>
+                    <p class="en">Introduction of new medication supporting effective management of chronic conditions. Read more...</p>
+                </div>
+            </li>
+            <!-- Νέα 14 -->
+            <li class="news-item">
+                <a href="news-research-study.html">
+                    <img src="img/news/research-study.jpg" alt="Μελέτη Υγείας" class="el">
+                    <img src="img/news/research-study.jpg" alt="Health Study" class="en">
+                </a>
+                <div class="news-item-content">
+                    <a href="news-research-study.html" class="el">Νέα Μελέτη για την Επίδραση της Διατροφής στην Υγεία</a>
+                    <a href="news-research-study.html" class="en">New Study on the Impact of Nutrition on Health</a>
+                    <p class="el">Διαβάστε τα αποτελέσματα της νέας μελέτης μας σχετικά με την επίδραση της διατροφής στην υγεία. Διαβάστε περισσότερα...</p>
+                    <p class="en">Read the results of our new study on the impact of nutrition on health. Read more...</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<p></p>
+<div class="pagination-container">
+    <ul class="pagination"></ul>
+</div>
+
+<p></p>
+<footer class="footer-area section-padding-100">
+    <!-- Main Footer Area -->
+    <div class="main-footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- Logo and Operating Hours -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <div class="footer-logo mb-3">
+                            <img src="img/core-img/logo.png" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                  
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                        <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                        <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                        <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                        <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                    </div>
+                </div>
+
+    
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bottom Footer Area -->
+    <div class="bottom-footer-area py-3 black text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 text-md-left text-center">
+                    <p>&copy; 2024 Medilife. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6 text-md-right text-center">
+                    <br></br>
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <script>
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Νέα & Ανακοινώσεις',
+                'en': 'News & Announcements'
+            };
+            updateTitle(titles[language]);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+    
+</body>
+
+</html>

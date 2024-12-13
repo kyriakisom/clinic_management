@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Λήψη Ιστορικού Ασθενούς</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .language-selector-container {
+            text-align: right; /* Align to the right side */
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .language-selector {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .home-link .arrow-icon {
+            width: 40px;
+            height: 40px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 10px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #0056b3;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .error {
+            color: #b71c1c;
+        }
+
+        .success {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector-container">
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span>
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+    
+    <a href="medical_history.html" class="home-link">
+        <div class="arrow-icon"></div>
+    
+    </a>
+    
+
+    <div class="container">
+        <h1 class="el">Λήψη Ιστορικού Ασθενούς</h1>
+        <h1 class="en">Patient History Download</h1>
+        <label for="socialSecurityNumber" class="el">Εισάγετε Αριθμό Κοινωνικής Ασφάλισης:</label>
+        <label for="socialSecurityNumber" class="en">Enter Social Security Number:</label>
+
+        <input type="text" id="socialSecurityNumber" name="socialSecurityNumber" required>
+        <p></p>
+        <div class="form-group">
+            <button id="downloadButtonEl" class="btn btn-primary el">Λήψη PDF</button>
+            <button id="downloadButtonEn" class="btn btn-primary en" style="display:none;">Download PDF</button>
+        </div>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        async function downloadPDF(language) {
+            const ssn = document.getElementById('socialSecurityNumber').value.trim();
+            const messageElement = document.getElementById('message');
+    
+            if (!ssn) {
+                messageElement.textContent = language === 'el' ? 'Παρακαλώ εισάγετε τον αριθμό κοινωνικής ασφάλισης.' : 'Please enter your Social Security Number.';
+                messageElement.className = 'message error';
+                return;
+            }
+    
+            try {
+                const response = await fetch('/med_histories/download-patient-history/pdf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ socialSecurityNumber: ssn, language: language })
+                });
+    
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `patient_history_${ssn}_${language}.pdf`;
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    messageElement.textContent = language === 'el' ? 'Η λήψη του PDF ξεκίνησε.' : 'The PDF download has started.';
+                    messageElement.className = 'message success';
+                } else {
+                    const errorText = await response.text();
+                    messageElement.textContent = language === 'el' ? `Σφάλμα: ${errorText}` : `Error: ${errorText}`;
+                    messageElement.className = 'message error';
+                }
+            } catch (error) {
+                console.error('Σφάλμα κατά την ανάκτηση του PDF:', error);
+                messageElement.textContent = language === 'el' ? 'Σφάλμα κατά τη λήψη του ιστορικού ασθενούς. Παρακαλώ προσπαθήστε ξανά αργότερα.' : 'Error downloading patient history. Please try again later.';
+                messageElement.className = 'message error';
+            }
+        }
+
+        document.getElementById('downloadButtonEl').addEventListener('click', function() {
+            downloadPDF('el');
+        });
+
+        document.getElementById('downloadButtonEn').addEventListener('click', function() {
+            downloadPDF('en');
+        });
+    
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Ενημέρωση placeholder ανάλογα με τη γλώσσα
+            const ssnInput = document.getElementById('socialSecurityNumber');
+            const placeholders = {
+                'el': 'Αριθμός Κοινωνικής Ασφάλισης',
+                'en': 'Social Security Number'
+            };
+            ssnInput.placeholder = placeholders[language];
+    
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Λήψη Ιστορικού Ασθενούς σε μορφή pdf',
+                'en': 'Downloading Patient History in pdf form'
+            };
+            updateTitle(titles[language]);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+    
+</body>
+</html>

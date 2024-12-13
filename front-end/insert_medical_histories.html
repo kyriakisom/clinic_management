@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Προσθήκη ιστορικού</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .home-link .arrow-icon {
+            width: 50px;
+            height: 50px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 15px;
+        }
+
+        .btn-green {
+            background-color: #28a745; /* Green background */
+            border-color: #28a745; /* Green border */
+            color: #ffffff; /* White text */
+        }
+
+        .btn-green:hover {
+            background-color: #218838; /* Darker green on hover */
+            border-color: #1e7e34; /* Darker green border on hover */
+        }
+
+        .icon.csv-icon {
+            width: 45px;
+            height: 50px;
+            margin-top: 25px;
+            margin-left: 20px;
+        }
+
+        .form-action-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-action-container button {
+            margin-right: 20px;
+        }
+
+        .form-control {
+            color: #000000;
+        }
+
+        .notification {
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .notification.success {
+            color: #28a745;
+        }
+
+        .notification.error {
+            color: #dc3545;
+        }
+
+        .language-selector {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+    <a href="medical_history.html" class="home-link">
+        <div class="arrow-icon"></div>
+    </a>
+
+    <section class="medilife-contact-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="contact-form">
+                        <form id="medicalHistoryForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="socialSecurityNumber" placeholder="Social Security Number">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="detectedHealthProblems" placeholder="Διάγνωση">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="treatment" placeholder="Θεραπεία">
+                            </div>
+                            <div id="notification" class="notification" style="display: none;"></div>
+                            <div class="row justify-content-center">
+                                <div class="form-action-container">
+                                    <button type="submit" id="submitButton" class="btn btn-sm btn-green">Προσθήκη</button>
+                                    <input type="file" id="csvFileInput" style="display: none;">
+                                    <a href="#" id="csvUploadLink">
+                                        <img src="img/icons/csv.png" class="icon csv-icon" alt="Csv">
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <h3></h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/active.js"></script>
+
+    <script>
+        let currentLanguage = 'el'; // Αρχική γλώσσα
+
+        const messages = {
+            el: {
+                successUpload: 'Το αρχείο ανέβηκε επιτυχώς!',
+                errorUpload: 'Παρουσιάστηκε σφάλμα κατά το ανέβασμα του αρχείου.',
+                successAdd: 'Το ιστορικό προστέθηκε επιτυχώς!',
+                errorAdd: 'Σφάλμα κατά την προσθήκη του ιστορικού.',
+                errorGeneral: 'Παρουσιάστηκε σφάλμα κατά την προσθήκη του ιστορικού ασθενούς.'
+            },
+            en: {
+                successUpload: 'File uploaded successfully!',
+                errorUpload: 'An error occurred while uploading the file.',
+                successAdd: 'Medical history added successfully!',
+                errorAdd: 'Error adding medical history.',
+                errorGeneral: 'An error occurred while adding the patient\'s medical history.'
+            }
+        };
+
+        function showNotification(messageKey, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = messages[currentLanguage][messageKey];
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+        }
+
+        function clearNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'none';
+        }
+
+        document.getElementById('csvUploadLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('csvFileInput').click();
+        });
+
+        document.getElementById('csvFileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/med_histories/upload-patient-history-csv', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                showNotification('successUpload', 'success');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('errorUpload', 'error');
+            });
+        });
+
+        document.getElementById('medicalHistoryForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const socialSecurityNumber = document.getElementById('socialSecurityNumber').value;
+            const detectedHealthProblems = document.getElementById('detectedHealthProblems').value;
+            const treatment = document.getElementById('treatment').value;
+
+            const data = {
+                socialSecurityNumber,
+                detectedHealthProblems,
+                treatment
+            };
+
+            try {
+                const response = await fetch('/med_histories', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showNotification('successAdd', 'success');
+                    document.getElementById('medicalHistoryForm').reset();
+                } else {
+                    showNotification('errorAdd', 'error');
+                }
+            } catch (error) {
+                console.error('Σφάλμα:', error);
+                showNotification('errorGeneral', 'error');
+            }
+        });
+
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title;
+        }
+
+        function changeLanguage(language) {
+            localStorage.setItem('selectedLanguage', language);
+            currentLanguage = language; // Ορισμός τρέχουσας γλώσσας
+
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+
+            const titles = {
+                'el': 'Εισαγωγή ιατρικού ιστορικού',
+                'en': 'Medical history addition'
+            };
+            updateTitle(titles[language]);
+
+            // Update placeholders and button text
+            const placeholders = {
+                'el': {
+                    ssn: 'Αριθμός Κοινωνικής Ασφάλισης',
+                    diagnosis: 'Διάγνωση',
+                    treatment: 'Θεραπεία',
+                    submit: 'Προσθήκη'
+                },
+                'en': {
+                    ssn: 'Social Security Number',
+                    diagnosis: 'Diagnosis',
+                    treatment: 'Treatment',
+                    submit: 'Add'
+                }
+            };
+
+            document.getElementById('socialSecurityNumber').placeholder = placeholders[language].ssn;
+            document.getElementById('detectedHealthProblems').placeholder = placeholders[language].diagnosis;
+            document.getElementById('treatment').placeholder = placeholders[language].treatment;
+            document.getElementById('submitButton').textContent = placeholders[language].submit;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+</body>
+
+</html>

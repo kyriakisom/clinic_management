@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Σεμινάριο πρώτων βοηθειών</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .article-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .article-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .article-image {
+    display: flex; /* Χρησιμοποίησε flexbox για καλύτερο κεντράρισμα */
+    justify-content: center; /* Κεντράρει την εικόνα οριζόντια */
+    margin-bottom: 20px;
+}
+
+.article-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+        .article-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .article-content p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #555;
+            text-align: justify;
+        }
+        .el { /* Greek Language */
+            display: block;
+        }
+        .en { /* English Language */
+            display: none;
+        }
+        [lang="en"] .el { /* Hide Greek for English pages */
+            display: none;
+        }
+        [lang="en"] .en { /* Show English on English pages */
+            display: block;
+        }
+        .language-selector {
+  margin: 5px; /* Adjusted margin for smaller spacing */
+  padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+  cursor: pointer;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 14px; /* Smaller font size */
+}
+    </style>
+</head>
+<body>
+    <header class="header-area">
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                            <div>
+                                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                            
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+
+    <div class="article-container">
+        <div class="article-header">
+            <h1 data-animation="fadeInUp" data-delay="100ms" class="el">Σεμινάριο Πρώτων Βοηθειών - 12 Σεπτεμβρίου 2024</h1>
+            <h1 data-animation="fadeInUp" data-delay="100ms" class="en">First Aid Seminar - September 12, 2024</h1>
+        </div>
+        <div class="article-image">
+            <img src="img/news/seminar.jpg" alt="Σεμινάριο Πρώτων Βοηθειών" class="el">
+            <img src="img/news/seminar.jpg" alt="First Aid Seminar" class="en">
+        </div>
+        <div class="article-content">
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Στις 12 Σεπτεμβρίου 2024, η κλινική μας διοργανώνει ένα σημαντικό σεμινάριο πρώτων βοηθειών, ανοιχτό στο ευρύ κοινό. Το σεμινάριο αυτό αποτελεί μια εξαιρετική ευκαιρία για όλους όσοι επιθυμούν να είναι προετοιμασμένοι για έκτακτες καταστάσεις που μπορεί να προκύψουν στην καθημερινή τους ζωή. Οι γνώσεις και οι δεξιότητες που θα αποκτηθούν από τους συμμετέχοντες θα μπορούσαν να αποδειχθούν σωτήριες σε κρίσιμες στιγμές.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">On September 12, 2024, our clinic is organizing an important First Aid seminar, open to the general public. This seminar is an excellent opportunity for everyone who wants to be prepared for emergencies that may arise in their daily lives. The knowledge and skills gained by participants could prove life-saving in critical moments.</p>
+
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Το σεμινάριο θα επικεντρωθεί στις βασικές αρχές της παροχής πρώτων βοηθειών, προσφέροντας θεωρητική και πρακτική εκπαίδευση. Οι συμμετέχοντες θα μάθουν πώς να παρέχουν καρδιοπνευμονική αναζωογόνηση (CPR), μια από τις πιο κρίσιμες δεξιότητες που μπορεί να σώσει τη ζωή ενός ανθρώπου που έχει υποστεί καρδιακή ανακοπή. Επιπλέον, το σεμινάριο θα καλύψει τη διαχείριση τραυματισμών, όπως αιμορραγίες, κατάγματα, εγκαύματα, και άλλες επείγουσες καταστάσεις.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">The seminar will focus on the basic principles of first aid, offering both theoretical and practical training. Participants will learn how to perform cardiopulmonary resuscitation (CPR), one of the most critical skills that can save the life of someone experiencing a cardiac arrest. Additionally, the seminar will cover the management of injuries such as bleeding, fractures, burns, and other emergency situations.</p>
+
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Ένα από τα βασικά πλεονεκτήματα του σεμιναρίου είναι η πρακτική εξάσκηση. Με την καθοδήγηση έμπειρων επαγγελματιών υγείας, οι συμμετέχοντες θα έχουν τη δυνατότητα να εφαρμόσουν τις γνώσεις τους σε προσομοιώσεις πραγματικών περιστατικών, αποκτώντας αυτοπεποίθηση και την ικανότητα να ανταποκριθούν άμεσα και αποτελεσματικά όταν χρειαστεί. Ιδιαίτερη έμφαση θα δοθεί επίσης στην ψυχολογική διαχείριση των επειγόντων περιστατικών, ώστε οι συμμετέχοντες να είναι σε θέση να παραμείνουν ψύχραιμοι και συγκεντρωμένοι κατά τη διάρκεια κρίσεων.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">One of the key advantages of the seminar is the practical training. Under the guidance of experienced healthcare professionals, participants will have the opportunity to apply their knowledge in simulations of real-life scenarios, gaining confidence and the ability to respond quickly and effectively when needed. Special emphasis will also be placed on the psychological management of emergency situations, so participants can remain calm and focused during crises.</p>
+
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Το σεμινάριο απευθύνεται σε άτομα όλων των ηλικιών, ανεξαρτήτως προϋπάρχουσας εμπειρίας. Είναι ιδανικό για γονείς, εκπαιδευτικούς, επαγγελματίες που εργάζονται σε χώρους με αυξημένο κίνδυνο ατυχημάτων, αλλά και για όποιον θέλει να είναι έτοιμος να προσφέρει βοήθεια σε περίπτωση ανάγκης. Η γνώση των πρώτων βοηθειών δεν είναι απλώς ένα προσόν, αλλά μια σημαντική κοινωνική ευθύνη.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">The seminar is aimed at people of all ages, regardless of prior experience. It is ideal for parents, educators, professionals working in high-risk environments, and anyone who wants to be prepared to offer assistance in case of emergency. Knowledge of first aid is not just a skill, but an important social responsibility.</p>
+
+            <p data-animation="fadeInUp" data-delay="100ms" class="el">Η συμμετοχή στο σεμινάριο είναι περιορισμένη και οι θέσεις αναμένεται να καλυφθούν γρήγορα. Για να εξασφαλίσετε τη συμμετοχή σας, σας συνιστούμε να εγγραφείτε άμεσα. Το κόστος συμμετοχής είναι συμβολικό και έχει σχεδιαστεί έτσι ώστε να καλύπτει τα βασικά έξοδα του σεμιναρίου, όπως τα υλικά εκπαίδευσης και την αμοιβή των εισηγητών.</p>
+            <p data-animation="fadeInUp" data-delay="100ms" class="en">Participation in the seminar is limited, and spots are expected to fill up quickly. To secure your place, we recommend that you register as soon as possible. The cost of participation is symbolic and is designed to cover the basic expenses of the seminar, such as training materials and speaker fees.</p>
+
+            <div class="call-to-action">
+                <p data-animation="fadeInUp" data-delay="100ms" class="el">Εγγραφείτε τώρα για να εξασφαλίσετε τη θέση σας σε αυτή τη ζωτικής σημασίας εκπαιδευτική εκδήλωση. Δείξτε την ευαισθησία και την υπευθυνότητά σας απέναντι στους γύρω σας, αποκτώντας γνώσεις που μπορεί μια μέρα να σώσουν ζωές.</p>
+                <p data-animation="fadeInUp" data-delay="100ms" class="en">Register now to secure your spot in this vital training event. Show your sensitivity and responsibility towards those around you by acquiring knowledge that could one day save lives.</p>
+            </div>
+        </div>
+    </div>
+    
+<p></p>
+<footer class="footer-area section-padding-100">
+    <!-- Main Footer Area -->
+    <div class="main-footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- Logo and Operating Hours -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <div class="footer-logo mb-3">
+                            <img src="img/core-img/logo.png" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                  
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                        <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                        <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                        <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                        <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                    </div>
+                </div>
+
+    
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bottom Footer Area -->
+    <div class="bottom-footer-area py-3 black text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 text-md-left text-center">
+                    <p>&copy; 2024 Medilife. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6 text-md-right text-center">
+                    <br></br>
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery (Necessary for All JavaScript Plugins) -->
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="js/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Plugins js -->
+<script src="js/plugins.js"></script>
+<!-- Active js -->
+<script src="js/active.js"></script>
+<script>
+    // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+    function updateTitle(title) {
+        const titleElement = document.getElementById('page-title');
+        if (titleElement) {
+            titleElement.textContent = title;
+        }
+        document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+    }
+
+    function changeLanguage(language) {
+        // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+        localStorage.setItem('selectedLanguage', language);
+
+        // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+        document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+        document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+
+        // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+        const titles = {
+            'el': 'Σεμινάριο Πρώτων Βοηθειών',
+            'en': 'First Aid Seminar'
+        };
+        updateTitle(titles[language]);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+        const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+        changeLanguage(savedLanguage);
+    });
+</script>
+</body>
+</html>

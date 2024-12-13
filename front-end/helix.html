@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+ 
+    <!-- Title  -->
+    <title id="page-title">Το ελικοδρόμιο μας</title> <!-- Add id="page-title" here -->
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+         .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+  
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                            <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                            <div>
+                                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="index.html">Αρχική</a>
+                                            <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                            <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                            <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                            <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                            <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                            <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Breadcumb Area Start ***** -->
+    <section class="breadcumb-area bg-img gradient-background-overlay"
+        style="background-image: url(img/bg-img/helicopter.png);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h2 data-animation="fadeInUp" data-delay="100ms" class="el">Λίγα λόγια για το ελικοδρόμιό μας</h2>
+                        <h2 data-animation="fadeInUp" data-delay="100ms" class="en">A few words about our helipad</h2>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Services Area Start ***** -->
+  
+
+    <style>
+        .medica-about-us-area .medica-about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+        .medica-about-us-area .row {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    
+    <style>
+        .medica-about-us-area .medica-about-content p {
+            text-align: justify;
+        }
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+    </style>
+    
+    <!-- ***** About Us Area Start ***** -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <p class="el">Το ιατρείο μας διαθέτει ένα σύγχρονο ελικοδρόμιο, το οποίο αποτελεί ένα κρίσιμο στοιχείο για την παροχή άμεσης και επείγουσας ιατρικής φροντίδας. Το ελικοδρόμιό μας είναι πλήρως εξοπλισμένο και πιστοποιημένο για την ασφαλή προσγείωση και απογείωση ιατρικών ελικοπτέρων, εξασφαλίζοντας ότι οι ασθενείς που χρειάζονται επείγουσα μεταφορά σε μεγαλύτερα ιατρικά κέντρα ή εξειδικευμένες μονάδες μπορούν να το κάνουν γρήγορα και με ασφάλεια.</p>
+                        <p class="en">Our clinic is equipped with a modern helipad, which is a critical element for providing immediate and emergency medical care. Our helipad is fully equipped and certified for the safe landing and takeoff of medical helicopters, ensuring that patients requiring urgent transfer to larger medical centers or specialized units can do so quickly and safely.</p>
+                    
+                        <p class="el">Η ύπαρξη του ελικοδρομίου μας επιτρέπει την άμεση ανταπόκριση σε επείγοντα περιστατικά, εξασφαλίζοντας ότι η ιατρική βοήθεια φτάνει εγκαίρως σε όσους την έχουν ανάγκη. Είναι σχεδιασμένο σύμφωνα με τα διεθνή πρότυπα ασφαλείας και είναι κατάλληλο για την υποδοχή διαφόρων τύπων ιατρικών ελικοπτέρων, εξασφαλίζοντας την άμεση διακομιδή των ασθενών.</p>
+                        <p class="en">The existence of our helipad allows for immediate response to emergency situations, ensuring that medical assistance arrives on time to those in need. It is designed according to international safety standards and is suitable for receiving various types of medical helicopters, ensuring the timely transfer of patients.</p>
+                    
+                        <p class="el">Το ελικοδρόμιό μας είναι στελεχωμένο από εξειδικευμένο προσωπικό, έτοιμο να υποστηρίξει τις διαδικασίες διακομιδής με τον απαραίτητο εξοπλισμό και τεχνογνωσία. Η ομάδα μας συνεργάζεται στενά με τις υπηρεσίες έκτακτης ανάγκης και τους ιατρούς, διασφαλίζοντας ότι κάθε μεταφορά γίνεται με την μεγαλύτερη δυνατή προσοχή και αποτελεσματικότητα.</p>
+                        <p class="en">Our helipad is staffed by specialized personnel, ready to support transfer procedures with the necessary equipment and expertise. Our team works closely with emergency services and doctors, ensuring that every transfer is handled with the utmost care and efficiency.</p>
+                    
+                        <p class="el">Με το ελικοδρόμιό μας, οι δυνατότητες του ιατρείου μας επεκτείνονται πέρα από τα τοπικά όρια, παρέχοντας ένα ζωτικό σύνδεσμο με τις μεγαλύτερες ιατρικές εγκαταστάσεις και εξειδικευμένα κέντρα σε όλη την Ελλάδα. Αυτό επιτρέπει την άμεση πρόσβαση σε εξειδικευμένες θεραπείες και διαγνωστικές διαδικασίες που μπορεί να μην είναι διαθέσιμες τοπικά.</p>
+                        <p class="en">With our helipad, the capabilities of our clinic extend beyond local limits, providing a vital link to larger medical facilities and specialized centers throughout Greece. This allows immediate access to specialized treatments and diagnostic procedures that may not be available locally.</p>
+                    
+                        <p class="el">Το ελικοδρόμιό μας αποτελεί αναπόσπαστο μέρος της δέσμευσής μας να παρέχουμε ολοκληρωμένη και υψηλής ποιότητας ιατρική φροντίδα, διασφαλίζοντας ότι οι ασθενείς μας λαμβάνουν την καλύτερη δυνατή περίθαλψη, ανεξάρτητα από την κατάσταση έκτακτης ανάγκης ή την ανάγκη για εξειδικευμένη ιατρική παρέμβαση.</p>
+                        <p class="en">Our helipad is an integral part of our commitment to providing comprehensive and high-quality medical care, ensuring that our patients receive the best possible care, regardless of the emergency situation or the need for specialized medical intervention.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+       <!-- ***** Cool Facts Area End ***** -->
+       <footer class="footer-area section-padding-100">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Operating Hours -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo mb-3">
+                                <img src="img/core-img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                      
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                            <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                            <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                            <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                            <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                        </div>
+                    </div>
+    
+        
+                </div>
+            </div>
+        </div>
+    
+
+    
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area py-3 black text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 text-md-left text-center">
+                        <p>&copy; 2024 Medilife. All rights reserved.</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-right text-center">
+                        <br></br>
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <script>
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Ελικοδρόμιο',
+                'en': 'Helipad'
+            };
+            updateTitle(titles[language]);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+    
+    
+</body>
+
+
+</html>

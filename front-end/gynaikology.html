@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title id="page-title">Γυναικολόγος-Μαιευτήρας</title> <!-- Add id="page-title" here -->
+
+  <!-- Favicon  -->
+  <link rel="icon" href="img/core-img/favicon.ico">
+
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+       .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: .4s;
+      }
+
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+      }
+
+      input:checked+.slider {
+          background-color: #2196F3;
+      }
+
+      input:focus+.slider {
+          box-shadow: 0 0 1px #2196F3;
+      }
+
+      input:checked+.slider:before {
+          transform: translateX(26px);
+      }
+
+      .slider.round {
+          border-radius: 34px;
+      }
+
+      .slider.round:before {
+          border-radius: 50%;
+      }
+      .language-selector {
+  margin: 5px; /* Adjusted margin for smaller spacing */
+  padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+  cursor: pointer;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 14px; /* Smaller font size */
+}
+
+      /* Rounded sliders */
+      .slider.round {
+          border-radius: 34px;
+      }
+
+      .slider.round:before {
+          border-radius: 50%;
+      }
+  </style>
+</head>
+
+<body>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area">
+      <div class="top-header-area">
+          <div class="container h-100">
+              <div class="row h-100">
+                  <div class="col-12 h-100">
+                      <div class="h-100 d-md-flex justify-content-between align-items-center">
+                          <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                          <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                          <div>
+                              <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                              <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="main-header-area" id="stickyHeader">
+          <div class="container h-100">
+              <div class="row h-100 align-items-center">
+                  <div class="col-12 h-100">
+                      <div class="main-menu h-100">
+                          <nav class="navbar h-100 navbar-expand-lg">
+                              <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                              <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                  data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                  aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                              <div class="collapse navbar-collapse" id="medilifeMenu">
+                                  <ul class="navbar-nav ml-auto">
+                                      <li class="nav-item ">
+                                          <a class="nav-link el" href="index.html">Αρχική</a>
+                                          <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                          <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                      </li>
+                                      <li class="nav-item ">
+                                          <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                          <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                      </li>
+                                      <li class="nav-item active">
+                                          <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                          <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                          <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                          <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </nav>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+    <!-- ***** Breadcumb Area Start ***** -->
+    <section class="breadcumb-area bg-img gradient-background-overlay"
+        style="background-image: url(img/bg-img/sign.png);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h2 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: left;">Μαρία Αργυροπούλου</h2>
+                        <h2 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: left;">Maria Argyropoulou</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Services Area Start ***** -->
+  
+
+    <style>
+        .medica-about-us-area .medica-about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+        .medica-about-us-area .row {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    
+    <style>
+        .medica-about-us-area .medica-about-content p {
+            text-align: justify;
+        }
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+    </style>
+    
+    <!-- ***** About Us Area Start ***** -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <h4 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: left;">Γυναικολόγος-Μαιευτήρας</h4>
+                        <h4 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: left;">Gynaecologist-Obstetrician</h4>
+                       <!--<img src="img/bg-img/cardiology.png" alt="Dr. Georgios Papadopoulos">--->
+                       <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">
+                        Η γυναικολόγος-μαιευτήρας μας, Μαρία Αργυροπούλου, γεννήθηκε στην Αθήνα το 1982. Από μικρή ηλικία είχε πάθος για την ιατρική και ιδιαίτερα για την υγεία των γυναικών, γεγονός που την οδήγησε να σπουδάσει Ιατρική στο Εθνικό και Καποδιστριακό Πανεπιστήμιο Αθηνών. Αποφοίτησε το 2006 με άριστα και συνέχισε την ειδίκευσή της στη Γυναικολογία και Μαιευτική στο Αρεταίειο Νοσοκομείο, όπου απέκτησε πλούσια εμπειρία στην κλινική πρακτική και τις χειρουργικές επεμβάσεις.
+                    </p>
+                    <p data-animation="fadeInUp" data-delay="400ms" class="el" style="text-align: justify;">
+                        Η Δρ. Αργυροπούλου παρακολούθησε επιπλέον εξειδικευμένα σεμινάρια και εκπαιδευτικά προγράμματα στο εξωτερικό, με ιδιαίτερη έμφαση στην υποβοηθούμενη αναπαραγωγή και τις προγεννητικές διαγνωστικές μεθόδους. Έχει εργαστεί σε κορυφαία νοσοκομεία και κλινικές της Ελλάδας και του εξωτερικού, όπου απέκτησε πολύτιμη εμπειρία στην αντιμετώπιση σύνθετων γυναικολογικών και μαιευτικών περιπτώσεων.
+                    </p>
+                    <p data-animation="fadeInUp" data-delay="500ms" class="el" style="text-align: justify;">
+                        Από το 2016, η Δρ. Μαρία Αργυροπούλου αποτελεί αναπόσπαστο μέλος της ιατρικής ομάδας του ιατρείου μας στη Σάμο. Με περισσότερα από 10 χρόνια εμπειρίας στον τομέα της γυναικολογίας και της μαιευτικής, η Δρ. Αργυροπούλου προσφέρει ολοκληρωμένες υπηρεσίες φροντίδας για την υγεία της γυναίκας, από την εφηβεία έως την εμμηνόπαυση. Παρέχει εξατομικευμένες θεραπείες και υποστήριξη σε όλο το φάσμα της γυναικολογικής και μαιευτικής φροντίδας, συμπεριλαμβανομένων των γυναικολογικών εξετάσεων, της προγεννητικής φροντίδας, και των τοκετών.
+                    </p>
+                    <p data-animation="fadeInUp" data-delay="600ms" class="el" style="text-align: justify;">
+                        Η Δρ. Αργυροπούλου είναι γνωστή για την ευαισθησία και την κατανόηση που δείχνει προς τις ασθενείς της, δημιουργώντας ένα ασφαλές και υποστηρικτικό περιβάλλον. Με έμφαση στην πρόληψη και την προαγωγή της υγείας των γυναικών, η Δρ. Αργυροπούλου προωθεί την ενημέρωση και την ευαισθητοποίηση σε θέματα γυναικολογικής υγείας. Η επιστημονική της κατάρτιση, η συνεχής επιμόρφωση και η αφοσίωσή της στην παροχή ποιοτικής ιατρικής φροντίδας την καθιστούν μια από τις πιο σεβαστές και αξιόπιστες γυναικολόγους-μαιευτήρες στην περιοχή μας.
+                    </p>
+                    <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">
+                        Our gynecologist-obstetrician, Maria Argyropoulou, was born in Athens in 1982. From an early age she had a passion for medicine and especially for women's health, which led her to study medicine at the National and Kapodistrian University of Athens. She graduated in 2006 with honors and continued her residency in Gynecology and Obstetrics at Aretaios Hospital, where she gained a wealth of experience in clinical practice and surgical procedures.
+                    </p>
+                    <p data-animation="fadeInUp" data-delay="400ms" class="en" style="text-align: justify;">
+                        Dr. Argyropoulou also attended additional specialized seminars and training programs abroad, with a special focus on assisted reproduction and prenatal diagnostic methods. She has worked in leading hospitals and clinics in Greece and abroad, where she gained valuable experience in the treatment of complex gynecological and obstetric cases.
+                    </p>
+                    <p data-animation="fadeInUp" data-delay="500ms" class="en" style="text-align: justify;">
+                        Since 2016, Dr. Maria Argyropoulou has been an integral member of the medical team of our Samos clinic. With more than 10 years of experience in the field of gynecology and obstetrics, Dr. Argyropoulou offers comprehensive care services for women's health, from puberty to menopause. She provides individualized treatments and support across the entire spectrum of gynecological and obstetrical care, including gynecological exams, prenatal care, and childbirth.
+                    </p>
+                    <p data-animation="fadeInUp" data-delay="600ms" class="en" style="text-align: justify;">
+                        Dr. Argyropoulou is known for her sensitivity and understanding towards her patients, creating a safe and supportive environment. With a focus on prevention and promotion of women's health, Dr. Argyropoulou promotes awareness and education on gynecological health issues. Her scientific training, continuing education and dedication to providing quality medical care make her one of the most respected and trusted gynecologist-obstetricians in our region.
+                    </p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- ***** Cool Facts Area End ***** -->
+        <footer class="footer-area section-padding-100">
+            <!-- Main Footer Area -->
+            <div class="main-footer-area">
+                <div class="container">
+                    <div class="row">
+                        <!-- Logo and Operating Hours -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                            <div class="footer-widget-area">
+                                <div class="footer-logo mb-3">
+                                    <img src="img/core-img/logo.png" alt="Logo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                            <div class="footer-widget-area">
+                                <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                                <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                                <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                          
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                            <div class="footer-widget-area">
+                                <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                                <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                                <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                            <div class="footer-widget-area">
+                                <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                                <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                                <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                            </div>
+                        </div>
+        
+            
+                    </div>
+                </div>
+            </div>
+        
+    
+        
+            <!-- Bottom Footer Area -->
+            <div class="bottom-footer-area py-3 black text-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 text-md-left text-center">
+                            <p>&copy; 2024 Medilife. All rights reserved.</p>
+                        </div>
+                        <div class="col-12 col-md-6 text-md-right text-center">
+                            <br></br>
+                            <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                            <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                            <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                            <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    
+        <!-- jQuery (Necessary for All JavaScript Plugins) -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <!-- Popper js -->
+        <script src="js/popper.min.js"></script>
+        <!-- Bootstrap js -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Plugins js -->
+        <script src="js/plugins.js"></script>
+        <!-- Active js -->
+        <script src="js/active.js"></script>
+    
+        <script>
+            // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+            function updateTitle(title) {
+                const titleElement = document.getElementById('page-title');
+                if (titleElement) {
+                    titleElement.textContent = title;
+                }
+                document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+            }
+        
+            function changeLanguage(language) {
+                // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+                localStorage.setItem('selectedLanguage', language);
+        
+                // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+                document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+                document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+        
+                // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+                const titles = {
+                    'el': 'Γυναικολόγος',
+                    'en': 'Gynecologists'
+                };
+                updateTitle(titles[language]);
+            }
+        
+            document.addEventListener('DOMContentLoaded', () => {
+                // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+                const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+                changeLanguage(savedLanguage);
+            });
+        </script>
+        
+</body>
+
+
+</html>

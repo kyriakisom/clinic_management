@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Σύνδεση</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            padding: 25px;
+            background-color: white;
+            color: rgb(11, 6, 43);
+            font-size: 25px;
+        }
+
+        .dark-mode {
+            background-color: rgb(11, 6, 43);
+            color: white;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .login-form {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form h5 {
+            margin-bottom: 20px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .login-form .form-control {
+            color: black; /* Ensures text inside inputs is black */
+        }
+
+        .login-form .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-form .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .login-form .small-text {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .login-form .show-password-label {
+            font-size: 0.8em; /* Μικρότερο μέγεθος γραμματοσειράς */
+            color: #666;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: #fff;
+        }
+
+        .medilife-load {
+            width: 100px;
+            height: 100px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        .form-control {
+    color: black; /* Το κείμενο είναι πάντα μαύρο */
+}
+
+.form-control:focus {
+    color: black; /* Το κείμενο παραμένει μαύρο όταν το πεδίο είναι σε εστίαση */
+}
+
+.form-control:active {
+    color: black; /* Το κείμενο παραμένει μαύρο όταν το πεδίο είναι ενεργό */
+}
+
+.form-control:disabled {
+    color: black; /* Το κείμενο παραμένει μαύρο όταν το πεδίο είναι ανενεργό */
+}
+
+.form-control:not(:focus) {
+    color: black; /* Το κείμενο παραμένει μαύρο όταν το πεδίο δεν είναι σε εστίαση */
+}
+.language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="medilife-load"></div>
+    </div>
+
+    <!-- Header Area -->
+    <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                            <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                            <div>
+                                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header Area -->
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <!-- Logo Area -->
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <!-- Menu Area -->
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="index.html">Αρχική</a>
+                                            <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                            <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                            <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                            <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                            <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                            <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcumb Area -->
+    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h1 data-animation="fadeInUp" data-delay="100ms" class="el">Παρκαλώ συνδεθείτε</h1>
+                        <h1 data-animation="fadeInUp" data-delay="100ms" class="en">Please login</h1>                
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Form Area -->
+    <section class="medilife-contact-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 mx-auto">
+                    <div class="login-form">
+                        <h5 class="mb-50 el">Σύνδεση</h5>
+                        <h5 class="mb-50 en">Login</h5>
+
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Όνομα χρήστη" data-placeholder-el="Όνομα χρήστη" data-placeholder-en="Username">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Κωδικός πρόσβασης" data-placeholder-el="Κωδικός πρόσβασης" data-placeholder-en="Password">
+                                <div>
+                                    <input type="checkbox" id="showPassword"> 
+                                    <label for="showPassword" class="show-password-label el">Εμφάνιση κωδικού πρόσβασης</label>
+                                    <label for="showPassword" class="show-password-label en" style="display:none;">Show password</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn el">Σύνδεση</button>
+                            <button type="submit" class="btn en" style="display:none;">Login</button>
+                            <div id="message"></div>
+                        </form>
+                        
+                       <div class="mt-3 small-text">
+    <p class="el">Δεν έχεις κάνει ακόμα εγγραφή;</p>
+    <p class="en" style="display:none;">You haven't registered yet?</p>
+    <p><a href="register.html" class="el">Κάνε εγγραφή εδώ</a></p>
+    <p><a href="register.html" class="en" style="display:none;">Register here</a></p>
+</div>
+<div class="mt-3 small-text">
+    <p class="el">Ξεχάσατε τον κωδικό σας;</p>
+    <p class="en" style="display:none;">Forgot your password?</p>
+    <p><a href="forgot_password.html" class="el">Ανάκτηση κωδικού πρόσβασης</a></p>
+    <p><a href="forgot_password.html" class="en" style="display:none;">Recover password</a></p>
+</div>
+<div class="mt-3 small-text">
+    <p class="el">Θέλετε να αλλάξετε τον κωδικό σας;</p>
+    <p class="en" style="display:none;">Want to change your password?</p>
+    <p><a href="reset.html" class="el">Αλλαγή κωδικού πρόσβασης</a></p>
+    <p><a href="reset.html" class="en" style="display:none;">Change password</a></p>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+<p></p>
+<footer class="footer-area section-padding-100">
+    <!-- Main Footer Area -->
+    <div class="main-footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- Logo and Operating Hours -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <div class="footer-logo mb-3">
+                            <img src="img/core-img/logo.png" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                  
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                        <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                        <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                        <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                        <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                    </div>
+                </div>
+
+    
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bottom Footer Area -->
+    <div class="bottom-footer-area py-3 black text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 text-md-left text-center">
+                    <p>&copy; 2024 Medilife. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6 text-md-right text-center">
+                    <br></br>
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+        <!-- jQuery (Necessary for All JavaScript Plugins) -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <!-- Popper js -->
+        <script src="js/popper.min.js"></script>
+        <!-- Bootstrap js -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Plugins js -->
+        <script src="js/plugins.js"></script>
+        <!-- Active js -->
+        <script src="js/active.js"></script>
+        <!-- Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+        <script src="js/map-active.js"></script>
+        <script>
+   // When the page loads, check if a language is already selected
+window.onload = function() {
+    const savedLanguage = localStorage.getItem('selectedLanguage') || navigator.language.substring(0, 2);
+    changeLanguage(savedLanguage);
+};
+
+// Event listener for form submission
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const messageDiv = document.getElementById('message');
+    
+    // Get selected language from localStorage, fallback to 'el' if not set
+    const selectedLanguage = localStorage.getItem('selectedLanguage') || 'el';
+
+    try {
+        const response = await fetch('/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username, 
+                password, 
+                language: selectedLanguage // Send the dynamically chosen language
+            })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            // Success message based on the selected language
+            const successMessage = selectedLanguage === 'el' ? 'Επιτυχής σύνδεση.' : 'Login successful.';
+            messageDiv.innerText = successMessage;
+            messageDiv.style.color = 'green';
+
+            // Redirect based on user role
+            switch (result.user.role) {
+                case 'Patient':
+                    window.location.href = 'http://localhost:5000/patient.html';
+                    break;
+                case 'Doctor':
+                    window.location.href = 'http://localhost:5000/admin.html';
+                    break;
+                case 'Secretary':
+                    window.location.href = 'http://localhost:5000/secretary.html';
+                    break;
+                default:
+                    const unknownRoleMessage = selectedLanguage === 'el' ? 'Άγνωστος ρόλος' : 'Unknown role';
+                    messageDiv.innerText = unknownRoleMessage;
+                    messageDiv.style.color = 'red';
+                    break;
+            }
+        } else {
+            // Error message based on the selected language
+            const errorMessage = selectedLanguage === 'el' ? (result.message || 'Σφάλμα.') : (result.message || 'Error.');
+            messageDiv.innerText = errorMessage;
+            messageDiv.style.color = 'red';
+            
+            // Clear fields
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+    } catch (error) {
+        // Network error message based on the selected language
+        const networkErrorMessage = selectedLanguage === 'el' ? 'Σφάλμα. Παρκαλώ ξαναπροσπαθήστε.' : 'Error. Please try again.';
+        messageDiv.innerText = networkErrorMessage;
+        messageDiv.style.color = 'red';
+
+        // Clear fields
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }
+});
+
+// Change language function
+function changeLanguage(language) {
+    localStorage.setItem('selectedLanguage', language);
+
+    const elElements = document.querySelectorAll('.el');
+    const enElements = document.querySelectorAll('.en');
+
+    if (language === 'el') {
+        elElements.forEach(el => el.style.display = 'block');
+        enElements.forEach(en => en.style.display = 'none');
+    } else {
+        elElements.forEach(el => el.style.display = 'none');
+        enElements.forEach(en => en.style.display = 'block');
+    }
+
+    // Update placeholders dynamically
+    document.querySelectorAll('input').forEach(input => {
+        const placeholder = input.getAttribute(`data-placeholder-${language}`);
+        if (placeholder) {
+            input.setAttribute('placeholder', placeholder);
+        }
+    });
+}
+
+// Toggle password visibility
+document.getElementById('showPassword').addEventListener('change', function () {
+    const passwordField = document.getElementById('password');
+    passwordField.type = this.checked ? 'text' : 'password';
+});
+
+            
+   // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+   function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+    // Save the selected language in localStorage
+    localStorage.setItem('selectedLanguage', language);
+
+    // Toggle visibility of elements based on the selected language
+    document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+    document.querySelectorAll('.en').forEach(en => en.style.display = language === 'en' ? 'block' : 'none');
+
+    // Update input placeholders
+    document.getElementById('username').placeholder = language === 'el' ? document.getElementById('username').dataset.placeholderEl : document.getElementById('username').dataset.placeholderEn;
+    document.getElementById('password').placeholder = language === 'el' ? document.getElementById('password').dataset.placeholderEl : document.getElementById('password').dataset.placeholderEn;
+
+    // Update the page title based on the language
+    const titles = {
+        'el': 'Σύνδεση',
+        'en': 'Login'
+    };
+    updateTitle(titles[language]);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if a language is stored in localStorage
+    const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+    changeLanguage(savedLanguage);
+});
+
+        </script>
+        
+        
+</body>
+
+</html>

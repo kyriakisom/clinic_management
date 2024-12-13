@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Δείτε το ιστορικό των ασθενών</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            min-width: 160px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        #dropdownUserName {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            color: blue; 
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            min-width: 160px;
+            z-index: 1000;
+            right: 0;
+        }
+
+        .dropdown-content button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #f44336; /* Red */
+            color: white;
+            cursor: pointer;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #e53935;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .button-container .add-button {
+            background-color: #28a745;
+            color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+    
+        }
+
+        .add-doctor-button button:hover {
+    background-color: #218838; /* Darker green for hover effect */
+}
+
+.add-doctor-button button:hover {
+    background-color: #218838; /* Darker green for hover effect */
+}
+
+        .button-container .update-button {
+            background-color: orange;
+        }
+
+        .button-container .delete-button {
+            background-color: red;
+        }
+
+        .button-container .pdf-button {
+            background-color: #911717;
+        }
+
+        .button-container .icon {
+            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .button-container .side-icon {
+            margin-left: 5px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .icon.pdf-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .icon.excel-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .medica-about-us-area .medica-about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+
+        .medica-about-us-area .row {
+            display: flex;
+            align-items: center;
+        }
+
+        .medica-about-us-area .medica-about-content p {
+            text-align: justify;
+        }
+
+        .medica-medical-histories-area {
+            padding: 0 15px;
+            margin-top: 20px;
+        }
+
+        .medica-medical-histories-area h2 {
+            margin: 10px 0;
+            padding: 0;
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+            text-align: left;
+        }
+.action-icons img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        /* Styling for the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .actions {
+    display: flex;
+    justify-content: start; /* Ευθυγράμμιση στην αρχή της στήλης */
+    align-items: center; /* Ευθυγράμμιση κατακόρυφα στη μέση */
+}
+
+.actions img {
+    width: 25px; /* Μέγεθος των εικονίδιων (μπορείτε να το προσαρμόσετε) */
+    height: 25px; /* Μέγεθος των εικονίδιων (μπορείτε να το προσαρμόσετε) */
+    cursor: pointer;
+    margin: 0 5px; /* Μείωση του περιθωρίου μεταξύ των εικονίδιων */
+    vertical-align: middle; /* Ευθυγράμμιση κατακόρυφα με κείμενο */
+}
+
+
+        /* Optional: Add some responsiveness */
+        @media (max-width: 768px) {
+            th, td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            th {
+                background-color: #4CAF50;
+            }
+        }
+
+        /* Footer styles */
+        footer {
+            margin-top: 40px;
+        }
+         
+         /* General styles for the search form */
+         #searchForm {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #searchForm input {
+            flex: 1;
+            min-width: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #searchForm button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #searchForm button:hover {
+            background-color: #28a745;
+        }
+   .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 1px solid #ffffff;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    display: flex;
+    align-items: center;
+}
+
+.pagination span button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: 1px solid #4CAF50;
+    background-color: #4CAF50;
+    color: #ddd;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Κουμπιά "Προηγούμενη" και "Επόμενη" */
+.pagination button.prev-next {
+    border: none; /* Αφαίρεση του περιγράμματος */
+    color: white; /* Λευκό χρώμα γραμμάτων */
+}
+
+/* Ενεργό κουμπί */
+.pagination span button.active {
+    background-color: #ddd; /* Γκρι φόντο για το ενεργό κουμπί */
+    color: white; /* Λευκό χρώμα για τα γράμματα του ενεργού κουμπιού */
+    border: none; /* Αφαίρεση του περιγράμματος από το ενεργό κουμπί */
+}
+
+/* Αν το κουμπί είναι ενεργό ή το προηγούμενο και επόμενο κουμπί γύρω από αυτό */
+.pagination span button.active,
+.pagination button.prev-next-highlight {
+    background-color: #ddd;
+    color: #ffffff;
+}
+.language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+
+    </style>
+</head>
+
+<body>
+  
+
+    <header class="header-area">
+        <div>
+            <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+            <span class="language-selector" onclick="changeLanguage('en')">English</span>
+        </div>
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="admin.html">Αρχική <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link en" href="admin.html">Home page <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="view_patients.html">Δείτε τους ασθενείς</a>
+                                            <a class="nav-link en" href="view_patients.html">View patients</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="medical_history.html">Δείτε το ιστορικό των ασθενών</a>
+                                            <a class="nav-link en" href="medical_history.html">See patients' medical histories</a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="appointments_admin.html">Κλείστε ραντεβού</a>
+                                            <a class="nav-link en" href="appointments_admin.html">Book appointments</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="doctors.html">Δείτε τους ιατρούς</a>
+                                            <a class="nav-link en" href="doctors.html">Doctors</a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="view_appointments.html">Δείτε τα τρέχοντα ραντεβού</a>
+                                            <a class="nav-link en" href="view_appointments.html">See current appointments</a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="availability.html">Ώρες διαθεσιμότητας</a>
+                                            <a class="nav-link en" href="availability.html">Doctor availabilities</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <div class="dropdown">
+                                                <span id="dropdownUserName">Φόρτωση...</span>
+                                                <div class="dropdown-content">
+                                                    <button id="logoutButton">Αποσύνδεση</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <br></br>
+    
+    <!-- ***** About Us Area Start ***** -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <div class="button-container">
+                            <button class="add-button" onclick="window.location.href='insert_medical_histories.html'">
+                                <img src="img/icons/plus.png" class="icon" alt="Add">
+                                <span class="el">Προσθήκη</span>
+                                <span class="en" style="display: none;">Add</span>                            </button>
+                          
+                          
+                            <a href="pdf.html" target="_blank">
+                                <img src="img/icons/pdf1.png" class="icon pdf-icon" alt="Pdf">
+                            </a>
+                            <a href="excel.html" target="_blank">
+                                <img src="img/icons/excel.png" class="icon excel-icon" alt="Excel">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ***** Medical Histories Area Start ***** -->
+    <section class="medica-medical-histories-area section-padding-100-20">
+        <div class="search-container">
+            <form id="searchForm">
+                <input type="text" id="searchSSN" placeholder="ΑΜΚΑ"  onkeyup="filteredHistories()">
+                <!-- <input type="text" id="searchName" placeholder="Επώνυμο"> -->
+                <input type="text" id="searchHealthProblems" placeholder="Προβλήματα υγείας" onkeyup="filteredHistories()">
+
+                <input type="date" id="startDate">
+                <input type="date" id="endDate">
+                <button id="searchButton">
+                    <span class="el">Αναζήτηση</span>
+                    <span class="en" style="display: none;">Search</span>
+                </button>
+            </form>
+            <br></br>
+
+            <h4 class="el">Ιστορικό ασθενών</h4>
+            <h4 class="en">Patients' history</h4>
+
+
+            <table id="medicalHistoriesTable">
+                <thead>
+                    <tr>
+                        <tr>
+                            <th><span class="el">ID</span><span class="en">ID</span></th>
+                            <th><span class="el">ΑΜΚΑ</span><span class="en">SSN</span></th>
+                            <th><span class="el">Προβλήματα Υγείας</span><span class="en">Health problems</span></th>
+                            <th><span class="el">Θεραπεία</span><span class="en">Treatment</span></th>
+                            <th><span class="el">Ημερομηνία Δημιουργίας</span><span class="en">Creation date</span></th>
+                            <th><span class="el">Ενέργειες</span><span class="en">Actions</span></th>
+                        </tr>
+                        
+                    </tr>
+                </thead>
+                <tbody id="medicalHistoriesList">
+                    <!-- Medical histories will be dynamically added here -->
+                </tbody>
+            </table>
+            <div class="pagination" id="pagination">
+               
+                    <button id="prevPage" disabled> << </button>
+                    <!-- Τα κουμπιά σελίδας θα δημιουργηθούν με JavaScript -->
+                    <button id="nextPage" disabled> >> </button>
+                
+                <!-- Τα κουμπιά σελίδας θα δημιουργηθούν με JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+       
+    <br></br>
+    <br></br>
+       <!-- ***** Cool Facts Area End ***** -->
+       <footer class="footer-area section-padding-100">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Operating Hours -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo mb-3">
+                                <img src="img/core-img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                      
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                            <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                            <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                            <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                            <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                        </div>
+                    </div>
+    
+        
+                </div>
+            </div>
+        </div>
+    
+
+    
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area py-3 black text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 text-md-left text-center">
+                        <p>&copy; 2024 Medilife. All rights reserved.</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-right text-center">
+                        <br></br>
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <script>
+    // Define global variables
+// Define global variables
+let rowsPerPage = 5;
+let currentPage = 1;
+let allHistories = [];
+let filteredHistories = [];
+
+ // Function to get the selected language (default to Greek)
+ function getSelectedLanguage() {
+    return localStorage.getItem('selectedLanguage') || 'el';
+}
+
+// Fetch medical histories data from the server
+async function fetchMedicalHistories() {
+    const loadingMessage = 'Loading medical histories...';
+    const errorMessage = 'Error fetching medical history data. Please try again later.';
+    const medicalHistoriesList = document.getElementById('medicalHistoriesList');
+    medicalHistoriesList.innerHTML = `<tr><td colspan="6">${loadingMessage}</td></tr>`; // Adjusted for the additional column
+
+    try {
+        const response = await fetch('/med_histories', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+            // Group by socialSecurityNumber and find the latest history for each patient
+            const historiesByPatient = data.reduce((acc, item) => {
+                if (!acc[item.socialSecurityNumber]) {
+                    acc[item.socialSecurityNumber] = [];
+                }
+                acc[item.socialSecurityNumber].push(item);
+                return acc;
+            }, {});
+
+            // Create a new array of all histories with the latest highlighted
+            allHistories = [];
+            Object.values(historiesByPatient).forEach(histories => {
+                // Sort by creation date to get the latest entry
+                histories.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                allHistories = allHistories.concat(histories);
+            });
+
+            // Initially display all histories
+            filteredHistories = allHistories;
+            displayHistoriesPage(currentPage);
+            updatePagination();
+        } else {
+            medicalHistoriesList.innerHTML = `<tr><td colspan="6">No medical histories found.</td></tr>`; // Adjusted for the additional column
+        }
+    } catch (error) {
+        console.error('Error fetching medical history data:', error);
+        medicalHistoriesList.innerHTML = `<tr><td colspan="6">${errorMessage}</td></tr>`; // Adjusted for the additional column
+    }
+}
+
+// Function to display the current page of histories
+function displayHistoriesPage(page) {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const historiesToDisplay = filteredHistories.slice(start, end);
+    const medicalHistoriesList = document.getElementById('medicalHistoriesList');
+    medicalHistoriesList.innerHTML = '';
+
+    historiesToDisplay.forEach(item => {
+        const row = document.createElement('tr');
+
+        // ID Column
+        const idCell = document.createElement('td');
+        idCell.textContent = item.id || 'N/A';
+        row.appendChild(idCell);
+
+        // Social Security Number Column
+        const ssnCell = document.createElement('td');
+        ssnCell.textContent = item.socialSecurityNumber || 'N/A';
+        row.appendChild(ssnCell);
+
+        // Detected Health Problems Column
+        const healthProblemsCell = document.createElement('td');
+        healthProblemsCell.textContent = item.detectedHealthProblems || 'N/A';
+        row.appendChild(healthProblemsCell);
+
+        // Treatment Column
+        const treatmentCell = document.createElement('td');
+        treatmentCell.textContent = item.treatment || 'N/A';
+        row.appendChild(treatmentCell);
+
+        // Creation Date and Time Column
+        const creationDateCell = document.createElement('td');
+        if (item.createdAt) {
+            const date = new Date(item.createdAt);
+            const formattedDate = date.toLocaleDateString('el-GR');
+            const formattedTime = date.toLocaleTimeString('el-GR');
+            creationDateCell.textContent = `${formattedDate} ${formattedTime}`;
+        } else {
+            creationDateCell.textContent = 'N/A';
+        }
+        row.appendChild(creationDateCell);
+
+        // Actions Column
+        const actionsCell = document.createElement('td');
+        actionsCell.classList.add('actions');
+    // Create the download icon using a path
+const downloadIcon = document.createElement('img');
+downloadIcon.src = 'img/icons/pdf1.png'; // Set the path to your download icon
+downloadIcon.alt = 'Download';
+downloadIcon.title = getSelectedLanguage() === 'el' ? 'Λήψη Ιατρικού Ιστορικού σε PDF' : 'PDF Export';
+
+// Save messages for different languages
+const messages = {
+    'el': {
+        downloadSuccess: 'Το ιατρικό ιστορικό λήφθηκε επιτυχώς!',
+        downloadError: 'Σφάλμα κατά τη λήψη του ιατρικού ιστορικού.',
+        downloadErrorMessage: 'Σφάλμα κατά τη λήψη του ιατρικού ιστορικού:'
+    },
+    'en': {
+        downloadSuccess: 'Medical history downloaded successfully!',
+        downloadError: 'Error downloading medical history.',
+        downloadErrorMessage: 'Error downloading medical history:'
+    }
+};
+
+// Assuming each row has a data attribute with the history ID
+const historyId = item.id; // Assuming 'item.id' holds the ID of the medical history
+
+// Function to download the medical history
+downloadIcon.addEventListener('click', async () => {
+    const currentLanguage = localStorage.getItem('selectedLanguage') || 'el'; // Retrieve selected language
+    const langMessages = messages[currentLanguage]; // Select messages based on language
+
+    try {
+        const downloadResponse = await fetch('/med_histories/download-patient-history/one/pdf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ historyId, language: currentLanguage }),
+            credentials: 'include'
+        });
+
+        if (downloadResponse.ok) {
+            const blob = await downloadResponse.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `patient_history_${currentLanguage}.pdf`; // Set the file name
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+            alert(langMessages.downloadSuccess);
+        } else {
+            const errorData = await downloadResponse.json();
+            alert(`${langMessages.downloadErrorMessage} ${errorData.message}`);
+        }
+    } catch (error) {
+        alert(langMessages.downloadError);
+        console.error(langMessages.downloadErrorMessage, error);
+    }
+});
+
+// Append the download icon to the appropriate cell or container
+actionsCell.appendChild(downloadIcon);
+// Create the download icon for Excel
+const excelDownloadIcon = document.createElement('img');
+excelDownloadIcon.src = 'img/icons/excel.png'; // Set the path to your Excel download icon
+excelDownloadIcon.alt = 'Download Excel';
+excelDownloadIcon.title = getSelectedLanguage() === 'el' ? 'Λήψη Ιατρικού Ιστορικού σε Excel' : 'Excel Export';
+
+// Function to download the medical history in Excel
+excelDownloadIcon.addEventListener('click', async () => {
+    const currentLanguage = localStorage.getItem('selectedLanguage') || 'el'; // Retrieve selected language
+    const langMessages = messages[currentLanguage]; // Select messages based on language
+
+    try {
+        const downloadResponse = await fetch('/med_histories/download-patient-history/one/excel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ historyId, language: currentLanguage }),
+            credentials: 'include'
+        });
+
+        if (downloadResponse.ok) {
+            const blob = await downloadResponse.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `patient_history_${currentLanguage}.xlsx`; // Set the file name
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+            alert(langMessages.downloadSuccess);
+        } else {
+            const errorData = await downloadResponse.json();
+            alert(`${langMessages.downloadErrorMessage} ${errorData.message}`);
+        }
+    } catch (error) {
+        alert(langMessages.downloadError);
+        console.error(langMessages.downloadErrorMessage, error);
+    }
+});
+
+// Append the Excel download icon to the appropriate cell or container
+actionsCell.appendChild(excelDownloadIcon);
+
+
+        if (item === filteredHistories.find(history => history.socialSecurityNumber === item.socialSecurityNumber)) {
+            const updateButton = document.createElement('img');
+            updateButton.src = 'pencil.png';
+            updateButton.alt = 'Update';
+            updateButton.title = getSelectedLanguage() === 'el' ? 'Ενημέρωση' : 'Update';
+            updateButton.onclick = () => {
+                window.location.href = `update_medical_histories.html?id=${item.id}`;
+            };
+            actionsCell.appendChild(updateButton);
+            const deleteIcon = document.createElement('img');
+deleteIcon.src = 'trash.png';
+deleteIcon.alt = 'Delete';
+deleteIcon.title = getSelectedLanguage() === 'el' ? 'Διαγραφή' : 'Delete';
+
+// Αποθήκευση των μηνυμάτων ανά γλώσσα
+const messages = {
+    'el': {
+        confirmDelete: 'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το ιστορικό;',
+        deleteSuccess: 'Το ιστορικό διαγράφηκε με επιτυχία!',
+        deleteError: 'Σφάλμα κατά τη διαγραφή του ιστορικού.',
+        deleteErrorMessage: 'Σφάλμα κατά τη διαγραφή του ιστορικού:'
+    },
+    'en': {
+        confirmDelete: 'Are you sure you want to delete this medical history?',
+        deleteSuccess: 'Medical history deleted successfully!',
+        deleteError: 'Error deleting medical history.',
+        deleteErrorMessage: 'Error deleting medical history:'
+    }
+};
+
+// Λειτουργία για τη διαγραφή του ιστορικού
+deleteIcon.addEventListener('click', async () => {
+    const currentLanguage = localStorage.getItem('selectedLanguage') || 'el'; // Ανάκτηση της επιλεγμένης γλώσσας
+    const langMessages = messages[currentLanguage]; // Επιλογή μηνυμάτων ανάλογα με τη γλώσσα
+
+    if (confirm(langMessages.confirmDelete)) {
+        try {
+            const deleteResponse = await fetch('/med_histories', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: item.id }),
+                credentials: 'include'
+            });
+
+            if (deleteResponse.ok) {
+                alert(langMessages.deleteSuccess);
+                fetchMedicalHistories(); // Ανανέωση των ιστορικών
+            } else {
+                const errorData = await deleteResponse.json();
+                alert(`${langMessages.deleteErrorMessage} ${errorData.message}`);
+            }
+        } catch (error) {
+            alert(langMessages.deleteError);
+            console.error(langMessages.deleteErrorMessage, error);
+        }
+    }
+});
+
+actionsCell.appendChild(deleteIcon);
+        }
+        row.appendChild(actionsCell);
+
+        medicalHistoriesList.appendChild(row);
+    });
+}
+
+// Function to update the pagination controls
+function updatePagination() {
+    const pagination = document.getElementById('pagination');
+    const prevButton = document.getElementById('prevPage');
+    const nextButton = document.getElementById('nextPage');
+
+    pagination.innerHTML = '';
+
+    const totalPages = Math.ceil(filteredHistories.length / rowsPerPage);
+
+    // Previous Page Button
+    prevButton.disabled = currentPage <= 1;
+    prevButton.onclick = () => {
+        if (currentPage > 1) {
+            currentPage--;
+            displayHistoriesPage(currentPage);
+            updatePagination();
+        }
+    };
+    pagination.appendChild(prevButton);
+
+    // Page Number Buttons
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        if (i === currentPage) {
+            pageButton.disabled = true;
+        }
+        pageButton.onclick = () => {
+            currentPage = i;
+            displayHistoriesPage(currentPage);
+            updatePagination();
+        };
+        pagination.appendChild(pageButton);
+    }
+
+    // Next Page Button
+    nextButton.disabled = currentPage >= totalPages;
+    nextButton.onclick = () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayHistoriesPage(currentPage);
+            updatePagination();
+        }
+    };
+    pagination.appendChild(nextButton);
+}
+
+// Search functionality
+document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const ssn = document.getElementById('searchSSN').value.trim();
+    const healthProblems = document.getElementById('searchHealthProblems').value.trim();
+    const startDate = document.getElementById('startDate').value.trim();
+    const endDate = document.getElementById('endDate').value.trim();
+
+    // Filter the histories based on the search criteria
+    filteredHistories = allHistories.filter(history => {
+        const dateCreated = new Date(history.createdAt);
+        const isSSNMatch = ssn ? history.socialSecurityNumber.includes(ssn) : true;
+        const isHealthProblemsMatch = healthProblems ? (history.detectedHealthProblems || '').includes(healthProblems) : true;
+        const isStartDateMatch = startDate ? dateCreated >= new Date(startDate) : true;
+        const isEndDateMatch = endDate ? dateCreated <= new Date(endDate) : true;
+
+        return isSSNMatch && isHealthProblemsMatch && isStartDateMatch && isEndDateMatch;
+    });
+
+    currentPage = 1; // Reset to the first page
+    displayHistoriesPage(currentPage);
+    updatePagination();
+});
+
+// Initial fetch of medical histories
+fetchMedicalHistories();
+
+
+// Logout and user info handling as before
+document.getElementById('logoutButton').addEventListener('click', async function () {
+    try {
+        const response = await fetch('/users/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+
+        const result = await response.text();
+
+        if (response.ok) {
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+    } catch (error) {
+        alert('Error: Unable to logout');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:5000/users/getUserInfo', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include' // Include cookies for authentication
+    })
+    .then(response => {
+        if (response.status === 401) {
+            throw new Error('Unauthorized: Please log in.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const dropdownUserName = document.getElementById('dropdownUserName');
+        dropdownUserName.textContent = `${data.firstname} ${data.lastname}`;
+    })
+    .catch(error => {
+        console.error('Error fetching user info:', error);
+        const dropdownUserName = document.getElementById('dropdownUserName');
+        dropdownUserName.textContent = 'Error loading user info';
+    });
+});
+
+document.getElementById('dropdownUserName').addEventListener('click', (event) => {
+    event.stopPropagation();
+    const dropdownContent = document.querySelector('.dropdown-content');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+});
+
+document.addEventListener('click', (event) => {
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    if (!dropdown.contains(event.target) && dropdownContent.style.display === 'block') {
+        dropdownContent.style.display = 'none';
+    }
+});
+
+function updateTitle(title) {
+    const titleElement = document.getElementById('page-title');
+    if (titleElement) {
+        titleElement.textContent = title;
+    }
+    document.title = title;
+}
+
+function changeLanguage(language) {
+    localStorage.setItem('selectedLanguage', language);
+
+    document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+    document.querySelectorAll('.en').forEach(en => en.style.display = language === 'en' ? 'block' : 'none');
+    document.getElementById('searchSSN').placeholder = language === 'el' ? 'Αναζήτηση με βάση τον ΑΜΚΑ...' : "Search based on SSN...";
+    document.getElementById('searchHealthProblems').placeholder = language === 'el' ? 'Αναζήτηση με βάση την διάγνωση...' : "Search based on detected problems...";
+
+    const titles = {
+        'el': 'Ιστορικό ασθενών',
+        'en': 'Patients history'
+    };
+    updateTitle(titles[language]);
+}
+logoutButton.innerHTML = `<span class="el">Αποσύνδεση</span><span class="en">Logout</span>`;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+    changeLanguage(savedLanguage);
+});
+
+</script>
+    
+</body>
+</html>

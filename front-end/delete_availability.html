@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αφαίρεση διαθεσιμότητας</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
+        .home-link .arrow-icon {
+            width: 50px;
+            height: 50px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 15px;
+        }
+        .form-action-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-action-container button {
+            margin-right: 10px;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .form-control {
+            color: black; /* Set text color for all input fields */
+        }
+        #csv-file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Back Arrow Icon Link -->
+<a href="availability.html" class="home-link">
+    <div class="arrow-icon"></div>
+</a>
+
+<!-- Main Content -->
+<section class="medilife-contact-area section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-6">
+                <div class="contact-form">
+                    <form id="availability-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="availability-id" placeholder="ID Διαθεσιμότητας" required>
+                        </div>
+                        <div class="row justify-content-center form-action-container">
+                            <div class="col-12 col-lg-6 text-center">
+                                <button type="submit" class="btn btn-sm btn-danger">Αφαίρεση</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="message" class="message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hidden file input for CSV upload -->
+<input type="file" id="csv-file-input" accept=".csv">
+
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/active.js"></script>
+
+<script>
+    document.getElementById('availability-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const id = document.getElementById('availability-id').value.trim();
+        const messageElement = document.getElementById('message');
+
+        // Clear previous messages
+        messageElement.textContent = '';
+
+        if (!id) {
+            messageElement.textContent = 'Παρακαλώ εισάγετε ένα έγκυρο ID.';
+            messageElement.style.color = 'red';
+            return;
+        }
+
+        try {
+            const response = await fetch('/availabilities', { // Ensure this URL matches your server route
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                messageElement.textContent = 'Η διαθεσιμότητα του ιατρού αφαιρέθηκε επιτυχώς!';
+                messageElement.style.color = 'green';
+            } else {
+                const errorData = await response.json();
+                messageElement.textContent = `Σφάλμα: ${errorData.error || 'Η διαθεσιμότητα δεν αφαιρέθηκε.'}`;
+                messageElement.style.color = 'red';
+            }
+        } catch (error) {
+            console.error('Απροσδόκητο σφάλμα:', error);
+            messageElement.textContent = 'Παρουσιάστηκε απροσδόκητο σφάλμα. Παρακαλώ προσπαθήστε ξανά αργότερα.';
+            messageElement.style.color = 'red';
+        }
+    });
+</script>
+</body>
+</html>

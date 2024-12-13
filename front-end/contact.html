@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+    <title id="page-title">Επικοινωνία</title> <!-- Add id="page-title" here -->
+
+  <!-- Favicon  -->
+  <link rel="icon" href="img/core-img/favicon.ico">
+
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .contact-form {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contact-form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+.contact-form .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.contact-form .btn:hover {
+    background-color: #0056b3;
+}
+       .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: .4s;
+      }
+
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+      }
+
+      input:checked+.slider {
+          background-color: #2196F3;
+      }
+
+      input:focus+.slider {
+          box-shadow: 0 0 1px #2196F3;
+      }
+
+      input:checked+.slider:before {
+          transform: translateX(26px);
+      }
+
+      .slider.round {
+          border-radius: 34px;
+      }
+
+      .slider.round:before {
+          border-radius: 50%;
+      }
+      .language-selector {
+  margin: 5px; /* Adjusted margin for smaller spacing */
+  padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+  cursor: pointer;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 14px; /* Smaller font size */
+}
+
+      /* Rounded sliders */
+      .slider.round {
+          border-radius: 34px;
+      }
+
+      .slider.round:before {
+          border-radius: 50%;
+      }
+  </style>
+</head>
+
+<body>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area">
+      <div class="top-header-area">
+          <div class="container h-100">
+              <div class="row h-100">
+                  <div class="col-12 h-100">
+                      <div class="h-100 d-md-flex justify-content-between align-items-center">
+                          <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                          <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                          <div>
+                              <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                              <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="main-header-area" id="stickyHeader">
+          <div class="container h-100">
+              <div class="row h-100 align-items-center">
+                  <div class="col-12 h-100">
+                      <div class="main-menu h-100">
+                          <nav class="navbar h-100 navbar-expand-lg">
+                              <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                              <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                  data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                  aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                              <div class="collapse navbar-collapse" id="medilifeMenu">
+                                  <ul class="navbar-nav ml-auto">
+                                      <li class="nav-item ">
+                                          <a class="nav-link el" href="index.html">Αρχική</a>
+                                          <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                      </li>
+                                      <li class="nav-item active">
+                                          <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                          <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                      </li>
+                                      <li class="nav-item ">
+                                          <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                          <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                      </li>
+                                      <li class="nav-item ">
+                                          <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                          <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                          <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                          <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </nav>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+
+    <!-- Breadcumb Area -->
+    <section class="breadcumb-area bg-img gradient-background-overlay"
+        style="background-image: url(img/bg-img/breadcumb3.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h2 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: left;">Επικοινωνήστε μαζί μας</h2>
+                        <h2 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: left;">Contact with us</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="medilife-contact-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <!-- Contact Form -->
+                <div class="col-12 col-lg-8">
+                    <div class="contact-form">
+                        <h5 class="mb-50 el" data-animation="fadeInUp" data-delay="100ms" style="text-align: left;">Συμπληρώστε τα στοιχεία σας</h5>
+                        <h5 class="mb-50 en" data-animation="fadeInUp" data-delay="100ms" style="text-align: left; display: none;">Fill in your details</h5>
+    
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="email" class="el" style="display: none;">Email:</label>
+                                <label for="email" class="en">Email:</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Το Email σας" required>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="subject" class="el" style="display: none;">Θέμα:</label>
+                                <label for="subject" class="en">Subject:</label>
+                                <input type="text" id="subject" name="subject" class="form-control" placeholder="Θέμα" required>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="message" class="el" style="display: none;">Μήνυμα:</label>
+                                <label for="message" class="en">Message:</label>
+                                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+    
+                            <button type="submit" class="btn btn-primary el" style="display: none;">Αποστολή</button>
+                            <button type="submit" class="btn btn-primary en">Submit</button>
+                        </form>
+    
+                        <p id="responseMessage"></p>
+                    </div>
+                </div>
+    
+                <!-- Contact Details -->
+                <div class="col-12 col-lg-4">
+                    <div class="content-sidebar">
+                        <div class="medilife-contact-card mb-50">
+                            <div class="single-contact d-flex align-items-center">
+                                <div class="contact-icon mr-30"><i class="icon-hospital"></i></div>
+                                <div class="contact-meta">
+                                    <p class="el" style="display: none;">Διέυθυνση: Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                                    <p class="en">Address: Asklipiou 8<br>83200 Karlovasi</p>
+                                </div>
+                            </div>
+    
+                            <div class="single-contact d-flex align-items-center">
+                                <div class="contact-icon mr-30"><i class="icon-smartphone-3"></i></div>
+                                <div class="contact-meta">
+                                    <p class="el" style="display: none;">Τηλέφωνο: 22730-14859</p>
+                                    <p class="en">Phone: 22730-14859</p>
+                                </div>
+                            </div>
+    
+                            <div class="single-contact d-flex align-items-center">
+                                <div class="contact-icon mr-30"><i class="ti-email"></i></div>
+                                <div class="contact-meta">
+                                    <p class="el" style="display: none;">Email: medilife@gmail.com</p>
+                                    <p class="en">Email: medilife@gmail.com</p>
+                                </div>
+                            </div>
+    
+                            <div class="single-contact d-flex align-items-center">
+                                <div class="contact-icon mr-30"><i class="ti-printer"></i></div>
+                                <div class="contact-meta">
+                                    <p class="el" style="display: none;">Fax: 254 478 2458</p>
+                                    <p class="en">Fax: 254 478 2458</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="medilife-emergency-card bg-img bg-overlay"
+                            style="background-image: url(img/bg-img/about1.jpg);">
+                            <i class="icon-smartphone"></i>
+                            <h2 class="el" style="display: none;">Για Επείγοντα</h2>
+                            <h2 class="en">For Emergencies</h2>
+                            <h3 class="el" style="display: none;">22730 22222</h3>
+                            <h3 class="en">22730 22222</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="medilife-map-area section-padding-100">
+        <div class="container">
+            <h2 class="el" style="display: none;">Βρείτε μας και στην τοποθεσία μας</h2>
+            <h2 class="en">Find us at our location</h2>
+            <!-- Google Maps iframe -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14626.2526712084!2d26.7056!3d37.7936!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b1c163f69b9b7d%3A0xb71d4b81bfa0657d!2zMTh8N8vK!5e0!3m2!1sen!2sus!4v1631547750183!5m2!1sen!2sus" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+    <p></p>
+    <!-- ***** Cool Facts Area End ***** -->
+    <footer class="footer-area section-padding-100">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Operating Hours -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo mb-3">
+                                <img src="img/core-img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                      
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                            <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                            <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                            <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                            <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                        </div>
+                    </div>
+    
+        
+                </div>
+            </div>
+        </div>
+    
+
+    
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area py-3 black text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 text-md-left text-center">
+                        <p>&copy; 2024 Medilife. All rights reserved.</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-right text-center">
+                        <br></br>
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <script>
+        // Language dictionary
+        const translations = {
+            'el': {
+                successMessage: 'Το μήνυμα στάλθηκε επιτυχώς!',
+                errorMessage: 'Υπήρξε πρόβλημα κατά την αποστολή του μηνύματος.',
+                contactTitle: 'Επικοινωνία',
+                contactSubtitle: 'Συμπληρώστε τα στοιχεία σας',
+                emailLabel: 'Email:',
+                subjectLabel: 'Θέμα:',
+                messageLabel: 'Μήνυμα:',
+                submitButton: 'Αποστολή',
+                address: 'Διέυθυνση: Ασκληπιού 8<br>83200 Καρλόβασι',
+                phone: 'Τηλέφωνο: 22730-14859',
+                email: 'Email: medilife@gmail.com',
+                fax: 'Fax: 254 478 2458',
+                emergenciesTitle: 'Για Επείγοντα',
+                emergenciesPhone: '22730 22222',
+                findUs: 'Βρείτε μας και στην τοποθεσία μας',
+                privacyPolicy: 'Πολιτική Απορρήτου',
+                termsOfService: 'Όροι Χρήσης'
+            },
+            'en': {
+                successMessage: 'Message sent successfully!',
+                errorMessage: 'There was a problem sending the message.',
+                contactTitle: 'Contact',
+                contactSubtitle: 'Fill in your details',
+                emailLabel: 'Email:',
+                subjectLabel: 'Subject:',
+                messageLabel: 'Message:',
+                submitButton: 'Submit',
+                address: 'Address: Asklipiou 8<br>83200 Karlovasi',
+                phone: 'Phone: 22730-14859',
+                email: 'Email: medilife@gmail.com',
+                fax: 'Fax: 254 478 2458',
+                emergenciesTitle: 'For Emergencies',
+                emergenciesPhone: '22730 22222',
+                findUs: 'Find us at our location',
+                privacyPolicy: 'Privacy Policy',
+                termsOfService: 'Terms of Service'
+            }
+        };
+      
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+          e.preventDefault();
+      
+          const email = document.getElementById('email').value;
+          const subject = document.getElementById('subject').value;
+          const message = document.getElementById('message').value;
+      
+          const response = await fetch('/users/contact', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ email, subject, message })
+          });
+      
+          const responseMessage = document.getElementById('responseMessage');
+          const currentLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+      
+          if (response.ok) {
+              responseMessage.textContent = translations[currentLanguage].successMessage;
+              responseMessage.style.color = 'green';
+          } else {
+              responseMessage.textContent = translations[currentLanguage].errorMessage;
+              responseMessage.style.color = 'red';
+          }
+        });
+      
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Update the browser tab title
+        }
+      
+        function changeLanguage(language) {
+            // Save selected language in localStorage
+            localStorage.setItem('selectedLanguage', language);
+      
+            // Show the selected language content and hide the rest
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+      
+            // Update text content based on the selected language
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                el.textContent = translations[language][key] || '';
+            });
+      
+            // Update title based on the selected language
+            const titles = {
+                'el': 'Επικοινωνία',
+                'en': 'Contact'
+            };
+            updateTitle(titles[language]);
+        }
+      
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if there is a saved language in localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+      </script>
+      
+</body>
+
+</html>
