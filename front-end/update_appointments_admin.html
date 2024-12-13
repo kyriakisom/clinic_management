@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ενημέρωση Ραντεβού</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Στυλ */
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
+        .home-link .arrow-icon {
+            width: 50px;
+            height: 50px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 15px;
+        }
+        .form-action-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-action-container button {
+            margin-right: 10px;
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-action-container button:hover {
+            background-color: darkorange;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .form-control {
+            color: black;
+        }
+        .form-control::placeholder {
+            color: grey;
+        }
+        .language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+    </style>
+</head>
+<body>
+    <div>
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+<!-- Back Arrow Icon Link -->
+<a href="view_appointments.html" class="home-link">
+    <div class="arrow-icon"></div>
+</a>
+
+<!-- Main Content -->
+<section class="medilife-contact-area section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-6">
+                <div class="contact-form">
+                    <form id="updateAppointmentForm">
+                        <input type="hidden" id="appointmentId">
+                        <div class="form-group">
+                            <label for="date">
+                                <span class="el">Τρέχουσα Ημερομηνία:</span>
+                                <span class="en" style="display:none;">Current Date:</span>
+                            </label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">
+                                <span class="el">Τρέχουσα Ώρα:</span>
+                                <span class="en" style="display:none;">Current time:</span>
+                            </label>
+                            <input type="time" class="form-control" id="time" required>
+                        </div>
+                        <div class="form-group">
+                           
+                            <label for="date">
+                                <span class="el">Νέα Ημερομηνία:(προαιρετικό)</span>
+                                <span class="en" style="display:none;">New Date:(optional)</span>
+                            </label>
+                            <input type="date" class="form-control" id="newDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">
+                                <span class="el">Νέα Ώρα:(προαιρετικό)</span>
+                                <span class="en" style="display:none;">New time:(optional)</span>
+                            </label> 
+                            <input type="time" class="form-control" id="newTime">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">
+                                <span class="el">Κατάσταση:</span>
+                                <span class="en" style="display:none;">Status:</span>
+                            </label>
+                            <input type="text" class="form-control" id="status" placeholder="Κατάσταση" required>
+                        </div>
+                        <div class="row justify-content-center form-action-container">
+                            <div class="col-12 col-lg-6 text-center">
+                                <button type="submit" id="updateButton" class="btn btn-sm btn-primary el">Ανανέωση</button>
+                                <button type="submit" id="updateButton" class="btn btn-sm btn-primary en">Update</button>
+
+                            </div>
+                        </div>
+                    </form>
+                    <div id="responseMessage" class="message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="script.js"></script>
+<script>
+
+    // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+    function updateTitle(title) {
+              const titleElement = document.getElementById('page-title');
+              if (titleElement) {
+                  titleElement.textContent = title;
+              }
+              document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+          }
+  
+          const messages = {
+        el: {
+            noAppointmentId: 'Δεν βρέθηκε το ID του ραντεβού.',
+            loadingError: 'Δεν μπορέσαμε να φορτώσουμε τα δεδομένα του ραντεβού.',
+            dataLoadError: 'Σφάλμα κατά τη φόρτωση των δεδομένων του ιστορικού:',
+            mandatoryFields: 'Η ημερομηνία, η ώρα και η κατάσταση είναι υποχρεωτικά πεδία.',
+            statusError: 'Η κατάσταση πρέπει να είναι "Cancelled", "Ακυρωμένο", "Completed", "Ολοκληρωμένο", "Kept" ή "Τηρημένο".',
+            updateSuccess: 'Το ραντεβού ενημερώθηκε επιτυχώς!',
+            invalidStatus: 'Μη έγκυρη κατάσταση ραντεβού.',
+            updateFailure: 'Αποτυχία ενημέρωσης του ραντεβού.',
+            error: 'Παρουσιάστηκε σφάλμα κατά την ενημέρωση του ραντεβού.',
+            timeAlert: 'Οι διαθέσιμες ώρες είναι από 08:00 π.μ. έως 09:00 μ.μ.'
+        },
+        en: {
+            noAppointmentId: 'Appointment ID not found.',
+            loadingError: 'Failed to load appointment data.',
+            dataLoadError: 'Error loading history data:',
+            mandatoryFields: 'Date, time, and status are required fields.',
+            statusError: 'Status must be "Cancelled", "Ακυρωμένο", "Completed", "Ολοκληρωμένο", "Kept" or "Τηρημένο".',
+            updateSuccess: 'Appointment updated successfully!',
+            invalidStatus: 'Invalid appointment status.',
+            updateFailure: 'Failed to update appointment.',
+            error: 'An error occurred while updating the appointment.',
+            timeAlert: 'Available times are from 08:00 AM to 09:00 PM.'
+        }
+    };
+
+      
+          function changeLanguage(language) {
+              // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+              localStorage.setItem('selectedLanguage', language);
+      
+              // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+              document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+              document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+      
+  
+              // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+              const titles = {
+                  el: 'Ενημέρωση ραντεβού',
+                  en: 'Appointment update'
+              };
+              updateTitle(titles[language]);
+  
+              // Ενημέρωση των μηνυμάτων ανάλογα με τη γλώσσα
+              currentMessages = messages[language];
+          }
+  
+          let currentMessages = messages.el; // Default to Greek
+  
+          document.addEventListener('DOMContentLoaded', () => {
+              // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+              const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+              changeLanguage(savedLanguage);
+          });
+  
+  document.addEventListener('DOMContentLoaded', async function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const appointmentId = urlParams.get('appointmentId'); // Change 'id' to 'appointmentId'
+  
+      if (!appointmentId) {
+          console.error(currentMessages.noAppointmentId);
+          showNotification(currentMessages.noAppointmentId, 'error');
+          return;
+      }
+  
+      try {
+          const response = await fetch(`http://localhost:5000/appointments/${appointmentId}`, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              credentials: 'include'
+          });
+  
+          if (response.ok) {
+              const data = await response.json();
+              document.getElementById('date').value = data.date || '';
+              document.getElementById('time').value = data.time || '';
+              document.getElementById('status').value = data.status || '';
+          } else {
+              console.error(currentMessages.loadingError);
+              showNotification(currentMessages.loadingError, 'error');
+          }
+      } catch (error) {
+          console.error(currentMessages.dataLoadError, error);
+          showNotification(currentMessages.dataLoadError, 'error');
+      }
+  });
+  
+  function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+          document.body.removeChild(notification);
+      }, 3000);
+  }
+  
+  // Ensure the DOM is fully loaded before interacting with elements
+  document.addEventListener('DOMContentLoaded', () => {
+      const appointmentId = getQueryParam('appointmentId');
+      if (appointmentId) {
+          document.getElementById('appointmentId').value = appointmentId;
+      }
+  
+      // Set the minimum date to today for date inputs
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('date').setAttribute('min', today);
+      document.getElementById('newDate').setAttribute('min', today);
+  
+      // Disable times before 8 AM and after 9 PM
+      const timeInput = document.getElementById('time');
+      const newTimeInput = document.getElementById('newTime');
+  
+      timeInput.addEventListener('input', validateTime);
+      newTimeInput.addEventListener('input', validateTime);
+  
+      function validateTime() {
+          const inputTime = this.value;
+          const [hours, minutes] = inputTime.split(':').map(Number);
+          if (hours < 8 || hours > 21 || (hours === 21 && minutes > 0)) {
+              this.value = '';
+          }
+      }
+  
+      const timeInputs = document.querySelectorAll('input[type="time"]');
+      
+      timeInputs.forEach(input => {
+          input.addEventListener('input', function() {
+              const time = this.value;
+              if (time < "08:00" || time > "21:00") {
+                  alert(currentMessages.timeAlert);
+                  this.value = '';
+              }
+          });
+      });
+  });
+  
+  document.getElementById('updateAppointmentForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+  
+      const appointmentId = document.getElementById('appointmentId').value;
+      const currentDate = document.getElementById('date').value; // Assuming this is already in 'yyyy-MM-dd' format
+      const currentTime = document.getElementById('time').value; // Assuming this is in 'HH:mm' format
+      const newDate = document.getElementById('newDate').value; // 'yyyy-MM-dd' format
+      const newTime = document.getElementById('newTime').value; // 'HH:mm' format
+      const status = document.getElementById('status').value;
+  
+      const responseMessage = document.getElementById('responseMessage');
+      responseMessage.textContent = '';
+  
+      // Validations
+      if (!currentDate || !currentTime || !status) {
+          responseMessage.style.color = 'red';
+          responseMessage.textContent = currentMessages.mandatoryFields;
+          return;
+      }
+  
+      // Check if the date or time have changed
+      const isDateChanged = newDate && newDate !== currentDate;
+      const isTimeChanged = newTime && newTime !== currentTime;
+  
+      // Build the data object to send
+      const updateData = {
+          status,
+          appointmentDate: newDate || currentDate, // Use newDate if provided, otherwise use currentDate
+          appointmentTime: newTime || currentTime  // Use newTime if provided, otherwise use currentTime
+      };
+  
+      // Include newDate and newTime in the data object if they have changed
+      if (isDateChanged) {
+          updateData.appointmentDate = newDate; // newDate as string
+      }
+  
+      if (isTimeChanged) {
+          updateData.appointmentTime = newTime; // newTime as string
+      }
+  
+      // If no changes in date or time, include current values
+      if (!isDateChanged) {
+          updateData.appointmentDate = currentDate; // currentDate as string
+      }
+      
+      if (!isTimeChanged) {
+          updateData.appointmentTime = currentTime; // currentTime as string
+      }
+  
+      if (!['Cancelled', 'Ακυρωμένο', 'Completed', 'Ολοκληρωμένο', 'Kept', 'Τηρημένο'].includes(status)) {
+    responseMessage.style.color = 'red';
+    responseMessage.textContent = currentMessages.statusError;
+    return;
+}
+
+  
+      try {
+          const response = await fetch(`http://localhost:5000/appointments/${appointmentId}`, {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              credentials: 'include',
+              body: JSON.stringify(updateData)
+          });
+  
+          if (response.ok) {
+              responseMessage.style.color = 'green';
+              responseMessage.textContent = currentMessages.updateSuccess;
+          } else if (response.status === 400) {
+              responseMessage.style.color = 'red';
+              responseMessage.textContent = currentMessages.invalidStatus;
+          } else {
+              responseMessage.style.color = 'red';
+              responseMessage.textContent = currentMessages.updateFailure;
+          }
+      } catch (error) {
+          console.error(currentMessages.error, error);
+          responseMessage.style.color = 'red';
+          responseMessage.textContent = currentMessages.error;
+      }
+  });
+  
+  // Get query parameters by name
+  function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+  }
+  
+  </script>
+  
+</body>
+</html>

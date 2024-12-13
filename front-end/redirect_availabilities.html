@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Ώρες Διαθεσιμότητας</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            min-width: 160px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        #dropdownUserName {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            color: blue; 
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            min-width: 160px;
+            z-index: 1000;
+            right: 0;
+        }
+
+        .dropdown-content button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #f44336; /* Red */
+            color: white;
+            cursor: pointer;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #e53935;
+        }
+
+        .add-button button {
+            background-color: #28a745; /* Bootstrap primary color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            margin-left: auto; /* Ensures button is aligned to the right */
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .button-container button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .button-container .add-button {
+            background-color: #28a745;
+        }
+        
+        .button-container .icon {
+            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .button-container .side-icon {
+            margin-left: 5px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .medica-about-us-area .medica-about-content p {
+            text-align: justify;
+        }
+        
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+
+        /* Card Styles */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: #d1e8ff;
+        }
+
+        .card h4 {
+            margin: 0 0 10px;
+            color: #0080ff;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .card .slots {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button,
+        .pagination span {
+            margin: 0 5px;
+            padding: 8px 16px;
+            border: none;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .pagination button[disabled] {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .pagination span {
+            cursor: pointer;
+        }
+
+        .pagination span:hover {
+            text-decoration: underline;
+        }
+        
+        /* Hyperlink Styles */
+        .link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .link:active {
+            color: #003d7a;
+            text-decoration: underline;
+        }
+        .language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+    </style>
+</head>
+
+<body>
+<!-- Preloader -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area">
+    <div>
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+    <div class="main-header-area" id="stickyHeader">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 h-100">
+                    <div class="main-menu h-100">
+                        <nav class="navbar h-100 navbar-expand-lg">
+                            <a class="navbar-brand"><img src="img/core-img/logo.png" alt="Logo"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                            <div class="collapse navbar-collapse" id="medilifeMenu">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link el" href="appointments_patients.html">Επιστροφή στη φόρμα ραντεβού <span class="sr-only">(current)</span></a>
+                                        <a class="nav-link en" href="appointments_patients.html">Return to appointment page <span class="sr-only">(current)</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<br></br>
+    <br></br>
+<section class="medica-about-us-area section-padding-100-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="medica-about-content">
+                    <p></p>
+                    <h3 class="el">Διαθεσιμότητα Ιατρών</h3>
+                    <h3 class="en">Doctor availabilities</h3>
+                    <div id="cardContainer" class="card-container"></div>
+                    <div id="pagination" class="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br></br>
+<br></br>
+   <!-- ***** Cool Facts Area End ***** -->
+   <footer class="footer-area section-padding-100">
+    <!-- Main Footer Area -->
+    <div class="main-footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- Logo and Operating Hours -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <div class="footer-logo mb-3">
+                            <img src="img/core-img/logo.png" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                        <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                  
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                        <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                        <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="footer-widget-area">
+                        <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                        <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                        <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                    </div>
+                </div>
+
+    
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bottom Footer Area -->
+    <div class="bottom-footer-area py-3 black text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 text-md-left text-center">
+                    <p>&copy; 2024 Medilife. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6 text-md-right text-center">
+                    <br></br>
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                    <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                    <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/active.js"></script>
+<script>
+    const itemsPerPage = 1;
+    let currentPage = 1;
+    let totalPages = 1;
+    let doctors = [];
+    let currentLanguage = 'el'; // Default language
+
+    const labels = {
+        'el': {
+            specialty: 'Ειδικότητα:',
+            availableSlots: 'Διαθέσιμες ώρες:'
+        },
+        'en': {
+            specialty: 'Specialty:',
+            availableSlots: 'Available slots:'
+        }
+    };
+
+    async function fetchAvailability() {
+        try {
+            const response = await fetch('/availabilities/find-by-name', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                doctors = [];
+                if (Array.isArray(data) && data.length > 0) {
+                    const doctorData = {};
+
+                    data.forEach(item => {
+                        if (!doctorData[item.name]) {
+                            doctorData[item.name] = {
+                                specialty: item.specialty,
+                                slots: []
+                            };
+                        }
+                        item.slots.forEach(slot => {
+                            const date = new Date(slot.date);
+                            const time = slot.time;
+                            doctorData[item.name].slots.push(`${date.toLocaleDateString('el-GR')} ${time}`);
+                        });
+                    });
+
+                    doctors = Object.keys(doctorData).map(name => ({
+                        name,
+                        ...doctorData[name]
+                    }));
+
+                    totalPages = Math.ceil(doctors.length / itemsPerPage);
+                    renderPage(currentPage);
+                    renderPagination();
+                } else {
+                    const message = document.createElement('p');
+                    message.textContent = getLocalizedText('noData');
+                    document.getElementById('cardContainer').appendChild(message);
+                }
+            } else {
+                throw new Error('Unexpected response format');
+            }
+        } catch (error) {
+            console.error('Error fetching availability:', error);
+            document.getElementById('cardContainer').innerHTML = '<p>Σφάλμα κατά την ανάκτηση δεδομένων. Παρακαλώ δοκιμάστε ξανά αργότερα.</p>';
+        }
+    }
+
+    function getLocalizedText(key) {
+        const messages = {
+            'noData': {
+                'el': 'Δεν βρέθηκαν δεδομένα διαθεσιμότητας.',
+                'en': 'No availability data found.'
+            }
+        };
+        return messages[key][currentLanguage];
+    }
+
+    function renderPage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const doctorToDisplay = doctors.slice(start, end);
+
+        const cardContainer = document.getElementById('cardContainer');
+        cardContainer.innerHTML = '';
+
+        doctorToDisplay.forEach(doctor => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const cardTitle = document.createElement('h4');
+            cardTitle.textContent = doctor.name;
+            card.appendChild(cardTitle);
+
+            const specialty = document.createElement('p');
+            specialty.textContent = `${labels[currentLanguage].specialty} ${doctor.specialty}`;
+            card.appendChild(specialty);
+
+            const slots = document.createElement('p');
+            slots.className = 'slots';
+            slots.textContent = `${labels[currentLanguage].availableSlots} ${doctor.slots.join(', ')}`;
+            card.appendChild(slots);
+
+            cardContainer.appendChild(card);
+        });
+    }
+
+    function renderPagination() {
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+
+        const createButton = (text, pageNum, disabled = false) => {
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.disabled = disabled;
+            button.addEventListener('click', () => {
+                if (!disabled) {
+                    currentPage = pageNum;
+                    renderPage(currentPage);
+                    renderPagination();
+                }
+            });
+            return button;
+        };
+
+        pagination.appendChild(createButton('<<', currentPage - 1, currentPage === 1));
+        
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('span');
+            pageButton.textContent = i;
+            if (i === currentPage) {
+                pageButton.style.fontWeight = 'bold';
+            } else {
+                pageButton.style.cursor = 'pointer';
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    renderPage(currentPage);
+                    renderPagination();
+                });
+            }
+            pagination.appendChild(pageButton);
+        }
+
+        pagination.appendChild(createButton('>>', currentPage + 1, currentPage === totalPages));
+    }
+
+    function updateTitle(title) {
+        const titleElement = document.getElementById('page-title');
+        if (titleElement) {
+            titleElement.textContent = title;
+        }
+        document.title = title; // Update tab title
+    }
+    
+    function changeLanguage(language) {
+        // Save the selected language in localStorage
+        localStorage.setItem('selectedLanguage', language);
+        currentLanguage = language; // Update current language
+
+        // Show the selected language content and hide the rest
+        document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+        document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+        
+        // Update labels and re-render content
+        renderPage(currentPage);
+        renderPagination();
+        
+        // Update title based on language
+        const titles = {
+            'el': 'Διαθεσιμότητα γιατρών',
+            'en': 'Doctors availabilities'
+        };
+        updateTitle(titles[language]);
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // Check if there is a saved language in localStorage
+        const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+        changeLanguage(savedLanguage);
+        fetchAvailability();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Ανανέωση ιστορικού</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .home-link .arrow-icon {
+            width: 50px;
+            height: 50px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 15px;
+        }
+
+        .btn-primary {
+            background-color: #ffb522; /* Orange background */
+            border-color: #ffb522; /* Orange border */
+            color: #ffffff; /* White text */
+        }
+
+        .btn-primary:hover {
+            background-color: #ffb522; /* Darker orange on hover */
+            border-color: #ffb522; /* Darker orange border on hover */
+        }
+
+        .medica-about-us-area .medica-about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .medica-about-us-area .section-padding-100-20 {
+            padding: 100px 20px;
+        }
+
+        .medica-about-us-area .row {
+            display: flex;
+            align-items: center;
+        }
+
+        .medica-about-us-area .medica-about-content p {
+            text-align: justify;
+        }
+
+        #notification {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .notification-success {
+            color: green;
+        }
+
+        .notification-error {
+            color: red;
+        }
+
+        /* CSS for input fields */
+        .form-control {
+            color: black;
+        }
+
+        .language-selector {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+    <a href="medical_history.html" class="home-link">
+        <div class="arrow-icon"></div>
+    </a>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="medilife-load"></div>
+    </div>
+
+    <!-- ***** Header Area End ***** -->
+    <section class="medilife-contact-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="contact-form">
+                        <form id="updateHistoryForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="socialSecurityNumber" placeholder="Αριθμός Κοινωνικής Ασφάλισης" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="detectedHealthProblems" placeholder="Διάγνωση">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="treatment" placeholder="Θεραπεία">
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-lg-6 text-center">
+                                    <button type="submit" id="submitButton" class="btn btn-sm btn-primary">Ανανέωση</button>
+                                </div>
+                            </div>
+                            <div id="notification"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <script>
+        // Μηνύματα για επιλεγμένες γλώσσες
+        const messages = {
+            'el': {
+                historyNotFound: 'Δεν βρέθηκε το ID του ιστορικού.',
+                loadError: 'Δεν μπορέσαμε να φορτώσουμε τα δεδομένα του ιστορικού.',
+                updateSuccess: 'Η ανανέωση ιστορικού ολοκληρώθηκε με επιτυχία!',
+                updateError: 'Παρουσιάστηκε σφάλμα κατά την ανανέωση του ιστορικού.',
+                fetchError: 'Σφάλμα κατά τη φόρτωση των τελευταίων δεδομένων ιστορικού.'
+            },
+            'en': {
+                historyNotFound: 'Medical history ID not found.',
+                loadError: 'Unable to load medical history data.',
+                updateSuccess: 'Medical history updated successfully!',
+                updateError: 'An error occurred while updating the medical history.',
+                fetchError: 'Error loading the latest medical history data.'
+            }
+        };
+    
+        // Ενημερωμένη συνάρτηση εμφάνισης ειδοποιήσεων που λαμβάνει υπόψη τη γλώσσα
+        function showNotification(messageKey, type) {
+            const language = localStorage.getItem('selectedLanguage') || 'el';
+            const message = messages[language][messageKey]; // Επιλέγει το σωστό μήνυμα ανάλογα με το κλειδί και τη γλώσσα
+    
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = type === 'success' ? 'notification-success' : 'notification-error';
+        }
+    
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const historyId = urlParams.get('id');
+    
+            if (!historyId) {
+                console.error('Δεν βρέθηκε το ID του ιστορικού.');
+                showNotification('historyNotFound', 'error');
+                return;
+            }
+    
+            try {
+                const response = await fetch(`http://localhost:5000/med_histories/medical-history/${historyId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+    
+                    document.getElementById('socialSecurityNumber').value = data.socialSecurityNumber || '';
+                    document.getElementById('detectedHealthProblems').value = data.detectedHealthProblems || '';
+                    document.getElementById('treatment').value = data.treatment || '';
+                } else {
+                    console.error('Δεν μπορέσαμε να φορτώσουμε τα δεδομένα του ιστορικού.');
+                    showNotification('loadError', 'error');
+                }
+            } catch (error) {
+                console.error('Σφάλμα κατά τη φόρτωση των δεδομένων του ιστορικού:', error);
+                showNotification('loadError', 'error');
+            }
+        });
+    
+        document.getElementById('updateHistoryForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+    
+            const socialSecurityNumber = document.getElementById('socialSecurityNumber').value;
+            const detectedHealthProblems = document.getElementById('detectedHealthProblems').value;
+            const treatment = document.getElementById('treatment').value;
+    
+            const data = {
+                socialSecurityNumber,
+                detectedHealthProblems,
+                treatment
+            };
+    
+            try {
+                const response = await fetch('/med_histories', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+    
+                const result = await response.json();
+    
+                if (response.ok) {
+                    showNotification('updateSuccess', 'success');
+                    fetchLatestMedicalHistory();
+                } else {
+                    showNotification('updateError', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('updateError', 'error');
+            }
+        });
+    
+        async function fetchLatestMedicalHistory() {
+            try {
+                const response = await fetch('/med_histories', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Error fetching latest medical history');
+                }
+    
+                const data = await response.json();
+    
+                if (data) {
+                    document.getElementById('socialSecurityNumber').value = data.socialSecurityNumber || '';
+                    document.getElementById('detectedHealthProblems').value = data.detectedHealthProblems || '';
+                    document.getElementById('treatment').value = data.treatment || '';
+                }
+            } catch (error) {
+                console.error('Error fetching latest medical history:', error);
+                showNotification('fetchError', 'error');
+            }
+        }
+    
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Ανανέωση ιστορικού',
+                'en': 'Medical history update'
+            };
+            updateTitle(titles[language]);
+    
+            // Ενημέρωση των placeholders και του κουμπιού ανάλογα με τη γλώσσα
+            const placeholders = {
+                'el': {
+                    ssn: 'Αριθμός Κοινωνικής Ασφάλισης',
+                    diagnosis: 'Διάγνωση',
+                    treatment: 'Θεραπεία',
+                    submit: 'Ανανέωση'
+                },
+                'en': {
+                    ssn: 'Social Security Number',
+                    diagnosis: 'Diagnosis',
+                    treatment: 'Treatment',
+                    submit: 'Update'
+                }
+            };
+    
+            document.getElementById('socialSecurityNumber').placeholder = placeholders[language].ssn;
+            document.getElementById('detectedHealthProblems').placeholder = placeholders[language].diagnosis;
+            document.getElementById('treatment').placeholder = placeholders[language].treatment;
+            document.getElementById('submitButton').textContent = placeholders[language].submit;
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+    
+</body>
+
+</html>

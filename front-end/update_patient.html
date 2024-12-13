@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title id="page-title">Ενημέρωση ασθενούς</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
+        .home-link .arrow-icon {
+            width: 50px;
+            height: 50px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 15px;
+        }
+
+        .form-action-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .form-action-container button {
+            margin-right: 10px;
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-action-container button:hover {
+            background-color: darkorange;
+        }
+
+        .form-control {
+            color: black;
+        }
+
+        .response-message {
+            font-size: 1rem;
+            font-weight: normal;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .response-message.success {
+            color: rgb(40, 181, 40);
+        }
+
+        .response-message.error {
+            color: red;
+        }
+        .language-selector {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span class="language-selector" id="el" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" id="en" onclick="changeLanguage('en')">English</span>
+    </div>
+    <!-- Back Arrow Icon Link -->
+    <a href="view_patients.html" class="home-link">
+        <div class="arrow-icon"></div>
+    </a>
+    
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="medilife-load"></div>
+    </div>
+
+    <!-- Contact Area -->
+    <section class="medilife-contact-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="contact-form">
+                        <form id="patientForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="signup-first-name" placeholder="Όνομα" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="signup-last-name" placeholder="Επώνυμο" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="SSN" placeholder="ΑΜΚΑ" required>
+                            </div>
+                            <div class="form-action-container">
+                                <button type="submit" class="btn btn-sm btn-primary el">Ανανέωση</button>
+                                <button type="submit" class="btn btn-sm btn-primary en" style="display: none;">Update</button>
+                            </div>
+                            <div id="responseMessage" class="response-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Area -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <h3></h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer class="footer-area section-padding-100">
+        <div class="main-footer-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo">
+                                <img src="img/core-img/logo.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-footer-area">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="bottom-footer-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const patientId = urlParams.get('id');
+
+            if (!patientId) {
+                console.error('No patient ID found.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5000/patients/patients/${patientId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    document.getElementById('signup-first-name').value = data.firstName || '';
+                    document.getElementById('signup-last-name').value = data.lastName || '';
+                    document.getElementById('SSN').value = data.socialSecurityNumber || '';
+                } else {
+                    console.error('Failed to load patient data.');
+                }
+            } catch (error) {
+                console.error('Error loading patient data:', error);
+            }
+        });
+
+        document.querySelector('form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById('signup-first-name').value.trim();
+            const lastName = document.getElementById('signup-last-name').value.trim();
+            const socialSecurityNumber = document.getElementById('SSN').value.trim();
+
+            const requestBody = { firstName, lastName, socialSecurityNumber };
+
+            try {
+                const response = await fetch('/patients', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const contentType = response.headers.get("content-type");
+                let data;
+
+                if (contentType && contentType.includes("application/json")) {
+                    data = await response.json();
+                } else {
+                    throw new Error("Server response was not in JSON format.");
+                }
+
+                const responseMessage = document.getElementById('responseMessage');
+
+                if (response.ok) {
+                    responseMessage.textContent = language === 'el' ? 'Ο ασθενής ενημερώθηκε με επιτυχία.' : 'Patient updated successfully.';
+                    responseMessage.className = 'response-message success';
+                    document.querySelector('form').reset();
+                } else {
+                    const errorMsg = data.errors?.join(' ') || (language === 'el' ? 'Προέκυψε κάποιο σφάλμα. Παρακαλούμε δοκιμάστε ξανά.' : 'An error occurred. Please try again.');
+                    responseMessage.textContent = errorMsg;
+                    responseMessage.className = 'response-message error';
+                    clearInvalidFields(data.errors || []);
+                }
+            } catch (error) {
+                const responseMessage = document.getElementById('responseMessage');
+                responseMessage.textContent = language === 'el' ? `Προέκυψε κάποιο σφάλμα: ${error.message}` : `An error occurred: ${error.message}`;
+                responseMessage.className = 'response-message error';
+            }
+        });
+
+        function clearInvalidFields(errors) {
+            if (errors.includes('Το όνομα πρέπει να περιέχει μόνο λατινικούς ή ελληνικούς χαρακτήρες.') || errors.includes('First name must contain only Latin or Greek characters.')) {
+                document.getElementById('signup-first-name').value = '';
+            }
+            if (errors.includes('Το επώνυμο πρέπει να περιέχει μόνο λατινικούς ή ελληνικούς χαρακτήρες.') || errors.includes('Last name must contain only Latin or Greek characters.')) {
+                document.getElementById('signup-last-name').value = '';
+            }
+            if (errors.includes('Μη έγκυρη μορφή αριθμού κοινωνικής ασφάλισης.') || errors.includes('Invalid social security number format.')) {
+                document.getElementById('SSN').value = '';
+            }
+        }
+
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+
+        let language = 'el'; // Initialize language variable
+
+        function changeLanguage(selectedLanguage) {
+            language = selectedLanguage;
+
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+
+            // Ενημέρωση placeholders ανάλογα με τη γλώσσα
+            const placeholders = {
+                'el': {
+                    firstName: 'Όνομα',
+                    lastName: 'Επώνυμο',
+                    ssn: 'ΑΜΚΑ'
+                },
+                'en': {
+                    firstName: 'First Name',
+                    lastName: 'Last Name',
+                    ssn: 'Social Security Number'
+                }
+            };
+
+            document.getElementById('signup-first-name').placeholder = placeholders[language].firstName;
+            document.getElementById('signup-last-name').placeholder = placeholders[language].lastName;
+            document.getElementById('SSN').placeholder = placeholders[language].ssn;
+
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Ενημέρωση ασθενή',
+                'en': 'Patient update'
+            };
+            updateTitle(titles[language]);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+</body>
+</html>

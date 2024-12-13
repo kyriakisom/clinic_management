@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Update Information</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @font-face {
+            font-family: 'themify';
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/themify-icons/0.1.2/fonts/themify.woff') format('woff'),
+                 url('https://cdnjs.cloudflare.com/ajax/libs/themify-icons/0.1.2/fonts/themify.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .ti-home:before {
+            content: "\e69b";
+            font-family: 'themify';
+            font-size: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: black; /* Change this to your preferred color */
+            font-size: 24px; /* Adjust the font size if needed */
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        
+        .form-container h2 {
+            margin-top: 0;
+        }
+
+        .form-container input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: darkorange;
+        }
+        .success-message {
+        color: green;
+        font-weight: bold;
+    }
+        .error-message {
+            color: red;
+            margin: 10px 0;
+        }
+        .language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+</style>
+</head>
+
+<body> 
+    <div>
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+    <a href="admin.html" class="home-link">
+        <span class="ti-home"></span>
+    </a>
+
+    <section class="form-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-container">
+                        <h2 class="el">Ενημέρωση των στοιχείων μου</h2>
+                        <h2 class="en">Update my information</h2>
+                        <form id="updateForm">
+                            <input type="text" id="username" placeholder="Username" required>
+                            <input type="text" id="firstname" placeholder="First Name" required>
+                            <input type="text" id="lastname" placeholder="Last Name" required>
+                            <input type="email" id="email" placeholder="Email" required>
+                            <input type="text" id="idNumber" placeholder="ID Number" required>
+                            <input type="text" id="ssn" placeholder="SSN" style="display:none;">
+                            <input type="text" id="specialty" placeholder="Specialty" style="display:none;">
+                            <button type="submit" id="save-button">Αποθήκευση αλλαγών</button>
+                            <div id="error-message" class="error-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch user info and populate form fields
+            fetch('http://localhost:5000/users/getUserInfo', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            })
+            .then(response => {
+                if (response.status === 401) {
+                    throw new Error('Unauthorized: You need to log in.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data) {
+                    // Populate form fields
+                    document.getElementById('username').value = data.username || '';
+                    document.getElementById('firstname').value = data.firstname || '';
+                    document.getElementById('lastname').value = data.lastname || '';
+                    document.getElementById('email').value = data.email || '';
+                    document.getElementById('idNumber').value = data.idNumber || '';
+        
+                    // Adjust form based on user role
+                    if (data.role === 'Patient') {
+                        document.getElementById('ssn').style.display = 'block';
+                        document.getElementById('ssn').value = data.ssn || '';
+                        document.getElementById('specialty').style.display = 'none';
+                    } else if (data.role === 'Doctor') {
+                        document.getElementById('specialty').style.display = 'block';
+                        document.getElementById('specialty').value = data.specialty || '';
+                        document.getElementById('ssn').style.display = 'none';
+                    } else {
+                        document.getElementById('ssn').style.display = 'none';
+                        document.getElementById('specialty').style.display = 'none';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+        
+            document.getElementById('updateForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                updateUserInfo();
+            });
+        
+            function updateUserInfo() {
+                const userInfo = {
+                    username: document.getElementById('username').value,
+                    firstname: document.getElementById('firstname').value,
+                    lastname: document.getElementById('lastname').value,
+                    email: document.getElementById('email').value,
+                    idNumber: document.getElementById('idNumber').value,
+                    ssn: document.getElementById('ssn') ? document.getElementById('ssn').value : '',
+                    specialty: document.getElementById('specialty') ? document.getElementById('specialty').value : ''
+                };
+        
+                // Πρώτος έλεγχος αν το username είναι μοναδικό
+                fetch('http://localhost:5000/users/checkUsername', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ username: userInfo.username })
+                })
+                .then(response => response.json().then(data => ({ status: response.status, body: data })))
+                .then(({ status, body }) => {
+                    if (status === 200 && body.exists) {
+                        // Το όνομα χρήστη υπάρχει ήδη
+                        showError('usernameExists');
+                    } else {
+                        // Προχώρα με την ενημέρωση
+                        fetch('http://localhost:5000/users/updateUserInfo', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            credentials: 'include',
+                            body: JSON.stringify(userInfo)
+                        })
+                        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+                        .then(({ status, body }) => {
+                            if (status === 200) {
+                                console.log('Update successful! Displaying success message.');
+                                showError('updateSuccess');
+                            } else {
+                                const errors = body.errors || [];
+                                showError('validationErrors', errors);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error updating user info:', error);
+                            showError('updateError');
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking username:', error);
+                    showError('usernameCheckError');
+                });
+            }
+        
+            function showError(type, errors = []) {
+                const messageElement = document.getElementById('error-message');
+                const messages = {
+                    'usernameExists': {
+                        'el': 'Το όνομα χρήστη υπάρχει ήδη. Δοκιμάστε άλλο.',
+                        'en': 'Username already exists. Please try another.'
+                    },
+                    'updateError': {
+                        'el': 'Σφάλμα κατά την ενημέρωση των στοιχείων.',
+                        'en': 'Error updating user information.'
+                    },
+                    'usernameCheckError': {
+                        'el': 'Σφάλμα κατά την έλεγχο του ονόματος χρήστη.',
+                        'en': 'Error checking username availability.'
+                    },
+                    'updateSuccess': {
+                        'el': 'Οι αλλαγές αποθηκεύτηκαν με επιτυχία!',
+                        'en': 'Changes saved successfully!'
+                    },
+                    'validationErrors': {
+                        'el': 'Παρακαλώ διορθώστε τα ακόλουθα σφάλματα.',
+                        'en': 'Please correct the following errors.'
+                    }
+                };
+        
+                // Διαγραφή προηγούμενων κλάσεων
+                messageElement.className = '';
+        
+                // Προσθήκη success class αν η ενημέρωση ήταν επιτυχής
+                if (type === 'updateSuccess') {
+                    messageElement.classList.add('success-message');
+                } else {
+                    messageElement.classList.add('error-message');
+                }
+        
+                // Ορισμός μηνύματος
+                messageElement.innerHTML = messages[type][currentLanguage] || messages['updateError'][currentLanguage];
+                
+                // Αν υπάρχουν validation errors, εκκαθάρισε τα λάθος πεδία
+                if (type === 'validationErrors') {
+                    clearInvalidFields(errors);
+                }
+        
+                console.log('Displaying message:', messageElement.innerHTML);  // Προσθήκη debugging
+            }
+        
+            function clearInvalidFields(errors) {
+                const errorMessages = {
+                    'usernameInvalid': {
+                        'el': 'Το όνομα χρήστη πρέπει να περιέχει μόνο λατινικούς χαρακτήρες και υπογράμμιση.',
+                        'en': 'Username must contain only Latin characters and underscores.'
+                    },
+                    'idNumberInvalid': {
+                        'el': 'Ο αριθμός ταυτότητας πρέπει να περιέχει μόνο αλφαριθμητικούς χαρακτήρες.',
+                        'en': 'ID number must contain only alphanumeric characters.'
+                    },
+                    'firstnameInvalid': {
+                        'el': 'Το όνομα πρέπει να περιέχει μόνο λατινικούς ή ελληνικούς χαρακτήρες.',
+                        'en': 'First name must contain only Latin or Greek characters.'
+                    },
+                    'lastnameInvalid': {
+                        'el': 'Το επώνυμο πρέπει να περιέχει μόνο λατινικούς χαρακτήρες.',
+                        'en': 'Last name must contain only Latin characters.'
+                    },
+                    'emailInvalid': {
+                        'el': 'Η διεύθυνση email δεν έχει έγκυρη μορφή.',
+                        'en': 'Invalid email format.'
+                    },
+                    'specialtyInvalid': {
+                        'el': 'Η ειδικότητα πρέπει να περιέχει μόνο λατινικούς χαρακτήρες.',
+                        'en': 'Specialty must contain only Latin characters.'
+                    }
+                };
+        
+                errors.forEach(error => {
+                    if (errorMessages[error]) {
+                        document.getElementById('error-message').innerHTML += `<br>${errorMessages[error][currentLanguage]}`;
+                    }
+                    // Εκκαθάριση πεδίων σε περίπτωση λάθους
+                    if (error === 'usernameInvalid') {
+                        document.getElementById('username').value = '';
+                    }
+                    if (error === 'idNumberInvalid') {
+                        document.getElementById('idNumber').value = '';
+                    }
+                    if (error === 'firstnameInvalid') {
+                        document.getElementById('firstname').value = '';
+                    }
+                    if (error === 'lastnameInvalid') {
+                        document.getElementById('lastname').value = '';
+                    }
+                    if (error === 'emailInvalid') {
+                        document.getElementById('email').value = '';
+                    }
+                    if (error === 'specialtyInvalid') {
+                        document.getElementById('specialty').value = '';
+                    }
+                });
+            }
+        
+        });
+        
+        let currentLanguage = 'en'; // Default language
+        
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+        
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+            currentLanguage = language;
+        
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+        
+
+    // Ενημέρωση του τίτλου της σελίδας
+    if (language === 'el') {
+        updateTitle('Ενημέρωση Προφίλ');
+        document.getElementById('save-button').textContent = 'Αποθήκευση αλλαγών'; // Αλλαγή κειμένου κουμπιού σε Ελληνικά
+    } else {
+        updateTitle('Update Profile');
+        document.getElementById('save-button').textContent = 'Save Changes'; // Αλλαγή κειμένου κουμπιού σε Αγγλικά
+    }
+}
+        // Φόρτωση της επιλεγμένης γλώσσας από το localStorage κατά την φόρτωση της σελίδας
+        window.addEventListener('load', () => {
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage) {
+                changeLanguage(savedLanguage);
+            }
+        });
+        </script>
+        
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Εγγραφή</title>
+  <link rel="icon" href="img/core-img/favicon.ico">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 100%;
+      max-width: 500px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      margin: 10px 0;
+      padding: 10px;
+      width: calc(100% - 22px);
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #message {
+      margin-top: 10px;
+      color: #d9534f;
+    }
+    .roles {
+      margin: 10px 0;
+    }
+    .roles label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #333;
+    }
+    .roles input[type="radio"] {
+      margin-right: 10px;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #007bff;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+    }
+    .roles input[type="radio"]:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .roles input[type="radio"]:checked::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 8px;
+      height: 8px;
+      background-color: white;
+      border-radius: 50%;
+    }
+    .form-group {
+      margin-top: 10px;
+    }
+    .form-group input {
+      width: calc(100% - 22px);
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .validation-message {
+      font-size: 12px;
+      color: #d9534f;
+      margin-top: -8px;
+      margin-bottom: 10px;
+    }
+    #notification {
+      padding: 10px;
+      color: red;
+      background-color: transparent;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+    }
+    #notification.success {
+      color: #28a745; /* Πράσινο χρώμα για επιτυχία */
+    }
+    #notification.error {
+      color: #d9534f; /* Κόκκινο χρώμα για σφάλμα */
+    }
+    .language-buttons {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .language-buttons button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    .language-buttons button:hover {
+      background-color: #0056b3;
+    }
+    .language-buttons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+    .additional-fields {
+      margin-top: 20px;
+    }
+    .additional-fields .form-group {
+      margin-top: 10px;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="language-buttons">
+      <button id="greekBtn">Ελληνικά</button>
+      <button id="englishBtn">English</button>
+    </div>
+    <h1 id="formTitle">Εγγραφή</h1>
+    <form id="signupForm">
+      <div class="form-group">
+        <input type="text" id="username" name="username" placeholder="Όνομα χρήστη">
+        <div class="validation-message" id="usernameMessage"></div>
+      </div>
+      <div class="form-group">
+        <input type="text" id="firstname" name="firstname" placeholder="Όνομα">
+        <div class="validation-message" id="firstnameMessage"></div>
+      </div>
+      <div class="form-group">
+        <input type="text" id="lastname" name="lastname" placeholder="Επώνυμο">
+        <div class="validation-message" id="lastnameMessage"></div>
+      </div>
+      <div class="form-group">
+        <input type="text" id="idnumber" name="idnumber" placeholder="Αριθμός ταυτότητας">
+        <div class="validation-message" id="idnumberMessage"></div>
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" name="email" placeholder="Email">
+        <div class="validation-message" id="emailMessage"></div>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" name="password" placeholder="Κωδικός" minlength="6">
+        <div class="validation-message" id="passwordMessage"></div>
+      </div>
+      <div class="roles">
+        <label>
+            <input type="radio" id="patient" name="role" value="Patient" > <span>Ασθενής</span>
+        </label>
+        <label>
+            <input type="radio" id="doctor" name="role" value="Doctor"> <span>Ιατρός</span>
+        </label>
+        <label>
+            <input type="radio" id="secretary" name="role" value="Secretary"> <span>Γραμματέας</span>
+        </label>
+    </div>
+    
+      
+      <div class="additional-fields" id="additionalFields"></div>
+      
+      <div id="extra-fields"></div>
+      
+      <button type="submit">Εγγραφή</button>
+      <div id="message"></div>
+      <div id="notification"></div>
+
+      <input type="hidden" id="language" name="language" value="el">
+    </form>
+    <a href="login.html">Έχετε ήδη λογαριασμό; Σύνδεση</a>
+  </div>
+  <script>
+  document.getElementById('signupForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const username = document.getElementById('username').value.trim();
+  const firstname = document.getElementById('firstname').value.trim();
+  const lastname = document.getElementById('lastname').value.trim();
+  const idnumber = document.getElementById('idnumber').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const role = document.querySelector('input[name="role"]:checked')?.value;
+  const language = document.getElementById('language').value;
+
+  const ssn = role === 'Patient' ? document.getElementById('SSN')?.value.trim() : '';
+  const specialty = role === 'Doctor' ? document.getElementById('Specialty')?.value.trim() : '';
+
+  try {
+    const response = await fetch('/users/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, firstname, lastname, idnumber, email, password, role, ssn, specialty, language })
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      showNotification(result.message || getTranslation(language).successMessage, 'success');
+      document.getElementById('signupForm').reset(); // Reset form after successful registration
+    } else {
+      showNotification(result.errors.join('\n'), 'error');
+      clearFormAndMessages();
+    }
+  } catch (error) {
+    showNotification(getTranslation(language).errorMessage, 'error');
+    clearFormAndMessages();
+  }
+});
+
+document.querySelectorAll('input[name="role"]').forEach(radio => {
+  radio.addEventListener('change', function () {
+    const additionalFields = document.getElementById('additionalFields');
+    additionalFields.innerHTML = '';
+
+    if (this.value === 'Patient') {
+      additionalFields.innerHTML = `
+        <div class="form-group">
+          <input type="text" id="SSN" name="ssn" placeholder="${getTranslation(document.getElementById('language').value).ssnPlaceholder}">
+          <div class="validation-message" id="ssnMessage"></div>
+        </div>
+      `;
+    } else if (this.value === 'Doctor') {
+      additionalFields.innerHTML = `
+        <div class="form-group">
+          <input type="text" id="Specialty" name="specialty" placeholder="${getTranslation(document.getElementById('language').value).specialtyPlaceholder}">
+          <div class="validation-message" id="specialtyMessage"></div>
+        </div>
+      `;
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const savedLanguage = localStorage.getItem('selectedLanguage') || 'el';
+  setLanguage(savedLanguage);
+});
+
+function setLanguage(language) {
+  document.getElementById('language').value = language;
+  localStorage.setItem('selectedLanguage', language);
+  updateFormLanguage(language);
+  updateTitle(titles[language]);
+}
+
+function updateFormLanguage(language) {
+  const translation = getTranslation(language);
+  document.getElementById('formTitle').innerText = translation.title;
+  document.getElementById('username').placeholder = translation.usernamePlaceholder;
+  document.getElementById('firstname').placeholder = translation.firstnamePlaceholder;
+  document.getElementById('lastname').placeholder = translation.lastnamePlaceholder;
+  document.getElementById('idnumber').placeholder = translation.idnumberPlaceholder;
+  document.getElementById('email').placeholder = translation.emailPlaceholder;
+  document.getElementById('password').placeholder = translation.passwordPlaceholder;
+  document.querySelector('button[type="submit"]').innerText = translation.submitButton;
+
+  const roleLabels = document.querySelectorAll('.roles label span');
+  roleLabels[0].textContent = translation.rolePatient;
+  roleLabels[1].textContent = translation.roleDoctor;
+  roleLabels[2].textContent = translation.roleSecretary;
+
+  document.querySelector('a').innerText = translation.existingAccount;
+}
+
+function updateTitle(title) {
+  document.title = title;
+}
+
+const titles = {
+  'el': 'Εγγραφή',
+  'en': 'Sign up'
+};
+
+function getTranslation(language) {
+  const translations = {
+    en: {
+      title: 'Registration',
+      usernamePlaceholder: 'Username',
+      firstnamePlaceholder: 'First Name',
+      lastnamePlaceholder: 'Last Name',
+      idnumberPlaceholder: 'ID Number',
+      emailPlaceholder: 'Email',
+      passwordPlaceholder: 'Password',
+      submitButton: 'Register',
+      rolePatient: 'Patient',
+      roleDoctor: 'Doctor',
+      roleSecretary: 'Secretary',
+      existingAccount: 'Already have an account? Login',
+      allFieldsRequired: 'Please fill in all the fields.',
+      registrationSuccess: 'Registration successful!',
+      specialtyPlaceholder: 'Specialty',
+      ssnPlaceholder: 'SSN',
+      successMessage: 'Registration successful!',
+      errorMessage: 'Error processing request. Please try again.'
+    },
+    el: {
+      title: 'Εγγραφή',
+      usernamePlaceholder: 'Όνομα χρήστη',
+      firstnamePlaceholder: 'Όνομα',
+      lastnamePlaceholder: 'Επώνυμο',
+      idnumberPlaceholder: 'Αριθμός ταυτότητας',
+      emailPlaceholder: 'Email',
+      passwordPlaceholder: 'Κωδικός',
+      submitButton: 'Εγγραφή',
+      rolePatient: 'Ασθενής',
+      roleDoctor: 'Ιατρός',
+      roleSecretary: 'Γραμματέας',
+      existingAccount: 'Έχετε ήδη λογαριασμό; Σύνδεση',
+      allFieldsRequired: 'Συμπληρώστε όλα τα πεδία.',
+      registrationSuccess: 'Η εγγραφή ήταν επιτυχής!',
+      specialtyPlaceholder: 'Ειδικότητα',
+      ssnPlaceholder: 'ΑΜΚΑ',
+      successMessage: 'Η εγγραφή ήταν επιτυχής!',
+      errorMessage: 'Σφάλμα κατά την επεξεργασία της αίτησης. Παρακαλώ προσπαθήστε ξανά.'
+    }
+  };
+
+  return translations[language] || translations['el']; // Default to Greek if language not found
+}
+
+function showNotification(message, type) {
+  const notificationElement = document.getElementById('notification');
+  notificationElement.innerText = message;
+  notificationElement.className = type;
+}
+
+function clearFormAndMessages() {
+  // Clear all form fields and validation messages
+  document.getElementById('signupForm').reset();
+
+}
+
+document.getElementById('englishBtn').addEventListener('click', function () {
+  setLanguage('en');
+});
+
+document.getElementById('greekBtn').addEventListener('click', function () {
+  setLanguage('el');
+});
+
+  </script>
+      
+
+</body>
+</html>

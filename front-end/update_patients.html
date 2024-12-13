@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Ενημέρωση ασθενούς</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
+        .home-link .arrow-icon {
+            width: 50px;
+            height: 50px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 15px;
+        }
+        .icon.csv-icon {
+            width: 45px;
+            height: 45px;
+            margin-top: 25px;
+            cursor: pointer;
+        }
+
+        .form-action-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .form-action-container button {
+            margin-right: 10px;
+            background-color: orange; /* Set button background color to orange */
+            color: white; /* Set text color to white for better contrast */
+            border: none; /* Remove default border */
+            padding: 10px 20px; /* Add some padding */
+            border-radius: 5px; /* Optional: add rounded corners */
+            cursor: pointer; /* Add pointer cursor on hover */
+        }
+
+        .form-action-container button:hover {
+            background-color: darkorange; /* Darken the button color on hover */
+        }
+
+        .form-control {
+            color: black; /* Set text color inside input fields to black */
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: normal; /* Set font weight to normal */
+        }
+
+        .message.success {
+            color: rgb(25, 174, 25);
+        }
+
+        .message.error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Back Arrow Icon Link -->
+    <a href="view_patients.html" class="home-link">
+        <div class="arrow-icon"></div>
+    </a>
+    
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="medilife-load"></div>
+    </div>
+
+    <!-- Contact Area -->
+    <section class="medilife-contact-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="contact-form">
+                        <form id="patientForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="socialSecurityNumber" placeholder="ΑΜΚΑ" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="firstName" placeholder="Όνομα" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="lastName" placeholder="Επώνυμο" required>
+                            </div>
+                            <div class="form-action-container">
+                                <button type="submit" class="btn btn-sm btn-primary">Ανανέωση</button>
+                            </div>
+                            <div id="message" class="message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Area -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="medica-about-content">
+                        <h3></h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer class="footer-area section-padding-100">
+        <div class="main-footer-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo">
+                                <img src="img/core-img/logo.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-footer-area">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="bottom-footer-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.getElementById('patientForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const socialSecurityNumber = document.getElementById('socialSecurityNumber').value.trim();
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+
+            if (!socialSecurityNumber) {
+                document.getElementById('message').innerText = 'ΑΜΚΑ είναι απαιτούμενο.';
+                document.getElementById('message').className = 'message error';
+                return;
+            }
+
+            // Prepare data to send in the PATCH request
+            const data = {
+                socialSecurityNumber: socialSecurityNumber,
+                firstName: firstName,
+                lastName: lastName
+            };
+
+            try {
+                const response = await fetch('/patients', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('message').innerText = 'Οι πληροφορίες του/της ασθενούς ενημερώθηκαν επιτυχώς!';
+                    document.getElementById('message').className = 'message success';
+                } else {
+                    // Show error message from server
+                    document.getElementById('message').innerText = result.error || 'Σφάλμα κατά την ενημέρωση των πληροφοριών του ασθενούς.';
+                    document.getElementById('message').className = 'message error';
+                }
+            } catch (error) {
+                // Show error message if something goes wrong
+                document.getElementById('message').innerText = 'Παρουσιάστηκε σφάλμα κατά την ενημέρωση των πληροφοριών του ασθενούς.';
+                document.getElementById('message').className = 'message error';
+            }
+        });
+    </script>
+</body>
+</html>

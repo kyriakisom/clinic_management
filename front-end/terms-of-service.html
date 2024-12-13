@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Όροι χρήσης</title> <!-- Add id="page-title" here -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+    background-color: #3f2de5;
+    color: #ffffff;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+header .logo {
+    flex: 1; /* Allows the logo to take up space on the left */
+}
+
+header .logo img {
+    height: 50px;
+}
+
+header .language-selector-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes the language selector to the right */
+}
+
+header .language-selector {
+    margin: 0 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+.hidden {
+    display: none;
+}
+.el {
+    display: inline-block; /* Default for Greek */
+}
+
+.en {
+    display: none; /* Hidden by default */
+}
+
+        main {
+            padding: 40px 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #c3c9e9;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #3f2de5;
+            margin-top: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3f2de5;
+            padding-bottom: 10px;
+        }
+        p {
+            margin: 0 0 1.5em;
+        }
+        footer {
+            background-color: #3f2de5;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        footer .footer-links {
+            margin: 10px 0;
+        }
+        footer .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+        footer .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            background-color: #3f2de5;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #2d1aab;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- ***** Header Area Start ***** -->
+    <header>
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+            </div>
+            <!-- Language Selector -->
+            <div class="language-selector-container">
+                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span>
+                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+           
+                <h1 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Όροι χρήσης</h1>
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Εισαγωγή</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Η χρήση του ιστότοπού μας υπόκειται στους ακόλουθους όρους χρήσης. Με τη χρήση του ιστότοπου, συμφωνείτε με αυτούς τους όρους.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Χρήση του Ιστότοπου</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Επιτρέπεται η χρήση του ιστότοπου μόνο για νόμιμους σκοπούς και σύμφωνα με τους όρους χρήσης. Απαγορεύεται η παράνομη ή μη εξουσιοδοτημένη χρήση του περιεχομένου.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Πνευματικά Δικαιώματα</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Όλο το περιεχόμενο του ιστότοπου προστατεύεται από πνευματικά δικαιώματα και δεν μπορεί να αναπαραχθεί ή να αναδημοσιευθεί χωρίς την άδεια μας.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Περιορισμός Ευθύνης</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Δεν αναλαμβάνουμε καμία ευθύνη για τυχόν άμεσες, έμμεσες, ειδικές ή επακόλουθες ζημίες που προκύπτουν από τη χρήση του ιστότοπου.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Τροποποιήσεις</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Διατηρούμε το δικαίωμα να τροποποιούμε τους όρους χρήσης ανά πάσα στιγμή. Οι τροποποιήσεις θα δημοσιεύονται στον ιστότοπο και η χρήση του ιστότοπου μετά τις τροποποιήσεις θεωρείται αποδοχή των νέων όρων.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Εφαρμοστέο Δίκαιο</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="el" style="text-align: justify;">Οι όροι χρήσης υπόκεινται στο Ελληνικό δίκαιο. Οποιαδήποτε διαφορά θα επιλύεται αποκλειστικά από τα αρμόδια δικαστήρια της Ελλάδας.</p>
+       
+       
+
+                <h1 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Terms of use</h1>
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Introduction</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Your use of our website is subject to the following terms of use. By using the site, you agree to these terms.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Using the Website</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">You may use the website only for lawful purposes and in accordance with the terms of use. Illegal or unauthorized use of the content is prohibited.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Copyright</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">All content on the site is protected by copyright and may not be reproduced or republished without our permission.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Limitation of Liability</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">We accept no liability for any direct, indirect, special or consequential damages arising from the use of the site.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Changes</h3>
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">We reserve the right to modify the terms of use at any time. Amendments will be posted on the website and use of the website after the amendments is deemed acceptance of the new terms.</p>
+                
+                <h3 data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">Applicable Law</h3>.
+                <p data-animation="fadeInUp" data-delay="300ms" class="en" style="text-align: justify;">The terms of use are subject to Greek law. Any dispute will be resolved exclusively by the competent courts of Greece.</p>
+
+        
+                
+
+
+        </div>
+    </section>
+      
+   
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Medilife. All rights reserved.</p>
+            <div class="footer-links">
+                <!-- Greek Links -->
+                <div id="el-footer-links" class="el">
+                    <a href="privacy-policy.html">Πολιτική Απορρήτου</a> |
+                    <a href="terms-of-service.html">Όροι Χρήσης</a> |
+                    <a href="contact.html">Επικοινωνία</a>
+                </div>
+                <!-- English Links -->
+                <div id="en-footer-links" class="en">
+                    <a href="privacy-policy.html">Privacy Policy</a> |
+                    <a href="terms-of-service.html">Terms of Service</a> |
+                    <a href="contact.html">Contact Us</a>
+                </div>
+            </div>
+            <!-- Greek Button -->
+            <a href="index.html" id="el-btn" class="btn el">Επιστροφή στην Αρχική Σελίδα</a>
+            <!-- English Button -->
+            <a href="index.html" id="en-btn" class="btn en">Return to Home Page</a>
+        </div>
+    </footer>
+    
+    
+    
+     <!-- jQuery (Necessary for All JavaScript Plugins) -->
+     <script src="js/jquery/jquery-2.2.4.min.js"></script>
+     <!-- Popper js -->
+     <script src="js/popper.min.js"></script>
+     <!-- Bootstrap js -->
+     <script src="js/bootstrap.min.js"></script>
+     <!-- Plugins js -->
+     <script src="js/plugins.js"></script>
+     <!-- Active js -->
+     <script src="js/active.js"></script>
+ 
+     <script>
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Όροι χρήσης',
+                'en': 'Terms of service'
+            };
+            updateTitle(titles[language]);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+    
+</body>
+</html>

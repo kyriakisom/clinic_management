@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title  -->
+    <title id="page-title">Ενημέρωση ιατρού</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .home-link .arrow-icon {
+            width: 50px;
+            height: 50px;
+            background-image: url('new_arrow.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 15px;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #e19d4b;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #e07b00;
+        }
+
+        /* Styling for response messages */
+        .response-message {
+            font-size: 1rem;
+            font-weight: normal;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .response-message.success {
+            color: rgb(40, 181, 40);
+        }
+
+        .response-message.error {
+            color: red;
+        }
+
+        /* Styling for form controls */
+        .form-control {
+            color: black;
+        }
+
+        .language-selector {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+        <span class="language-selector" onclick="changeLanguage('en')">English</span>
+    </div>
+    <a href="doctors.html" class="home-link">
+        <div class="arrow-icon"></div>
+    </a>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="medilife-load"></div>
+    </div>
+
+    <section class="medilife-contact-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="contact-form">
+                        <form id="update-doctor-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="doctor-name" placeholder="Ονοματεπώνυμο">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="doctor-specialty" placeholder="Ειδικότητα">
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-lg-6 text-center">
+                                    <button type="submit" class="btn btn-primary" id="submit-button">Ενημέρωση</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="response-message" class="response-message"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <!-- JavaScript -->
+    <script>
+        const messages = {
+            el: {
+                pageTitle: "Ενημέρωση ιατρού",
+                fullnamePlaceholder: "Ονοματεπώνυμο",
+                specialtyPlaceholder: "Ειδικότητα",
+                submitButton: "Ενημέρωση",
+                successMessage: "Ο/Η ιατρός ενημερώθηκε επιτυχώς.",
+                serverError: "Σφάλμα διακομιστή. Παρακαλώ δοκιμάστε ξανά αργότερα.",
+                unexpectedError: "Παρουσιάστηκε απροσδόκητο σφάλμα. Παρακαλώ προσπαθήστε ξανά αργότερα.",
+                specialtyError: "Το πεδίο ειδικότητα μπορεί να περιέχει μόνο γράμματα, κενά, παύλες, αποστρόφους και κόμματα.",
+                nameError: "Το πεδίο όνομα μπορεί να περιέχει μόνο γράμματα και κενά."
+            },
+            en: {
+                pageTitle: "Doctor Update",
+                fullnamePlaceholder: "Fullname",
+                specialtyPlaceholder: "Specialty",
+                submitButton: "Update",
+                successMessage: "Doctor updated successfully.",
+                serverError: "Server error. Please try again later.",
+                unexpectedError: "An unexpected error occurred. Please try again later.",
+                specialtyError: "Specialty can only contain letters, spaces, hyphens, apostrophes, and commas.",
+                nameError: "Name can only contain letters and spaces."
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const doctorId = urlParams.get('id');
+
+            if (!doctorId) {
+                console.error('No doctor ID found.');
+                showNotification('No doctor ID found.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5000/doctors/display/${doctorId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('doctor-name').value = data.name || '';
+                    document.getElementById('doctor-specialty').value = data.specialty || '';
+                } else {
+                    console.error('Failed to load doctor data.');
+                    showNotification('Failed to load doctor data.', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading doctor data:', error);
+                showNotification('Error loading doctor data.', 'error');
+            }
+        });
+
+        document.getElementById('update-doctor-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('doctor-name').value.trim();
+            const specialty = document.getElementById('doctor-specialty').value.trim();
+            const responseMessage = document.getElementById('response-message');
+
+            responseMessage.textContent = '';
+            responseMessage.className = 'response-message';
+
+            try {
+                const response = await fetch('/doctors', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, specialty })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    responseMessage.textContent = messages[selectedLanguage].successMessage;
+                    responseMessage.className = 'response-message success';
+                    document.querySelector('form').reset();
+                } else {
+                    responseMessage.textContent = result.errors.join(', ');
+                    responseMessage.className = 'response-message error';
+                    clearInvalidFields(result.errors);
+                }
+            } catch (error) {
+                console.error('Unexpected error:', error);
+                responseMessage.textContent = messages[selectedLanguage].unexpectedError;
+                responseMessage.className = 'response-message error';
+            }
+        });
+
+        function clearInvalidFields(errors) {
+            if (errors.includes(messages[selectedLanguage].specialtyError)) {
+                document.getElementById('doctor-specialty').value = '';
+            }
+            if (errors.includes(messages[selectedLanguage].nameError)) {
+                document.getElementById('doctor-name').value = '';
+            }
+        }
+
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title;
+        }
+
+        function changeLanguage(language) {
+            localStorage.setItem('selectedLanguage', language);
+
+            document.getElementById('doctor-name').placeholder = messages[language].fullnamePlaceholder;
+            document.getElementById('doctor-specialty').placeholder = messages[language].specialtyPlaceholder;
+            document.getElementById('submit-button').textContent = messages[language].submitButton;
+
+            updateTitle(messages[language].pageTitle);
+
+            selectedLanguage = language;
+        }
+
+        let selectedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+        document.addEventListener('DOMContentLoaded', () => {
+            changeLanguage(selectedLanguage);
+        });
+    </script>
+
+</body>
+
+</html>

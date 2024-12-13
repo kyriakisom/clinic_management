@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+          content="width=device-width, 
+                   initial-scale=1.0" />
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title id="page-title">Προσωπικό</title> <!-- Add id="page-title" here -->
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+         .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+  
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p class="el">Ώρες Λειτουργίας : Δευτέρα με Σάββατο - 08:00 με 21:00</p>
+                            <p class="en" style="display:none;">Operating Hours: Monday to Saturday - 08:00 to 21:00</p>
+                            <div>
+                                <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+                                <span class="language-selector" onclick="changeLanguage('en')">English</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="index.html">Αρχική</a>
+                                            <a class="nav-link en" href="index.html" style="display:none;">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="contact.html">Επικοινωνία</a>
+                                            <a class="nav-link en" href="contact.html" style="display:none;">Contact</a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="services.html">Υπηρεσίες</a>
+                                            <a class="nav-link en" href="services.html" style="display:none;">Services</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="staff.html">Προσωπικό</a>
+                                            <a class="nav-link en" href="staff.html" style="display:none;">Staff</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="news.html">Νέα/Ανακοινώσεις</a>
+                                            <a class="nav-link en" href="news.html" style="display:none;">News</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="login.html">Σύνδεση</a>
+                                            <a class="nav-link en" href="login.html" style="display:none;">Login</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Breadcumb Area Start ***** -->
+    <section class="breadcumb-area bg-img gradient-background-overlay"
+        style="background-image: url(img/bg-img/benefits.png);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h2 data-animation="fadeInUp" data-delay="100ms" class="el">Το προσωπικό μας εδώ, για οτιδήποτε χρειαστείτε!</h2>
+                        <h2 data-animation="fadeInUp" data-delay="100ms" class="en">Our staff is here for anything you need!</h2>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Services Area Start ***** -->
+    <div class="medilife-services-area section-padding-100-20">
+        <div class="container">
+            <div class="row">
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="cardiology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Δημήτριος Παπαδόπουλος</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Dimitrios Papadopoulos</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Καρδιολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Cardiologist</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="pathology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Μαγδαληνή Τριανταφύλλου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Magdalini Triantafyllou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Παθολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Pathologist</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="neurology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Παύλος Αποστόλου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Pavlos Apostolou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Νευρολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Neurologist</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="orthopedics.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Γεώργιος Ιωάννου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Georgios Ioannou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Ορθοπεδικός</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Orthopedic</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="ophthalmology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Αθανασία Καλογεροπούλου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Athanasia Kalogeropoulou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Οφθαλμίατρος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Ophthalmologist</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="dentistry.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Δήμητρα Παπαγεωργίου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Dimitra Papageorgiou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Οδοντίατρος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Dentist</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="ourology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Εμμανουήλ Θεοδωρίδης</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Emmanouil Theodoridis</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Ουρολόγος-Ανδρολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Urologist-Andrologist</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="dietetics.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Πέτρος Βασιλείου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Petros Vasileiou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Διαιτολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Dietitian</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="gynaikology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Μαρία Αργυροπούλου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Maria Argyropoulou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Γυναικολόγος-Μαιευτήρας</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Gynecologist-Obstetrician</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="pediatrics.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Ελένη Μάνου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Eleni Manou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Παιδίατρος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Pediatrician</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="otorhinolaryngology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Γρηγόριος Νικολάου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Grigoris Nikolaou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Ωτορινολαρυγγολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Otolaryngologist</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="aktinology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Γεωργία Οικονόμου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Georgia Oikonomou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Ακτινολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Radiologist</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="psychiatry.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Αθανάσιος Χατζηαναγνώστου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Athanasios Chatzianagnostou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Ψυχίατρος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Psychiatrist</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="endocrinology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Μάρκος Παπαβασιλείου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Markos Papavasileiou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Ενδοκρινολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Endocrinologist</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="dermatology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Ζωή Χατζηγεωργίου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Zoi Chatzigeorgiou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Δερματολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Dermatologist</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex">
+                        <a href="microbiology.html">
+                            <div class="service-icon">
+                                <i class="icon-doctor"></i>
+                            </div>
+                        </a>
+                        <div class="service-content" style="text-align: justify;">
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="el" style="text-align: center;">Ιωάννα Δημητρίου</h5>
+                            <h5 data-animation="fadeInUp" data-delay="100ms" class="en" style="text-align: center;">Ioanna Dimitriou</h5>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="el" style="text-align: center;">Μικροβιολόγος</h6>
+                            <h6 data-animation="fadeInUp" data-delay="200ms" class="en" style="text-align: center;">Microbiologist</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+      <!-- ***** Cool Facts Area End ***** -->
+      <footer class="footer-area section-padding-100">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Operating Hours -->
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <div class="footer-logo mb-3">
+                                <img src="img/core-img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                            <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                      
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                            <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                            <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com <br>Fax: 254 478 2458</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                        <div class="footer-widget-area">
+                            <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                            <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                            <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                        </div>
+                    </div>
+    
+        
+                </div>
+            </div>
+        </div>
+    
+
+    
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area py-3 black text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 text-md-left text-center">
+                        <p>&copy; 2024 Medilife. All rights reserved.</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-right text-center">
+                        <br></br>
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                        <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                        <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <script>
+        // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+        function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Προσωπικό',
+                'en': 'Staff'
+            };
+            updateTitle(titles[language]);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+    </script>
+    
+    
+</body>
+
+
+</html>

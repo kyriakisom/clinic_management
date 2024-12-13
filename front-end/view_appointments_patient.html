@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Δείτε τα ραντεβού σας</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            min-width: 160px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        #dropdownUserName {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            color: blue;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            min-width: 160px;
+            z-index: 1000;
+            right: 0;
+        }
+
+        .dropdown-content button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #f44336;
+            color: white;
+            cursor: pointer;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #e53935;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .button-container .icon {
+            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .button-container .side-icon {
+            margin-left: 5px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .button-container .update-button {
+            background-color: orange;
+        }
+
+        .button-container .delete-button {
+            background-color: red;
+        }
+
+        .appointment-list {
+            margin-top: 20px;
+        }
+
+        .appointment-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .appointment-list th,
+        .appointment-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .appointment-list th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .appointment-list tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .appointment-list tr:hover {
+            background-color: #ddd;
+        }
+
+        #appointmentList th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .pagination button,
+        .pagination span {
+            margin: 0 5px;
+            padding: 8px 16px;
+            border: none;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .pagination button[disabled] {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .pagination span {
+            cursor: pointer;
+        }
+
+        .pagination span:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-container input,
+        .search-container button {
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .search-container input[type="text"],
+        .search-container input[type="date"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .search-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .history-item {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Styles for the empty table */
+        .empty-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .empty-table th,
+        .empty-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .empty-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .empty-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .empty-table tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Hide the appointment list by default */
+        #appointmentList {
+            display: none;
+        }
+
+        .update-button {
+            background-color: transparent; /* Αφαιρεί το φόντο του κουμπιού */
+            border: none; /* Αφαιρεί το περίγραμμα του κουμπιού */
+            cursor: pointer; /* Κάνει το εικονίδιο κλικαρίσιμο */
+        }
+
+        .update-button .icon {
+            width: 24px; /* Ρύθμισε το πλάτος της εικόνας */
+            height: auto; /* Διατηρεί αναλογία πλευρών */
+        }
+        .language-selector {
+    margin: 5px; /* Adjusted margin for smaller spacing */
+    padding: 5px 10px; /* Less padding to reduce the size of the buttons */
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+}
+    </style>
+</head>
+
+<body>
+
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div>
+            <span class="language-selector" onclick="changeLanguage('el')">Ελληνικά</span> |
+            <span class="language-selector" onclick="changeLanguage('en')">English</span>
+        </div>
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <a class="navbar-brand"><img src="img/core-img/logo.png" alt="Logo"></a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false"
+                                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="patient.html">Αρχική <span class="sr-only">(τρέχουσα)</span></a>
+                                            <a class="nav-link en" href="patient.html">Home page <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link el" href="doctors_patients.html">Δείτε τους ιατρούς</a>
+                                            <a class="nav-link en" href="doctors_patients.html">Doctors</a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="appointments_patients.html">Κλείστε ραντεβού</a>
+                                            <a class="nav-link en" href="appointments_patients.html">Book an appointment</a>
+
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link el" href="med_history.html">Δείτε το ιστορικό σας</a>
+                                            <a class="nav-link en" href="med_history.html">My medical history</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link el" href="view_appointments_patient.html">Δείτε τα ραντεβού σας</a>
+                                            <a class="nav-link en" href="view_appointments_patient.html">My appointments</a>
+
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <div class="dropdown">
+                                                <span id="dropdownUserName">Φόρτωση...</span>
+                                                <div class="dropdown-content">
+                                                    <button id="logoutButton">Αποσύνδεση</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ***** Hero Area End ***** -->
+<br></br>
+    <!-- ***** About Us Area Start ***** -->
+    <section class="medica-about-us-area section-padding-100-20">
+        <div class="container">
+            <!-- Empty table above search bars -->
+            <div class="appointment-list">
+                <table class="empty-table">
+                    <thead>
+                        <tr id="table-headers">
+                            <th id="appointment-id">ID ραντεβού</th>
+                            <th id="amka">ΑΜΚΑ</th>
+                            <th id="first-name">Όνομα</th>
+                            <th id="last-name">Επίθετο</th>
+                            <th id="appointment-date">Ημερομηνία ραντεβού</th>
+                            <th id="time">Ώρα</th>
+                            <th id="doctor">Γιατρός</th>
+                            <th id="reason">Λόγος επίσκεψης</th>
+                            <th id="status">Κατάσταση</th>
+                            <th id="actions">Ενέργειες</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <!-- Empty rows will go here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Search and pagination for medical history -->
+            <div class="search-container">
+                <input type="text" id="searchStatus" placeholder="Αναζήτηση με Κατάσταση...">
+                <input type="date" id="startDate" placeholder="Από ημερομηνία">
+                <input type="date" id="endDate" placeholder="Έως ημερομηνία">
+                <button id="searchButton">
+                    <span class="el">Αναζήτηση</span>
+                    <span class="en" style="display: none;">Search</span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="appointment-list" id="appointmentList"></div>
+                </div>
+                <p></p>
+            </div>
+            <div id="medical-history"></div>
+            <div id="pagination" class="pagination"></div>
+        </div>
+    </section>
+
+  <!-- ***** Cool Facts Area End ***** -->
+  <br></br>
+  <br></br>
+     <!-- ***** Cool Facts Area End ***** -->
+     <footer class="footer-area section-padding-100">
+      <!-- Main Footer Area -->
+      <div class="main-footer-area">
+          <div class="container">
+              <div class="row">
+                  <!-- Logo and Operating Hours -->
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                      <div class="footer-widget-area">
+                          <div class="footer-logo mb-3">
+                              <img src="img/core-img/logo.png" alt="Logo">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                      <div class="footer-widget-area">
+                          <h5 style="color: #3f2de5;"><strong class="el">Ώρες λειτουργίας</strong><strong class="en" style="display:none;">Operating hours</strong></h5>
+                          <p data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Δευτέρα - Σάββατο: 08:00 - 21:00<br>Κυριακή: Κλειστά</p>
+                          <p data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Monday - Saturday: 08:00 - 21:00<br>Sunday: Closed</p>
+                    
+                      </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                      <div class="footer-widget-area">
+                          <h5 style="color: #3f2de5;"><strong class="el">Επικοινωνία</strong><strong class="en" style="display:none;">Contact</strong></h5>
+                          <p class="el">Τηλέφωνο: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                          <p class="en" style="display:none;">Phone: 22730-14859<br>Email: medilife@gmail.com<br>Fax: 254 478 2458</p>
+                      </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                      <div class="footer-widget-area">
+                          <h5 style="color: #3f2de5;"><strong class="el">Διεύθυνση</strong><strong class="en" style="display:none;">Address</strong></h5>
+                          <p class="el">Ασκληπιού 8<br>83200 Καρλόβασι</p>
+                          <p class="en" style="display:none;">Asklipiou 8<br>83200 Karlovasi</p>
+                      </div>
+                  </div>
+  
+      
+              </div>
+          </div>
+      </div>
+  
+ 
+  
+      <!-- Bottom Footer Area -->
+      <div class="bottom-footer-area py-3 black text-white">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12 col-md-6 text-md-left text-center">
+                      <p>&copy; 2024 Medilife. All rights reserved.</p>
+                  </div>
+                  <div class="col-12 col-md-6 text-md-right text-center">
+                      <br></br>
+                      <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Πολιτική Απορρήτου</a> 
+                      <a href="privacy-policy.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Privacy Policy</a> 
+                      <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="el" style="display:none;">Όροι Χρήσης</a>
+                      <a href="terms-of-service.html" style="color: #ffffff;" data-animation="fadeInUp" data-delay="100ms" class="en" style="display:none;">Terms of service</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <script>
+
+// Function to get the selected language (default to Greek)
+function getSelectedLanguage() {
+    return localStorage.getItem('selectedLanguage') || 'el';
+}
+
+       
+// Συνάρτηση για την αλλαγή γλώσσας και αποθήκευση στο localStorage
+function changeLanguage(language) {
+    if (['en', 'el'].includes(language)) { // Επαλήθευση έγκυρης γλώσσας
+        localStorage.setItem('selectedLanguage', language);
+        location.reload(); // Επαναφόρτωσε τη σελίδα για να εφαρμοστούν οι αλλαγές
+    }
+}
+
+const selectedLanguage = localStorage.getItem('selectedLanguage') || 'el';
+       
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Language settings
+
+    // Ενημέρωση ορατότητας των στοιχείων γλώσσας
+    document.querySelectorAll('.el').forEach(el => el.style.display = selectedLanguage === 'el' ? 'block' : 'none');
+    document.querySelectorAll('.en').forEach(el => el.style.display = selectedLanguage === 'en' ? 'block' : 'none');
+    
+    const translations = {
+        en: {
+            noAppointments: "No appointments found for today.",
+            update: "Update",
+            delete: "Delete",
+            accessDenied: "Access denied.",
+            serverError: "Server error."
+        },
+        el: {
+            noAppointments: "Δεν βρέθηκαν ραντεβού για σήμερα.",
+            update: "Ενημέρωση",
+            delete: "Διαγραφή",
+            accessDenied: "Η πρόσβαση απορρίφθηκε.",
+            serverError: "Σφάλμα διακομιστή."
+        }
+    };
+
+    function getCurrentLanguage() {
+        // Retrieve from localStorage, or use browser language, defaulting to 'el' if neither is set
+        const storedLanguage = localStorage.getItem('selectedLanguage');
+        return storedLanguage;
+    }
+
+    async function fetchAppointments() {
+        const language = getCurrentLanguage();
+        const url = `/appointments/appointments/today?language=${language}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            const t = translations[language];
+
+            if (response.ok) {
+                if (Array.isArray(data) && data.length) {
+                    const tableBody = document.querySelector('.empty-table tbody');
+                    tableBody.innerHTML = ''; // Clear existing table rows
+
+                    data.forEach(appointment => {
+                        const row = document.createElement('tr');
+
+                     // Determine whether to show the update button
+                     const updateButton = (appointment.status === 'Ολοκληρωμένο' || appointment.status === 'Completed' || appointment.status === 'Ακυρωμένο' || appointment.status === 'Cancelled') ? '' : `
+    <button class="update-button" style="padding: 4px; font-size: 12px;" onclick="redirectToUpdatePage('${appointment.appointmentId}')">
+        <img src="pencil.png" alt="${getSelectedLanguage() === 'el' ? 'Ενημέρωση' : 'Update'}" title="${getSelectedLanguage() === 'el' ? 'Ενημέρωση' : 'Update'}" style="width: 24px; height: 24px;">
+    </button>
+`;
+
+// Determine whether to show the delete button
+const deleteButton = ''; // No delete button should be shown in any status
+
+
+                        row.innerHTML = `
+                            <td>${appointment.appointmentId}</td>
+                            <td>${appointment.socialSecurityNumber}</td>
+                            <td>${appointment.firstName}</td>
+                            <td>${appointment.lastName}</td>
+                            <td>${new Date(appointment.date).toLocaleDateString()}</td>
+                            <td>${appointment.time}</td>
+                            <td>${appointment.doctorName}</td>
+                            <td>${appointment.reason}</td>
+                            <td>${appointment.status}</td>
+                            <td> 
+                                ${updateButton}
+                                ${deleteButton}
+                            </td>
+                        `;
+
+                        tableBody.appendChild(row);
+                    });
+
+                    // Show the table if it's hidden
+                    document.querySelector('.appointment-list').style.display = 'block';
+                } else {
+                    const tableBody = document.querySelector('.empty-table tbody');
+                    tableBody.innerHTML = `<tr><td colspan="10">${t.noAppointments}</td></tr>`;
+                }
+            } else {
+                const tableBody = document.querySelector('.empty-table tbody');
+                tableBody.innerHTML = `<tr><td colspan="10">${t.serverError}</td></tr>`;
+            }
+        } catch (error) {
+            console.error('Error fetching appointments:', error);
+            const language = getCurrentLanguage();
+            const t = translations[language];
+            const tableBody = document.querySelector('.empty-table tbody');
+            tableBody.innerHTML = `<tr><td colspan="10">${t.serverError}</td></tr>`;
+        }
+    }
+
+    // Fetch appointments when the page loads
+    fetchAppointments();
+});
+
+function redirectToUpdatePage(appointmentId) {
+    // Assuming you want to redirect to an update page with the appointment ID
+    window.location.href = `update_appointments_patient.html?appointmentId=${appointmentId}`;
+}
+
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        // Get the selected language from localStorage or default to 'el'
+
+        // Fetch the user's appointment history with the language parameter
+        const response = await fetch('http://localhost:5000/appointments/app', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch appointment history');
+        }
+
+
+        const appointmentHistory = await response.json();
+
+        const historyContainer = document.getElementById('appointmentList');
+        const paginationContainer = document.getElementById('pagination');
+
+        const itemsPerPage = 5; // Number of appointments per page
+        let currentPage = 1;
+
+        function renderPage(page, filteredHistory = appointmentHistory) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const historyToDisplay = filteredHistory.slice(start, end);
+
+            historyContainer.innerHTML = '';
+
+            if (historyToDisplay.length === 0) {
+                historyContainer.style.display = 'none';
+                paginationContainer.style.display = 'none';
+                historyContainer.innerHTML = '<p>No appointments found for the connected user.</p>';
+            } else {
+                historyContainer.style.display = 'block';
+                paginationContainer.style.display = 'flex';
+                changeLanguage(selectedLanguage);
+                // Create the table with the correct language
+                const columnTitles = {
+                    'el': {
+                        appointmentId: 'ID ραντεβού',
+                        amka: 'ΑΜΚΑ',
+                        firstName: 'Όνομα',
+                        lastName: 'Επίθετο',
+                        date: 'Ημερομηνία ραντεβού',
+                        time: 'Ώρα',
+                        doctor: 'Γιατρός',
+                        reason: 'Λόγος επίσκεψης',
+                        status: 'Κατάσταση',
+                        actions: 'Ενέργειες'
+                    },
+                    'en': {
+                        appointmentId: 'Appointment ID',
+                        amka: 'SSN',
+                        firstName: 'First Name',
+                        lastName: 'Last Name',
+                        date: 'Appointment Date',
+                        time: 'Time',
+                        doctor: 'Doctor',
+                        reason: 'Reason',
+                        status: 'Status',
+                        actions: 'Actions'
+                    }
+                };
+
+                const titles = columnTitles[selectedLanguage];
+
+                // Create table based on the selected language
+                const table = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>${titles.appointmentId}</th>
+                                <th>${titles.amka}</th>
+                                <th>${titles.firstName}</th>
+                                <th>${titles.lastName}</th>
+                                <th>${titles.date}</th>
+                                <th>${titles.time}</th>
+                                <th>${titles.doctor}</th>
+                                <th>${titles.reason}</th>
+                                <th>${titles.status}</th>
+                                <th>${titles.actions}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${historyToDisplay.map(appointment => `
+                                <tr>
+                                    <td>${appointment.appointmentId}</td>
+                                    <td>${appointment.socialSecurityNumber}</td>
+                                    <td>${appointment.firstName}</td>
+                                    <td>${appointment.lastName}</td>
+                                    <td>${new Date(appointment.date).toLocaleDateString()}</td>
+                                    <td>${appointment.time}</td>
+                                    <td>${appointment.doctorName}</td>
+                                    <td>${appointment.reason}</td>
+                                    <td>${appointment.status}</td>
+                                    <td>
+                                        ${appointment.status === 'Cancelled' || appointment.status === 'Ακυρωμένο' || appointment.status === 'Ολοκληρωμένο' || appointment.status === 'Completed'
+                                            ? '' 
+                                            : `<button class="update-button" onclick="redirectToUpdatePage('${appointment.appointmentId}')">
+                                                <img src="pencil.png" alt="Update" class="icon" title="${getSelectedLanguage() === 'el' ? 'Ενημέρωση' : 'Update'}" title="${getSelectedLanguage() === 'el' ? 'Ενημέρωση' : 'Update'}">
+                                              </button>`}
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                historyContainer.innerHTML = table;
+            }
+        }
+        function renderPagination(filteredHistory = appointmentHistory) {
+            paginationContainer.innerHTML = '';
+
+            const totalPages = Math.ceil(filteredHistory.length / itemsPerPage);
+
+            const createButton = (text, pageNum, disabled = false) => {
+                const button = document.createElement('button');
+                button.textContent = text;
+                button.disabled = disabled;
+                button.addEventListener('click', () => {
+                    if (!disabled) {
+                        currentPage = pageNum;
+                        renderPage(currentPage, filteredHistory);
+                        renderPagination(filteredHistory);
+                    }
+                });
+                return button;
+            };
+
+            paginationContainer.appendChild(createButton('<<', currentPage - 1, currentPage === 1));
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('span');
+                pageButton.textContent = i;
+                if (i === currentPage) {
+                    pageButton.style.fontWeight = 'bold';
+                } else {
+                    pageButton.style.cursor = 'pointer';
+                    pageButton.addEventListener('click', () => {
+                        currentPage = i;
+                        renderPage(currentPage, filteredHistory);
+                        renderPagination(filteredHistory);
+                    });
+                }
+                paginationContainer.appendChild(pageButton);
+            }
+
+            paginationContainer.appendChild(createButton('>>', currentPage + 1, currentPage === totalPages));
+        }
+
+        function filterHistory() {
+            const statusTerm = document.getElementById('searchStatus').value.toLowerCase();
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            let filteredHistory = appointmentHistory.filter(item => {
+                const matchStatus = item.status.toLowerCase().includes(statusTerm);
+             
+                const appointmentDate = new Date(item.date);
+
+            // Check if the date is within the selected range
+                const matchDate = (!startDate || appointmentDate >= new Date(startDate)) && 
+                (!endDate || appointmentDate <= new Date(endDate));
+                return matchStatus && matchDate;
+            });
+
+            return filteredHistory;
+        }
+
+        document.getElementById('searchButton').addEventListener('click', () => {
+            currentPage = 1;
+            const filteredHistory = filterHistory();
+            renderPage(currentPage, filteredHistory);
+            renderPagination(filteredHistory);
+        });
+
+        // Initial rendering is not needed to keep table hidden
+
+    } catch (error) {
+        console.error('Error loading appointment history:', error);
+        document.getElementById('appointmentList').innerHTML = '<p>Error fetching appointments. Please try again later.</p>';
+    }
+});
+
+
+// Logout and user info handling as before
+document.getElementById('logoutButton').addEventListener('click', async function () {
+    try {
+        const response = await fetch('/users/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+
+        const result = await response.text();
+
+        if (response.ok) {
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+    } catch (error) {
+        alert('Error: Unable to logout');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:5000/users/getUserInfo', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include' // Include cookies for authentication
+    })
+    .then(response => {
+        if (response.status === 401) {
+            throw new Error('Unauthorized: Please log in.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const dropdownUserName = document.getElementById('dropdownUserName');
+        dropdownUserName.textContent = `${data.firstname} ${data.lastname}`;
+    })
+    .catch(error => {
+        console.error('Error fetching user info:', error);
+        const dropdownUserName = document.getElementById('dropdownUserName');
+        dropdownUserName.textContent = 'Error loading user info';
+    });
+});
+
+document.getElementById('dropdownUserName').addEventListener('click', (event) => {
+    event.stopPropagation();
+    const dropdownContent = document.querySelector('.dropdown-content');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+});
+
+document.addEventListener('click', (event) => {
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    if (!dropdown.contains(event.target) && dropdownContent.style.display === 'block') {
+        dropdownContent.style.display = 'none';
+    }
+});
+
+  // Αλλαγή τίτλου και εμφάνιση περιεχομένου ανάλογα με τη γλώσσα
+  function updateTitle(title) {
+            const titleElement = document.getElementById('page-title');
+            if (titleElement) {
+                titleElement.textContent = title;
+            }
+            document.title = title; // Ενημέρωση του τίτλου της καρτέλας
+        }
+    
+        function changeLanguage(language) {
+            // Αποθήκευση της επιλεγμένης γλώσσας στο localStorage
+            localStorage.setItem('selectedLanguage', language);
+    
+            // Προβολή του επιλεγμένου περιεχομένου γλώσσας και απόκρυψη του υπόλοιπου
+            document.querySelectorAll('.el').forEach(el => el.style.display = language === 'el' ? 'block' : 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = language === 'en' ? 'block' : 'none');
+    
+            document.getElementById('searchStatus').placeholder = language === 'el' ? 'Αναζήτηση με Κατάσταση...' : "Search by status";
+
+            // Ενημέρωση τίτλου ανάλογα με τη γλώσσα
+            const titles = {
+                'el': 'Τα ραντεβού μου',
+                'en': 'My appointments'
+            };
+            updateTitle(titles[language]);
+        }
+        logoutButton.innerHTML = `<span class="el">Αποσύνδεση</span><span class="en">Logout</span>`;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Έλεγχος αν υπάρχει αποθηκευμένη γλώσσα στο localStorage
+            const savedLanguage = localStorage.getItem('selectedLanguage') || (navigator.language.startsWith('en') ? 'en' : 'el');
+            changeLanguage(savedLanguage);
+        });
+        // Function to update table headers based on the selected language
+function updateTableHeaders() {
+    const selectedLanguage = localStorage.getItem('selectedLanguage') || 'el';
+
+    const headers = {
+        'el': {
+            'appointment-id': 'ID ραντεβού',
+            'amka': 'ΑΜΚΑ',
+            'first-name': 'Όνομα',
+            'last-name': 'Επίθετο',
+            'appointment-date': 'Ημερομηνία ραντεβού',
+            'time': 'Ώρα',
+            'doctor': 'Γιατρός',
+            'reason': 'Λόγος επίσκεψης',
+            'status': 'Κατάσταση',
+            'actions': 'Ενέργειες'
+        },
+        'en': {
+            'appointment-id': 'Appointment ID',
+            'amka': 'AMKA',
+            'first-name': 'First Name',
+            'last-name': 'Last Name',
+            'appointment-date': 'Appointment Date',
+            'time': 'Time',
+            'doctor': 'Doctor',
+            'reason': 'Reason for Visit',
+            'status': 'Status',
+            'actions': 'Actions'
+        }
+    };
+
+    // Update headers
+    for (const [key, value] of Object.entries(headers[selectedLanguage])) {
+        document.getElementById(key).textContent = value;
+    }
+}
+
+// Call this function after the language is changed
+updateTableHeaders();
+
+
+    </script>
+    
+</body>
+</html>

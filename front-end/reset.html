@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αλλαγή κωδικού πρόσβασης</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css"> <!-- External CSS link -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .change-password-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .change-password-container h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .change-password-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .change-password-container input[type="text"],
+        .change-password-container input[type="password"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .change-password-container button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .change-password-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .change-password-container .message {
+            margin-top: 10px;
+            font-size: 14px;
+            color: red;
+            text-align: center;
+        }
+
+        .change-password-container .success {
+            color: green;
+        }
+
+        .language-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+        }
+
+        .language-buttons button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .language-buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="change-password-container">
+    <div class="language-buttons">
+        <button id="greekBtn">Ελληνικά</button>
+        <button id="englishBtn">English</button>
+    </div>
+    <h2 id="formTitle">Αλλαγή κωδικού πρόσβασης</h2>
+    <form id="changePasswordForm">
+        <input type="text" id="username" name="username" placeholder="Όνομα χρήστη" required>
+        <input type="password" id="oldpassword" name="oldpassword" placeholder="Παλιός κωδικός πρόσβασης" required>
+        <input type="password" id="newpassword" name="newpassword" placeholder="Νέος κωδικός πρόσβασης" required>
+        <button type="submit">Αλλαγή</button>
+        <div id="message" class="message"></div>
+    </form>
+</div>
+<script>
+    // Function to update the page title
+    function updateTitle(title) {
+        const titleElement = document.getElementById('page-title');
+        if (titleElement) {
+            titleElement.textContent = title;
+        }
+        document.title = title; // Update the browser tab title
+    }
+
+    // Function to set the language and update the page content
+    function setLanguage(language) {
+        const translations = {
+            en: {
+                title: 'Change Password',
+                pageTitle: 'Reset password',
+                usernamePlaceholder: 'Username',
+                oldPasswordPlaceholder: 'Old Password',
+                newPasswordPlaceholder: 'New Password',
+                submitButton: 'Change Password',
+                allFieldsRequired: 'All fields are required.',
+                passwordLength: 'Password must be at least 6 characters.',
+                successMessage: 'Password changed successfully!',
+                errorMessage: 'Error. Please try again.'
+            },
+            el: {
+                title: 'Αλλαγή Κωδικού',
+                pageTitle: 'Αλλαγή κωδικού',
+                usernamePlaceholder: 'Όνομα Χρήστη',
+                oldPasswordPlaceholder: 'Παλιός Κωδικός',
+                newPasswordPlaceholder: 'Νέος Κωδικός',
+                submitButton: 'Αλλαγή Κωδικού',
+                allFieldsRequired: 'Όλα τα πεδία είναι υποχρεωτικά.',
+                passwordLength: 'Ο κωδικός πρέπει να είναι τουλάχιστον 6 χαρακτήρες.',
+                successMessage: 'Ο κωδικός πρόσβασης άλλαξε επιτυχώς!',
+                errorMessage: 'Σφάλμα. Παρακαλώ δοκιμάστε ξανά.'
+            }
+        };
+
+        const translation = translations[language];
+        document.getElementById('formTitle').innerText = translation.title;
+        document.getElementById('username').placeholder = translation.usernamePlaceholder;
+        document.getElementById('oldpassword').placeholder = translation.oldPasswordPlaceholder;
+        document.getElementById('newpassword').placeholder = translation.newPasswordPlaceholder;
+        document.querySelector('button[type="submit"]').innerText = translation.submitButton;
+
+        // Update the page title
+        updateTitle(translation.pageTitle);
+
+        localStorage.setItem('selectedLanguage', language);
+    }
+
+    // Event listeners for language buttons
+    document.getElementById('englishBtn').addEventListener('click', () => setLanguage('en'));
+    document.getElementById('greekBtn').addEventListener('click', () => setLanguage('el'));
+
+    // On page load, set the language based on saved preference or default to Greek
+    document.addEventListener('DOMContentLoaded', function () {
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'el';
+        setLanguage(savedLanguage);
+    });
+
+    // Form submission handler
+    document.getElementById('changePasswordForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const oldpassword = document.getElementById('oldpassword').value;
+        const newpassword = document.getElementById('newpassword').value;
+        const messageDiv = document.getElementById('message');
+        const language = localStorage.getItem('selectedLanguage') || 'el';
+
+        const translation = {
+            el: {
+                allFieldsRequired: 'Όλα τα πεδία είναι υποχρεωτικά.',
+                passwordLength: 'Ο κωδικός πρέπει να είναι τουλάχιστον 6 χαρακτήρες.',
+                error: 'Σφάλμα. Παρακαλώ δοκιμάστε ξανά.',
+                success: 'Ο κωδικός πρόσβασης άλλαξε επιτυχώς!'
+            },
+            en: {
+                allFieldsRequired: 'All fields are required.',
+                passwordLength: 'Password must be at least 6 characters.',
+                error: 'Error. Please try again.',
+                success: 'Password changed successfully!'
+            }
+        }[language];
+
+        if (!username || !oldpassword || !newpassword) {
+            messageDiv.textContent = translation.allFieldsRequired;
+            return;
+        }
+
+        if (newpassword.length < 6) {
+            messageDiv.textContent = translation.passwordLength;
+            return;
+        }
+
+        try {
+            const response = await fetch('/users/changepassword', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, oldpassword, newpassword, language })
+            });
+
+            const resultText = await response.text();
+            let result;
+            try {
+                result = JSON.parse(resultText); 
+            } catch (jsonError) {
+                throw new Error('Invalid JSON format');
+            }
+
+            if (response.ok) {
+                messageDiv.innerText = translation.success;
+                messageDiv.classList.add('success');
+                messageDiv.classList.remove('error');
+                document.getElementById('changePasswordForm').reset();
+            } else {
+                messageDiv.innerText = result.message || translation.error;
+                messageDiv.classList.add('error');
+                messageDiv.classList.remove('success');
+            }
+        } catch (error) {
+            messageDiv.textContent = translation.error;
+            messageDiv.classList.add('error');
+            messageDiv.classList.remove('success');
+        }
+    });
+</script>
+
+
+</body>
+</html>
